@@ -1,0 +1,55 @@
+.alert {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 1rem 1.5rem;
+  background-color: rgba(#0085fd, 0.16);
+  border-radius: 0.25rem;
+  
+  .alert__body {
+    flex-grow: 1;
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Severity
+
+  &.alert--info {
+    background-color: rgba(#0085fd, 0.16);
+
+    path {
+      fill: #0085fd;
+    }
+  }
+  &.alert--success {
+    background-color: rgba(#2e7d32, 0.16);
+
+    path {
+      fill: #2e7d32;
+    }
+  }
+  &.alert--warning {
+    background-color: rgba(#ed8f02, 0.16);
+
+    path {
+      fill: #ed8f02;
+    }
+  }
+  &.alert--error {
+    background-color: rgba(#d32f2f, 0.16);
+
+    path {
+      fill: #d32f2f;
+    }
+  }
+
+  // Size
+
+  &.alert--small {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+}

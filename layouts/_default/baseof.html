@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ site.Title }}</title>
+    {{ $cssOpts := dict "transpiler" "libsass" "targetPath" "css/main.css" }}
+    {{ with resources.Get "scss/main.scss" | toCSS $cssOpts | resources.Minify | resources.Fingerprint }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}">
+    {{ end }}
+  </head>
+  <body>
+    {{ block "main" . }}
+    {{ end }}
+  </body>
+</html>

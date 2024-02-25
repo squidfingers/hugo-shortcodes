@@ -1,0 +1,44 @@
+.tabpane {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.tabpane__input {
+  position: absolute;
+  opacity: 0;
+}
+.tabpane__label {
+  position: relative;
+  flex-shrink: 1;
+  padding: 0.5rem 1rem;
+  background-color: #eee;
+  border: solid 2px #eee;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-bottom: none;
+  cursor: pointer;
+  z-index: 999;
+
+  &:first-of-type {
+    border-top-left-radius: 0.5rem;
+    border-left-width: 2px;
+  }
+  &:last-of-type {
+    border-top-right-radius: 0.5rem;
+    border-right-width: 2px;
+  }
+}
+.tabpane__panel {
+  order: 999;
+  display: none;
+  width: 100%;
+  margin-top: -2px;
+  padding: 1rem;
+  border: solid 2px #eee;
+}
+.tabpane__input:checked + .tabpane__label {
+  background-color: #fff;
+}
+.tabpane__input:checked + .tabpane__label + .tabpane__panel {
+  display: block;
+}

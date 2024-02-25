@@ -1,0 +1,14 @@
+{{/* Verify that this tab is enclosed within a tabpane */}}
+{{ if .Parent }}
+  {{ if ne .Parent.Name "tabpane" }}
+    {{ errorf "Found shortcode %q enclosed inside a %q block, must be enclosed inside a %q block. Error position: %s" .Name .Parent.Name "tabpane" .Position }}
+  {{ end }}
+{{ else }}
+  {{ errorf "shortcode %q must be enclosed inside a %q block, but no parent block was found. Error position: %s" .Name "tabpane" .Position }}
+{{ end }}
+{{/* Get tab name */}}
+{{ $name := .Get "name" | default (printf "Tab %v" .Ordinal) }}
+{{/* Pass name and content to tabpane */}}
+{{ $tab := dict "name" $name }}
+{{ $tab = merge $tab (dict "content" .Inner) }}
+{{ .Parent.Scratch.SetInMap "tabs" (printf "%02v" .Ordinal) $tab }}

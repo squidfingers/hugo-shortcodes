@@ -1,0 +1,7 @@
+{{ $src := cond .IsNamedParams (.Get "src") (.Get 0) -}}
+<img src="{{ $src }}"
+  {{ with .Get "alt" }} alt="{{ . }}"{{ end -}}
+  {{ with .Get "width" }} width="{{ . }}"{{ end -}}
+  {{ with .Get "height" }} height="{{ . }}"{{ end -}}
+  {{ with .Get "class" }} class="{{ . }}"{{ end -}}
+  {{ with .Get "style" }} style="{{ . }}"{{ end }}>{{ "" -}}

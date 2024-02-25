@@ -1,0 +1,113 @@
+html {
+  box-sizing: border-box;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 3rem;
+  background-color: #fff;
+  color: #222;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  line-height: 1.2;
+  
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: 0.8rem;
+}
+
+p, ul, ol {
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+ul, ol {
+  padding-left: 2rem;
+}
+
+ul ul,
+ol ol,
+ol ul,
+ul ol {
+  margin-bottom: 0;
+  padding-top: 0.25rem;
+}
+
+li {
+  margin-bottom: 0.25rem;
+  
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+figure {
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+img {
+  border-style: none;
+}
+
+a {
+  color: #0085fd;
+  text-decoration: none;
+
+  &:hover,
+  &:active {
+    text-decoration: underline;
+    text-decoration-color: rgba(#0085fd, 0.24);
+    text-decoration-thickness: 2px;
+    
+  }
+}
+
+strong, b {
+  font-weight: 600;
+}
+
+pre, code {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 0.85rem;
+}

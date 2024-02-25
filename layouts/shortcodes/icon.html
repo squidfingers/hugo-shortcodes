@@ -1,0 +1,8 @@
+{{ $name := cond .IsNamedParams (.Get "name") (.Get 0) -}}
+{{ $size := cond .IsNamedParams (.Get "size") (.Get 1) -}}
+{{/* Output */ -}}
+{{ $icon := partial "icon.html" (dict "name" $name "size" $size) -}}
+{{ if not $icon -}}
+  {{ errorf "Shortcode %q could not find %q. Error position: %s" .Name $name .Position -}}
+{{ end -}}
+{{ $icon -}}

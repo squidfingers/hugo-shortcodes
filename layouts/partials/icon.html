@@ -1,0 +1,14 @@
+{{ $src := printf "/assets/icons/%s.svg" .name -}}
+{{ if fileExists $src -}}
+  {{ $svg := readFile $src | htmlUnescape -}}
+  {{ $class := slice "icon" -}}
+  {{/* Get size */ -}}
+  {{ if or (eq .size "small") (eq .size "large") -}}
+    {{ $class = $class | append (printf "icon--%s" .size) -}}
+  {{ end -}}
+  {{/* Build class names */ -}}
+  {{ $class = delimit $class " " -}}
+  {{ $svg = $svg | replaceRE "<svg " (printf `<svg class="%s" ` $class) -}}
+  {{/* Output */ -}}
+  {{ $svg | safeHTML -}}
+{{ end -}}

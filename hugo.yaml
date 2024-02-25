@@ -1,0 +1,4 @@
+---
+title: "Hugo Shortcodes"
+disableKinds: ["RSS","taxonomy","term"]
+...

@@ -1,0 +1,53 @@
+.button {
+  display: inline-block;
+  padding: 0.5rem;
+  color: #0085fd;
+  background-color: transparent;
+  border-radius: 0.25rem;
+  border-width: 0;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:focus {
+    outline: 0;
+  }
+  &:hover,
+  &:active {
+    text-decoration: none;
+  }
+
+  // Variant
+
+  &.button--primary {
+    padding: 0.5rem 1rem;
+    color: #fff;
+    background-color: #0085fd;
+  }
+  &.button--secondary {
+    padding: 0.5rem 1rem;
+    color: #222;
+    background-color: #ccc;
+  }
+
+  // Size
+
+  &.button--large {
+    padding: 0.75rem 1.5rem;
+    font-size: 20px;
+  }
+  &.button--small {
+    padding: 0.25rem 0.5rem;
+    font-size: 16px;
+  }
+
+  // Disabled
+
+  &.button--disabled {
+    opacity: 0.24;
+    cursor: not-allowed;
+  }
+}
