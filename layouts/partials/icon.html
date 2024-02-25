@@ -2,6 +2,10 @@
 {{ if fileExists $src -}}
   {{ $svg := readFile $src | htmlUnescape -}}
   {{ $class := slice "icon" -}}
+  {{/* Get variant */ -}}
+  {{ if or (eq .variant "primary") (eq .variant "secondary") (eq .variant "info") (eq .variant "success") (eq .variant "warning") (eq .variant "error") -}}
+    {{ $class = $class | append (printf "icon--%s" .variant) -}}
+  {{ end -}}
   {{/* Get size */ -}}
   {{ if or (eq .size "small") (eq .size "large") -}}
     {{ $class = $class | append (printf "icon--%s" .size) -}}

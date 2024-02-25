@@ -15,13 +15,15 @@
 {{ $size := cond .IsNamedParams (.Get "size") (.Get 1) -}}
 {{ if eq $size "small" -}}
   {{ $class = $class | append (printf "alert--%s" $size) -}}
+{{ else -}}
+  {{ $size = "" -}}
 {{ end -}}
 {{/* Build class names */ -}}
 {{ $class = delimit $class " " -}}
 {{/* Output */ -}}
 <div class="{{ $class }}">
   <div class="alert__icon">
-    {{ partial "icon.html" (dict "name" (index $icons $sev) "size" $size) }}
+    {{ partial "icon.html" (dict "name" (index $icons $sev) "variant" $sev "size" $size) }}
   </div>
   <div class="alert__body">
     {{ .Inner | markdownify }}

@@ -40,7 +40,7 @@ All parameters are optional:
 ```html
 <div class="alert alert--info alert--small">
   <div class="alert__icon">
-    <svg class="icon icon--small">...</svg>
+    <svg class="icon icon--info icon--small">...</svg>
   </div>
   <div class="alert__body">
     Markdown
@@ -71,7 +71,7 @@ Or named parameters:
 All parameters are optional except for `href`:
 
 - `href`: URL
-- `variant`: `primary` or `secondary`
+- `variant`: `primary`, `secondary`, `info`, `success`, `warning`, or `error`
 - `size`: `small` or `large`
 - `disabled`: `disabled` or `true`
 
@@ -94,18 +94,18 @@ If you want to add an image with a caption to your content, you can use the `fig
 You can use positional parameters:
 
 ```
-{{< figure "/path/to/image.jpg" "Alt text" "Caption of image" >}}
+{{< figure "/path/to/image.jpg" "Alt text" "Image caption" >}}
 ```
 
 Or named parameters:
 
 ```
-{{< figure src="/path/to/image.jpg" alt="Alt text" title="Caption of image" >}}
+{{< figure src="/path/to/image.jpg" alt="Alt text" title="Image caption" >}}
 ```
 
 All parameters are optional except for `src`:
 
-- `src`: Path to the image
+- `src`: Image filepath
 - `alt`: Image alt
 - `title`: Caption to display under the image
 
@@ -114,7 +114,7 @@ All parameters are optional except for `src`:
 ```html
 <figure>
   <img src="/path/to/image.jpg" alt="Alt text">
-  <figcaption>Caption of image</figcaption>
+  <figcaption>Image caption</figcaption>
 </figure>
 ```
 
@@ -125,18 +125,19 @@ If you want to add an icon to your content, you can use the `icon` shortcode.
 You can use positional parameters:
 
 ```
-{{< icon "alert" "small" >}}
+{{< icon "alert" "primary" "small" >}}
 ```
 
 Or named parameters:
 
 ```
-{{< icon name="alert" size="small" >}}
+{{< icon name="alert" variant="primary" size="small" >}}
 ```
 
 All parameters are optional except for `name`:
 
-- `name`: Name of icon
+- `name`: Icon name
+- `variant`: `primary`, `secondary`, `info`, `success`, `warning`, or `error`
 - `size`: `small` or `large`
 
 ##### Notes
@@ -146,7 +147,7 @@ The icon file must be an svg, located in the `/assets/icons/` directory.
 ##### Output
 
 ```html
-<svg class="icon icon--small">...</svg>
+<svg class="icon icon--primary icon--small">...</svg>
 ```
 
 ## ifparam
@@ -179,10 +180,10 @@ If you want to add an image in your content, but need to set additional attribut
 
 All parameters are optional except for `src`:
 
-- `src`: Path to the image
+- `src`: Image path 
 - `alt`: Image alt
-- `width`: Width of the image
-- `height`: Width of the image
+- `width`: Image width
+- `height`: Image height
 - `class`: CSS class name
 - `style`: Inline CSS
 
@@ -194,9 +195,7 @@ All parameters are optional except for `src`:
 
 ## include
 
-If you have HTML or Markdown that you would like to externally include in your
-content files, you can place the file under the current working directory. Then,
-you can use the `include` shortcode to pull in this file into your content.
+If you have HTML or Markdown that you would like to externally include in your content files, you can place the file under the current working directory. Then, you can use the `include` shortcode to pull in this file into your content.
 
 ```
 {{< include "includes/file.md" >}}
@@ -204,19 +203,11 @@ you can use the `include` shortcode to pull in this file into your content.
 
 ##### Notes
 
-- You must use `{{< >}}` shortcode delimiters to render the included content
-  correctly.
-- All included files under the `content` directory must have `draft:true` set in
-  their `frontmatter`.
-- Only relative paths **under** the page including the file are supported.
-  Relative paths traversing up the directory are **not** supported. For files
-  outside the current working directory you can use an absolute path starting
-  with `/`.
-- When editing an **included** file in local development, the page **including**
-  the file is not automatically updated. Restarting the server is required to
-  see any changes.
-- The headings of included files will **not** be displayed in Hugo's
-  `TableOfContents`.
+- You must use `{{< >}}` shortcode delimiters to render the included content correctly.
+- All included files under the `content` directory must have `draft:true` set in their `frontmatter`.
+- Only relative paths **under** the page including the file are supported. Relative paths traversing up the directory are **not** supported. For files outside the current working directory you can use an absolute path starting with `/`.
+- When editing an **included** file in local development, the page **including** the file is not automatically updated. Restarting the server is required to see any changes.
+- The headings of included files will **not** be displayed in Hugo's `TableOfContents`.
 
 ## param
 

@@ -2,7 +2,7 @@
 {{ $class := slice "button" -}}
 {{/* Get variant */ -}}
 {{ $variant := cond .IsNamedParams (.Get "variant") (.Get 1) -}}
-{{ if or (eq $variant "primary") (eq $variant "secondary") -}}
+{{ if or (eq $variant "primary") (eq $variant "secondary") (eq $variant "info") (eq $variant "success") (eq $variant "warning") (eq $variant "error") -}}
   {{ $class = $class | append (printf "button--%s" $variant) -}}
 {{ end -}}
 {{/* Get size */ -}}

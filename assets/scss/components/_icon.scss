@@ -4,6 +4,39 @@
   width: 24px;
   height: 24px;
 
+  // Variant
+
+  &.icon--primary {
+    path {
+      fill: #0085fd;
+    }
+  }
+  &.icon--secondary {
+    path {
+      fill: #999;
+    }
+  }
+  &.icon--info {
+    path {
+      fill: #0085fd;
+    }
+  }
+  &.icon--success {
+    path {
+      fill: #2e7d32;
+    }
+  }
+  &.icon--warning {
+    path {
+      fill: #ed8f02;
+    }
+  }
+  &.icon--error {
+    path {
+      fill: #d32f2f;
+    }
+  }
+
   // Size
   
   &.icon--large {

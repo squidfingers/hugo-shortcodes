@@ -23,21 +23,21 @@ has_title: true
   Secondary
 {{< /button >}}
 
-{{< button href="https://github.com/" variant="primary" size="large" disabled="true" >}}
+{{< button href="https://github.com/" variant="warning" size="large" disabled="true" >}}
   Disabled
 {{< /button >}}
 
 ## figure
 
-{{< figure "/images/placeholder.svg" "Alt text" "Caption of image" >}}
+{{< figure "/images/placeholder.svg" "Alt text" "Image caption" >}}
 
 ## icon
 
-{{< icon "alert" "small" >}}
+{{< icon "alert" "primary" "small" >}}
 
-{{< icon "alert" >}}
+{{< icon "alert" "secondary" >}}
 
-{{< icon name="alert" size="large" >}}
+{{< icon name="alert" variant="warning" size="large" >}}
 
 ## ifparam
 

@@ -22,15 +22,32 @@
 
   // Variant
 
-  &.button--primary {
+  &.button--primary,
+  &.button--secondary,
+  &.button--info,
+  &.button--success,
+  &.button--warning,
+  &.button--error {
     padding: 0.5rem 1rem;
     color: #fff;
+  }
+  &.button--primary {
     background-color: #0085fd;
   }
   &.button--secondary {
-    padding: 0.5rem 1rem;
-    color: #222;
-    background-color: #ccc;
+    background-color: #999;
+  }
+  &.button--info {
+    background-color: #0085fd;
+  }
+  &.button--success {
+    background-color: #2e7d32;
+  }
+  &.button--warning {
+    background-color: #ed8f02;
+  }
+  &.button--error {
+    background-color: #d32f2f;
   }
 
   // Size
@@ -47,7 +64,7 @@
   // Disabled
 
   &.button--disabled {
-    opacity: 0.24;
+    opacity: 0.25;
     cursor: not-allowed;
   }
 }
