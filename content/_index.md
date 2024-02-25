@@ -55,6 +55,12 @@ The `title` param {{< ifparam "has_title" "is" "is not" >}} set
 
 The page title is "{{< param "title" >}}"
 
+The page description is {{< param "description" "not set" >}}
+
+## siteparam
+
+{{< siteparam "some_param" >}}
+
 ## tabpane
 
 {{< tabpane >}}

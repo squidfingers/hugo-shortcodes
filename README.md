@@ -8,6 +8,7 @@
 - [img](#img)
 - [include](#include)
 - [param](#param)
+- [siteparam](#siteparam)
 - [tabpane](#tabpane)
 
 ## alert
@@ -231,6 +232,26 @@ You can also pass a second optional value that will only be returned if the para
 
 ```
 {{< param "param_name" "default value" >}}
+```
+
+## siteparam
+
+If you need to print a site parameter in your Markdown, you can use the `siteparam` shortcode.
+
+```
+{{< siteparam "param_name" >}}
+```
+
+You can also pass a second optional value that will only be returned if the site parameter is empty.
+
+```
+{{< siteparam "param_name" "default value" >}}
+```
+
+You can also access the site parameter by chaining the identifiers
+
+```
+{{< siteparam "a.b.c" >}}
 ```
 
 ## tabpane
