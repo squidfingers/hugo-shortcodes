@@ -217,14 +217,14 @@ Let's say you have this param set in your `frontmatter`:
 
 ```
 ---
-date: "Monday, January 2, 2006"
+title: Hugo shortcodes
 ---
 ```
 
 Then in your Markdown, you can print the value of this parameter:
 
 ```
-{{< param "date" >}}
+{{< param "title" >}}
 ```
 
 You can also pass a second optional value that will only be returned if the parameter is empty.
