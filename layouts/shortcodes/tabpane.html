@@ -3,9 +3,9 @@
 {{/* Render tabpane */ -}}
 {{ $tabPaneOrdinal := .Ordinal -}}
 <div class="tabpane">
-  {{ range $k, $v := $.Scratch.Get "tabs" -}}
-    {{ $tabpaneId := printf "tabpane-%02v" $tabPaneOrdinal | anchorize -}}
-    {{ $tabId := printf "tabpane-%02v-%v" $tabPaneOrdinal $k | anchorize -}}
+  {{- range $k, $v := $.Scratch.Get "tabs" }}
+    {{- $tabpaneId := printf "tabpane-%02v" $tabPaneOrdinal | anchorize }}
+    {{- $tabId := printf "tabpane-%02v-%v" $tabPaneOrdinal $k | anchorize }}
     <input type="radio" name="{{ $tabpaneId }}" id="{{ $tabId }}" class="tabpane__input" tabindex="1"{{ if eq $k "00" }} checked="checked"{{ end }}>
     <label class="tabpane__label" for="{{ $tabId }}">
       {{ index . "name" }}
@@ -13,5 +13,5 @@
     <div class="tabpane__panel" tabindex="1">
       {{ index . "content" | markdownify }}
     </div>
-  {{ end -}}
+  {{- end }}
 </div>

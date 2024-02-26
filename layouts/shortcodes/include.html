@@ -8,9 +8,9 @@
 {{ if fileExists $path -}}
   {{ $content := readFile $path | replaceRE "^---[\\s\\S]+?---" "" -}}
   {{ if hasSuffix $file ".md" -}}
-    {{ $content | $.Page.RenderString (dict "display" "block") }}
+    {{ $content | $.Page.RenderString (dict "display" "block") -}}
   {{ else -}}
-    {{ $content | safeHTML }}
+    {{ $content | safeHTML -}}
   {{ end -}}
 {{ else -}}
   {{ errorf "Shortcode %q: file %q not found at %s" .Name $path .Position -}}

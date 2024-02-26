@@ -6,5 +6,5 @@
   <img src="{{ $src }}"{{ with $alt }} alt="{{ . }}"{{ end }}>
   {{ with $title -}}
     <figcaption>{{ . | markdownify }}</figcaption>
-  {{ end -}}
+  {{- end }}
 </figure>

@@ -4,7 +4,7 @@
   "success" "check-circle"
   "warning" "alert"
   "error" "alert-circle"
-}}
+-}}
 {{/* Get severity */ -}}
 {{ $sev := cond .IsNamedParams (.Get "severity") (.Get 0) -}}
 {{ if not (or (eq $sev "success") (eq $sev "warning") (eq $sev "error")) -}}
