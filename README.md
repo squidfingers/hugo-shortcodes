@@ -1,5 +1,7 @@
 # Hugo shortcodes
 
+This collection of Hugo shortcodes is not meant to be an exhaustive list of components you might need in your Markdown content, rather it's a few examples that illustrate various techinques that will help you build out your own shortcodes. These techinques include: validating parameters ([button](#button)), using a partial within the shortcode so layout and content can use the component ([icon](#icon)), using conditional content ([ifparam](#ifparam)), and passing parameters from a child shortcode to the parent for rendering ([tabpane](#tabpane)).
+
 - [alert](#alert)
 - [button](#button)
 - [figure](#figure)
