@@ -35,10 +35,11 @@ Or named parameters:
 
 Parameters:
 
-| Name         | Value                                           | Description      |
-| ------------ | ----------------------------------------------- | -----------------|
-| 0 `severity` | `info` (default), `success`, `warning`, `error` |                  |
-| 1 `size`     | `small`                                         | Defaults to none |
+| Name         | Value                                           | Description                  |
+| ------------ | ----------------------------------------------- | -----------------------------|
+| 0 `severity` | `info` (default), `success`, `warning`, `error` |                              |
+| 1 `size`     | `small`                                         | Defaults to none             |
+| 2 `hideIcon` | `true`                                          | Hides icon; Default to false |
 
 ##### Output
 

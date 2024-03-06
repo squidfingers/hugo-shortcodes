@@ -20,11 +20,15 @@
 {{ end -}}
 {{/* Build class names */ -}}
 {{ $class = delimit $class " " -}}
+{{/* Get hideIcon */ -}}
+{{ $hideIcon := cond .IsNamedParams (.Get "hideIcon") (.Get 2) -}}
 {{/* Output */ -}}
 <div class="{{ $class }}">
-  <div class="alert__icon">
-    {{ partial "icon.html" (dict "name" (index $icons $sev) "variant" $sev "size" $size) }}
-  </div>
+  {{ if not (eq $hideIcon "true") -}}
+    <div class="alert__icon">
+      {{ partial "icon.html" (dict "name" (index $icons $sev) "variant" $sev "size" $size) }}
+    </div>
+  {{ end -}}
   <div class="alert__body">
     {{ .Inner | markdownify }}
   </div>

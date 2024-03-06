@@ -5,15 +5,23 @@ has_title: true
 
 ## alert
 
-{{< alert >}}
-  **Info:** This is an info alert
+{{< alert "success" >}}
+  **Success:** This is a success alert
 {{< /alert >}}
 
 {{< alert severity="warning" size="small" >}}
   **Warning:** This is a small warning alert
 {{< /alert >}}
 
+{{< alert hideIcon="true" >}}
+  This alert doesn't have an icon
+{{< /alert >}}
+
 ## button
+
+{{< button "https://github.com/" >}}
+  Button
+{{< /button >}}
 
 {{< button "https://github.com/" "primary" "small" >}}
   Primary
@@ -23,7 +31,7 @@ has_title: true
   Secondary
 {{< /button >}}
 
-{{< button href="https://github.com/" variant="warning" size="large" disabled="true" >}}
+{{< button href="https://github.com/" variant="error" size="large" disabled="true" >}}
   Disabled
 {{< /button >}}
 
