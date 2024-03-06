@@ -35,11 +35,11 @@ Or named parameters:
 
 Parameters:
 
-| Name         | Value                                           | Description                  |
-| ------------ | ----------------------------------------------- | -----------------------------|
-| 0 `severity` | `info` (default), `success`, `warning`, `error` |                              |
-| 1 `size`     | `small`                                         | Defaults to none             |
-| 2 `hideIcon` | `true`                                          | Hides icon; Default to false |
+| Name          | Value                                           | Description                  |
+| ------------- | ----------------------------------------------- | -----------------------------|
+| 0: `severity` | `info` (default), `success`, `warning`, `error` |                              |
+| 1: `size`     | `small`                                         | Defaults to none             |
+| 2: `hideIcon` | `true`                                          | Hides icon; Default to false |
 
 ##### Output
 
@@ -76,12 +76,12 @@ Or named parameters:
 
 Parameters:
 
-| Name                | Value                                                         | Description      |
-| ------------------- | ------------------------------------------------------------- | ---------------- |
-| 0 `href` (Required) | URL                                                           | Page link        |
-| 1 `variant`         | `primary`, `secondary`, `info`, `success`, `warning`, `error` | Defaults to none |
-| 2 `size`            | `small`, `large`                                              | Defaults to none |
-| 3 `disabled`        | `disabled` or `true`                                          |                  |
+| Name                 | Value                                                         | Description      |
+| -------------------- | ------------------------------------------------------------- | ---------------- |
+| 0: `href` (Required) | URL                                                           | Page link        |
+| 1: `variant`         | `primary`, `secondary`, `info`, `success`, `warning`, `error` | Defaults to none |
+| 2: `size`            | `small`, `large`                                              | Defaults to none |
+| 3: `disabled`        | `disabled` or `true`                                          |                  |
 
 ##### Notes
 
@@ -113,11 +113,11 @@ Or named parameters:
 
 Parameters:
 
-| Name               | Value    | Description                        |
-| ------------------ | -------- | ---------------------------------- |
-| 0 `src` (Required) | URL      | Image filepath                     |
-| 1 `alt`            | Text     | Image alt                          |
-| 2 `title`          | Markdown | Caption to display under the image |
+| Name                | Value    | Description                        |
+| ------------------- | -------- | ---------------------------------- |
+| 0: `src` (Required) | URL      | Image filepath                     |
+| 1: `alt`            | Text     | Image alt                          |
+| 2: `title`          | Markdown | Caption to display under the image |
 
 ##### Output
 
@@ -146,11 +146,11 @@ Or named parameters:
 
 Parameters:
 
-| Name                | Value                                                         | Description      |
-| ------------------- | ------------------------------------------------------------- | -----------------|
-| 0 `name` (Required) | Text                                                          | Icon name        |
-| 1 `variant`         | `primary`, `secondary`, `info`, `success`, `warning`, `error` | Defaults to none |
-| 2 `size`            | `small`, `large`                                              | Defaults to none | 
+| Name                 | Value                                                         | Description      |
+| -------------------- | ------------------------------------------------------------- | -----------------|
+| 0: `name` (Required) | Text                                                          | Icon name        |
+| 1: `variant`         | `primary`, `secondary`, `info`, `success`, `warning`, `error` | Defaults to none |
+| 2: `size`            | `small`, `large`                                              | Defaults to none | 
 
 ##### Notes
 
@@ -192,14 +192,14 @@ If you want to add an image in your content, but need to set additional attribut
 
 Parameters:
 
-| Name               | Value     | Description       |
-| ------------------ | --------- | ----------------- |
-| 0 `src` (Required) | URL       | Image path        |
-| 1 `alt`            | Text      | Image alt         |
-| 2 `width`          | Number    | Image width       |
-| 3 `height`         | Number    | Image height      |
-| 4 `class`          | Classname | CSS class name    |
-| 5 `style`          | CSS rules | Inline CSS styles |
+| Name                | Value     | Description       |
+| ------------------- | --------- | ----------------- |
+| 0: `src` (Required) | URL       | Image path        |
+| 1: `alt`            | Text      | Image alt         |
+| 2: `width`          | Number    | Image width       |
+| 3: `height`         | Number    | Image height      |
+| 4: `class`          | Classname | CSS class name    |
+| 5: `style`          | CSS rules | Inline CSS styles |
 
 ##### Output
 

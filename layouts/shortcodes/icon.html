@@ -1,9 +1,9 @@
-{{ $name := cond .IsNamedParams (.Get "name") (.Get 0) -}}
-{{ $variant := cond .IsNamedParams (.Get "variant") (.Get 1) -}}
-{{ $size := cond .IsNamedParams (.Get "size") (.Get 2) -}}
-{{/* Output */ -}}
-{{ $icon := partial "icon.html" (dict "name" $name "variant" $variant "size" $size) -}}
-{{ if not $icon -}}
-  {{ errorf "Shortcode %q could not find %q. Error position: %s" .Name $name .Position -}}
-{{ end -}}
-{{ $icon -}}
+{{- $name := cond .IsNamedParams (.Get "name") (.Get 0) -}}
+{{- $variant := cond .IsNamedParams (.Get "variant") (.Get 1) -}}
+{{- $size := cond .IsNamedParams (.Get "size") (.Get 2) -}}
+{{- /* Output */ -}}
+{{- $icon := partial "icon.html" (dict "name" $name "variant" $variant "size" $size) -}}
+{{- if not $icon -}}
+  {{- errorf "Shortcode %q could not find %q. Error position: %s" .Name $name .Position -}}
+{{- end -}}
+{{- $icon -}}

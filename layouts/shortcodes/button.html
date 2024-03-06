@@ -1,23 +1,23 @@
-{{ $href := cond .IsNamedParams (.Get "href") (.Get 0) -}}
-{{ $class := slice "button" -}}
-{{/* Get variant */ -}}
-{{ $variant := cond .IsNamedParams (.Get "variant") (.Get 1) -}}
-{{ if or (eq $variant "primary") (eq $variant "secondary") (eq $variant "info") (eq $variant "success") (eq $variant "warning") (eq $variant "error") -}}
-  {{ $class = $class | append (printf "button--%s" $variant) -}}
-{{ end -}}
-{{/* Get size */ -}}
-{{ $size := cond .IsNamedParams (.Get "size") (.Get 2) -}}
-{{ if or (eq $size "small") (eq $size "large") -}}
-  {{ $class = $class | append (printf "button--%s" $size) -}}
-{{ end -}}
-{{/* Get disabled */ -}}
-{{ $disabled := cond .IsNamedParams (.Get "disabled") (.Get 3) -}}
-{{ if or (eq $disabled "true") (eq $disabled "disabled") -}}
-  {{ $class = $class | append "button--disabled" -}}
-{{ end -}}
-{{/* Build class names */ -}}
-{{ $class = delimit $class " " -}}
-{{/* Output */ -}}
+{{- $href := cond .IsNamedParams (.Get "href") (.Get 0) -}}
+{{- $class := slice "button" -}}
+{{- /* Get variant */ -}}
+{{- $variant := cond .IsNamedParams (.Get "variant") (.Get 1) -}}
+{{- if or (eq $variant "primary") (eq $variant "secondary") (eq $variant "info") (eq $variant "success") (eq $variant "warning") (eq $variant "error") -}}
+  {{- $class = $class | append (printf "button--%s" $variant) -}}
+{{- end -}}
+{{- /* Get size */ -}}
+{{- $size := cond .IsNamedParams (.Get "size") (.Get 2) -}}
+{{- if or (eq $size "small") (eq $size "large") -}}
+  {{- $class = $class | append (printf "button--%s" $size) -}}
+{{- end -}}
+{{- /* Get disabled */ -}}
+{{- $disabled := cond .IsNamedParams (.Get "disabled") (.Get 3) -}}
+{{- if or (eq $disabled "true") (eq $disabled "disabled") -}}
+  {{- $class = $class | append "button--disabled" -}}
+{{- end -}}
+{{- /* Build class names */ -}}
+{{- $class = delimit $class " " -}}
+{{- /* Output */ -}}
 <a href="{{ $href }}" class="{{ $class }}" {{ if hasPrefix $href "http" }} target="_blank" rel="noopener"{{ end }}>
   {{ .Inner | markdownify }}
 </a>{{ "" -}}

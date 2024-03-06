@@ -1,7 +1,12 @@
-{{ $src := cond .IsNamedParams (.Get "src") (.Get 0) -}}
-<img src="{{ $src }}"
-  {{- with .Get "alt" }} alt="{{ . }}"{{ end -}}
-  {{ with .Get "width" }} width="{{ . }}"{{ end -}}
-  {{ with .Get "height" }} height="{{ . }}"{{ end -}}
-  {{ with .Get "class" }} class="{{ . }}"{{ end -}}
-  {{ with .Get "style" }} style="{{ . }}"{{ end }}>{{ "" -}}
+{{- $src := cond .IsNamedParams (.Get "src") (.Get 0) -}}
+{{- $alt := cond .IsNamedParams (.Get "alt") (.Get 1) -}}
+{{- $width := cond .IsNamedParams (.Get "width") (.Get 2) -}}
+{{- $height := cond .IsNamedParams (.Get "height") (.Get 3) -}}
+{{- $class := cond .IsNamedParams (.Get "class") (.Get 4) -}}
+{{- $style := cond .IsNamedParams (.Get "style") (.Get 5) -}}
+{{- /* Output */ -}}
+<img src="{{ $src }}" alt="{{ with $alt }}{{ . }}{{ end }}"
+  {{- with $width }} width="{{ . }}"{{ end -}}
+  {{ with $height }} height="{{ . }}"{{ end -}}
+  {{ with $class }} class="{{ . }}"{{ end -}}
+  {{ with $style }} style="{{ . }}"{{ end }}>{{ "" -}}

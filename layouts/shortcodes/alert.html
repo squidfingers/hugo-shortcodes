@@ -1,28 +1,29 @@
-{{ $class := slice "alert" -}}
-{{ $icons := dict
+{{- $class := slice "alert" -}}
+{{- /* Map severity to icon names */ -}}
+{{- $icons := dict
   "info" "information-box"
   "success" "check-circle"
   "warning" "alert"
   "error" "alert-circle"
 -}}
-{{/* Get severity */ -}}
-{{ $sev := cond .IsNamedParams (.Get "severity") (.Get 0) -}}
-{{ if not (or (eq $sev "success") (eq $sev "warning") (eq $sev "error")) -}}
-  {{ $sev = "info" -}}
-{{ end -}}
-{{ $class = $class | append (printf "alert--%s" $sev) -}}
-{{/* Get size */ -}}
-{{ $size := cond .IsNamedParams (.Get "size") (.Get 1) -}}
-{{ if eq $size "small" -}}
-  {{ $class = $class | append (printf "alert--%s" $size) -}}
-{{ else -}}
-  {{ $size = "" -}}
-{{ end -}}
-{{/* Build class names */ -}}
-{{ $class = delimit $class " " -}}
-{{/* Get hideIcon */ -}}
-{{ $hideIcon := cond .IsNamedParams (.Get "hideIcon") (.Get 2) -}}
-{{/* Output */ -}}
+{{- /* Get severity */ -}}
+{{- $sev := cond .IsNamedParams (.Get "severity") (.Get 0) -}}
+{{- if not (or (eq $sev "success") (eq $sev "warning") (eq $sev "error")) -}}
+  {{- $sev = "info" -}}
+{{- end -}}
+{{- $class = $class | append (printf "alert--%s" $sev) -}}
+{{- /* Get size */ -}}
+{{- $size := cond .IsNamedParams (.Get "size") (.Get 1) -}}
+{{- if eq $size "small" -}}
+  {{-  $class = $class | append (printf "alert--%s" $size) -}}
+{{- else -}}
+  {{- $size = "" -}}
+{{- end -}}
+{{- /* Build class names */ -}}
+{{- $class = delimit $class " " -}}
+{{- /* Get hideIcon */ -}}
+{{- $hideIcon := cond .IsNamedParams (.Get "hideIcon") (.Get 2) -}}
+{{- /* Output */ -}}
 <div class="{{ $class }}">
   {{ if not (eq $hideIcon "true") -}}
     <div class="alert__icon">

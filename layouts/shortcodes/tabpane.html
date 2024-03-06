@@ -1,7 +1,7 @@
-{{/* Populate Scratch with tab content by rendering .Inner; print to a variable so whitespace isn't rendered */ -}}
-{{ $inner := .Inner -}}
-{{/* Render tabpane */ -}}
-{{ $tabPaneOrdinal := .Ordinal -}}
+{{- /* Populate Scratch with tab content by rendering .Inner; print to a variable so whitespace isn't rendered */ -}}
+{{- $inner := .Inner -}}
+{{- /* Render tabpane */ -}}
+{{- $tabPaneOrdinal := .Ordinal -}}
 <div class="tabpane">
   {{- range $k, $v := $.Scratch.Get "tabs" }}
     {{- $tabpaneId := printf "tabpane-%02v" $tabPaneOrdinal | anchorize }}
