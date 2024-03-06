@@ -33,10 +33,12 @@ Or named parameters:
 {{< /alert >}}
 ```
 
-All parameters are optional:
+Parameters:
 
-- `severity`: `info` (default), `success`, `warning`, or `error`
-- `size`: `small`
+| Name         | Value                                           | Description      |
+| ------------ | ----------------------------------------------- | -----------------|
+| 0 `severity` | `info` (default), `success`, `warning`, `error` |                  |
+| 1 `size`     | `small`                                         | Defaults to none |
 
 ##### Output
 
@@ -71,12 +73,14 @@ Or named parameters:
 {{< /button >}}
 ```
 
-All parameters are optional except for `href`:
+Parameters:
 
-- `href`: URL
-- `variant`: `primary`, `secondary`, `info`, `success`, `warning`, or `error`
-- `size`: `small` or `large`
-- `disabled`: `disabled` or `true`
+| Name                | Value                                                         | Description      |
+| ------------------- | ------------------------------------------------------------- | ---------------- |
+| 0 `href` (Required) | URL                                                           | Page link        |
+| 1 `variant`         | `primary`, `secondary`, `info`, `success`, `warning`, `error` | Defaults to none |
+| 2 `size`            | `small`, `large`                                              | Defaults to none |
+| 3 `disabled`        | `disabled` or `true`                                          |                  |
 
 ##### Notes
 
@@ -106,11 +110,13 @@ Or named parameters:
 {{< figure src="/path/to/image.jpg" alt="Alt text" title="Image caption" >}}
 ```
 
-All parameters are optional except for `src`:
+Parameters:
 
-- `src`: Image filepath
-- `alt`: Image alt
-- `title`: Caption to display under the image
+| Name               | Value    | Description                        |
+| ------------------ | -------- | ---------------------------------- |
+| 0 `src` (Required) | URL      | Image filepath                     |
+| 1 `alt`            | Text     | Image alt                          |
+| 2 `title`          | Markdown | Caption to display under the image |
 
 ##### Output
 
@@ -137,11 +143,13 @@ Or named parameters:
 {{< icon name="alert" variant="primary" size="small" >}}
 ```
 
-All parameters are optional except for `name`:
+Parameters:
 
-- `name`: Icon name
-- `variant`: `primary`, `secondary`, `info`, `success`, `warning`, or `error`
-- `size`: `small` or `large`
+| Name                | Value                                                         | Description      |
+| ------------------- | ------------------------------------------------------------- | -----------------|
+| 0 `name` (Required) | Text                                                          | Icon name        |
+| 1 `variant`         | `primary`, `secondary`, `info`, `success`, `warning`, `error` | Defaults to none |
+| 2 `size`            | `small`, `large`                                              | Defaults to none | 
 
 ##### Notes
 
@@ -181,14 +189,16 @@ If you want to add an image in your content, but need to set additional attribut
 {{< img src="/path/to/image.jpg" alt="Alt text" width="600" height="400" class="image" style="border: solid 1px red" >}}
 ```
 
-All parameters are optional except for `src`:
+Parameters:
 
-- `src`: Image path 
-- `alt`: Image alt
-- `width`: Image width
-- `height`: Image height
-- `class`: CSS class name
-- `style`: Inline CSS
+| Name               | Value     | Description       |
+| ------------------ | --------- | ----------------- |
+| 0 `src` (Required) | URL       | Image path        |
+| 1 `alt`            | Text      | Image alt         |
+| 2 `width`          | Number    | Image width       |
+| 3 `height`         | Number    | Image height      |
+| 4 `class`          | Classname | CSS class name    |
+| 5 `style`          | CSS rules | Inline CSS styles |
 
 ##### Output
 
