@@ -1,0 +1,30 @@
+{{- $maxHeight := cond .IsNamedParams (.Get "maxHeight") (.Get 0) -}}
+{{- $collapseId := printf "collapse-%02v" .Ordinal | anchorize }}
+<div class="collapse">
+  <input class="collapse__input" type="checkbox" id="{{ $collapseId }}">
+  <label class="collapse__label" for="{{ $collapseId }}"></label>
+  <div class="collapse__content"{{ with $maxHeight }} style="max-height:{{ . }}px"{{ end }}>
+    {{ .Inner | markdownify }}
+  </div>
+</div>
+<script>
+  (() => {
+    const callback = (event) => {
+      const collapse__input = document.getElementById("{{ $collapseId }}");
+      collapse__input.checked = false;
+      if (collapse__input) {
+        const collapse = collapse__input.parentNode;
+        const collapse__content = collapse.querySelector(".collapse__content");
+        if (collapse__content) {
+          if (collapse__content.scrollHeight == collapse__content.offsetHeight) {
+            collapse.classList.add("collapse--remove");
+          } else {
+            collapse.classList.remove("collapse--remove");
+          }
+        }
+      }
+    };
+    window.addEventListener("DOMContentLoaded", callback, false);
+    window.addEventListener("resize", callback, false);
+  })();
+</script>

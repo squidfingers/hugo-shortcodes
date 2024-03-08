@@ -4,6 +4,7 @@ This collection of Hugo shortcodes is not meant to be an exhaustive list of comp
 
 - [alert](#alert)
 - [button](#button)
+- [collapse](#collapse)
 - [figure](#figure)
 - [icon](#icon)
 - [ifparam](#ifparam)
@@ -93,6 +94,44 @@ If `href` begins with "http", then the link will open in a new window.
 <a class="button button--primary button--small button--disabled">
   Markdown
 </a>
+```
+
+## collapse
+
+If you want to add collapse a block of content and show an expand button to reveal the full content, you can you the `collapse` shortcode.
+
+You can use positional parameters:
+
+```
+{{< collapse "100" >}}
+  Markdown
+{{< /collapse >}}
+```
+
+Or named parameters:
+
+```
+{{< collapse maxHeight="100" >}}
+  Markdown
+{{< /collapse >}}
+```
+
+Parameters:
+
+| Name           | Value  | Description                                                          |
+| -------------- | ------ | ---------------------------------------------------------------------|
+| 0: `maxHeight` | Number | The max-height of the content when it's collapsed; Defaults to 200px |
+
+##### Output
+
+```html
+<div class="collapse">
+  <input class="collapse__input" type="checkbox" id="collapse-00">
+  <label class="collapse__label" for="collapse-00"></label>
+  <div class="collapse__content">
+    Markdown
+  </div>
+</div>
 ```
 
 ## figure

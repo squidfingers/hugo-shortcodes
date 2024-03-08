@@ -1,0 +1,43 @@
+.collapse {
+  display: flex;
+  flex-direction: column;
+
+  // Classname set by JavaScript if the expand button is not needed
+  &.collapse--remove {
+    .collapse__label {
+      display: none;
+    }
+  }
+}
+.collapse__input {
+  display: none;
+
+  &:checked ~ .collapse__label {
+    box-shadow: none;
+
+    &::after {
+      content: "Collapse";
+    }
+  }
+  &:checked ~ .collapse__content {
+    max-height: none !important;
+  }
+}
+.collapse__label {
+  order: 2;
+  display: block;
+  padding: 8px;
+  box-shadow: 0 -5px 5px -5px rgba(0,0,0,0.2);
+  border-top: solid 1px #ccc;
+  color: #0085fd;
+  text-align: center;
+  cursor: pointer;
+
+  &::after {
+    content: "Expand";
+  }
+}
+.collapse__content {
+  max-height: 200px;
+  overflow: hidden;
+}
