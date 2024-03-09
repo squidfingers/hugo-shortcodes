@@ -98,7 +98,7 @@ If `href` begins with "http", then the link will open in a new window.
 
 ## collapse
 
-If you want to add collapse a block of content and show an expand button to reveal the full content, you can you the `collapse` shortcode.
+If you want to collapse a block of content and show an expand button to reveal the full content, you can use the `collapse` shortcode.
 
 You can use positional parameters:
 
