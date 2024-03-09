@@ -134,6 +134,10 @@ Parameters:
 </div>
 ```
 
+##### Caveats
+
+The `collapse` shortcode doesn't reliably work when nested in a `tabpane` shortcode. The expand button may still be visible when it's not needed. This is because the CSS `display` property of the inactive `tabpane` panel is set to `none`, so the height of the content cannot be determined on page load. 
+
 ## figure
 
 If you want to add an image with a caption to your content, you can use the `figure` shortcode.
