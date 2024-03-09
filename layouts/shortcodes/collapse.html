@@ -1,5 +1,5 @@
 {{- $maxHeight := cond .IsNamedParams (.Get "maxHeight") (.Get 0) -}}
-{{- $collapseId := printf "collapse-%02v" .Ordinal | anchorize }}
+{{- $collapseId := printf "collapse-%02v" now.UnixNano | anchorize }}
 <div class="collapse">
   <input class="collapse__input" type="checkbox" id="{{ $collapseId }}">
   <label class="collapse__label" for="{{ $collapseId }}"></label>
