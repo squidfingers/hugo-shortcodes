@@ -8,23 +8,26 @@
   </div>
 </div>
 <script>
-  (() => {
-    const callback = (event) => {
-      const collapse__input = document.getElementById("{{ $collapseId }}");
-      collapse__input.checked = false;
-      if (collapse__input) {
-        const collapse = collapse__input.parentNode;
-        const collapse__content = collapse.querySelector(".collapse__content");
-        if (collapse__content) {
-          if (collapse__content.scrollHeight == collapse__content.offsetHeight) {
-            collapse.classList.add("collapse--remove");
-          } else {
-            collapse.classList.remove("collapse--remove");
+  window.addEventListener("DOMContentLoaded", function (event) {
+      const checkHeight = () => {
+        const input = document.getElementById("{{ $collapseId }}");
+        if (input) {
+          input.checked = false;
+          const collapse = input.parentNode;
+          const content = collapse.querySelector(".collapse__content");
+          if (content) {
+            if (content.scrollHeight > 0 && content.offsetHeight > 0) {
+              if (content.scrollHeight == content.offsetHeight) {
+                collapse.classList.add("collapse--disabled");
+              } else {
+                collapse.classList.remove("collapse--disabled");
+              }
+            }
           }
         }
-      }
-    };
-    window.addEventListener("DOMContentLoaded", callback, false);
-    window.addEventListener("resize", callback, false);
-  })();
+      };
+      window.addEventListener("resize", checkHeight, false);
+      checkHeight();
+    }, false
+  );
 </script>

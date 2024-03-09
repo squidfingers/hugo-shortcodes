@@ -3,7 +3,7 @@
   flex-direction: column;
 
   // Classname set by JavaScript if the expand button is not needed
-  &.collapse--remove {
+  &.collapse--disabled {
     .collapse__label {
       display: none;
     }
