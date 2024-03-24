@@ -14,13 +14,21 @@ This collection of Hugo shortcodes is not meant to be an exhaustive list of comp
 - [siteparam](#siteparam)
 - [tabpane](#tabpane)
 
+To see the output of these shortcodes, run:
+
+```bash
+hugo server
+```
+
+ Then visit http://localhost:1313 in your browser.
+
 ## alert
 
 If you want to add an alert banner to your content, you can you the `alert` shortcode.
 
 You can use positional parameters:
 
-```
+```markdown
 {{< alert "warning" >}}
   Markdown
 {{< /alert >}}
@@ -28,7 +36,7 @@ You can use positional parameters:
 
 Or named parameters:
 
-```
+```markdown
 {{< alert severity="warning" size="small" >}}
   Markdown
 {{< /alert >}}
@@ -61,7 +69,7 @@ If you want to add a button to your content, you can you the `button` shortcode.
 
 You can use positional parameters:
 
-```
+```markdown
 {{< button "https://github.com/" "primary" "small" "disabled" >}}
   Markdown
 {{< /button >}}
@@ -69,7 +77,7 @@ You can use positional parameters:
 
 Or named parameters:
 
-```
+```markdown
 {{< button href="https://github.com/" variant="primary" size="small" disabled="true" >}}
   Markdown
 {{< /button >}}
@@ -102,7 +110,7 @@ If you want to collapse a block of content and show an expand button to reveal t
 
 You can use positional parameters:
 
-```
+```markdown
 {{< collapse "100" >}}
   Markdown
 {{< /collapse >}}
@@ -110,7 +118,7 @@ You can use positional parameters:
 
 Or named parameters:
 
-```
+```markdown
 {{< collapse maxHeight="100" >}}
   Markdown
 {{< /collapse >}}
@@ -144,13 +152,13 @@ If you want to add an image with a caption to your content, you can use the `fig
 
 You can use positional parameters:
 
-```
+```markdown
 {{< figure "/path/to/image.jpg" "Alt text" "Image caption" >}}
 ```
 
 Or named parameters:
 
-```
+```markdown
 {{< figure src="/path/to/image.jpg" alt="Alt text" title="Image caption" >}}
 ```
 
@@ -177,13 +185,13 @@ If you want to add an icon to your content, you can use the `icon` shortcode.
 
 You can use positional parameters:
 
-```
+```markdown
 {{< icon "alert" "primary" "small" >}}
 ```
 
 Or named parameters:
 
-```
+```markdown
 {{< icon name="alert" variant="primary" size="small" >}}
 ```
 
@@ -211,7 +219,7 @@ If you want to conditionally print some text based on a **boolean** parameter se
 
 Let's say you have this parameter set in your `frontmatter`...
 
-```
+```yaml
 ---
 some_param: true
 ---
@@ -219,7 +227,7 @@ some_param: true
 
 In your Markdown, you can conditionally print some text based on this parameter.
 
-```
+```markdown
 {{< ifparam "some_param" "enabled" "disabled" >}}
 ```
 
@@ -229,7 +237,7 @@ You can also leave the false value empty, and the shortcode will only print the 
 
 If you want to add an image in your content, but need to set additional attributes not supported by Markdown image syntax, you can use the `img` shortcode.
 
-```
+```markdown
 {{< img src="/path/to/image.jpg" alt="Alt text" width="600" height="400" class="image" style="border: solid 1px red" >}}
 ```
 
@@ -254,7 +262,7 @@ Parameters:
 
 If you have HTML or Markdown that you would like to externally include in your content files, you can place the file under the current working directory. Then, you can use the `include` shortcode to pull in this file into your content.
 
-```
+```markdown
 {{< include "includes/file.md" >}}
 ```
 
@@ -272,7 +280,7 @@ If you need to print a `frontmatter` parameter in your Markdown, you can use the
 
 Let's say you have this param set in your `frontmatter`:
 
-```
+```yaml
 ---
 title: Hugo shortcodes
 ---
@@ -280,13 +288,13 @@ title: Hugo shortcodes
 
 Then in your Markdown, you can print the value of this parameter:
 
-```
+```markdown
 {{< param "title" >}}
 ```
 
 You can also pass a second optional value that will only be returned if the parameter is empty.
 
-```
+```markdown
 {{< param "param_name" "default value" >}}
 ```
 
@@ -294,19 +302,19 @@ You can also pass a second optional value that will only be returned if the para
 
 If you need to print a site parameter in your Markdown, you can use the `siteparam` shortcode.
 
-```
+```markdown
 {{< siteparam "param_name" >}}
 ```
 
 You can also pass a second optional value that will only be returned if the site parameter is empty.
 
-```
+```markdown
 {{< siteparam "param_name" "default value" >}}
 ```
 
 You can also access the site parameter by chaining the identifiers
 
-```
+```markdown
 {{< siteparam "a.b.c" >}}
 ```
 
@@ -314,7 +322,7 @@ You can also access the site parameter by chaining the identifiers
 
 If you want to add tabs to your content, you can use the `tabpane` shortcode.
 
-```
+```markdown
 {{< tabpane >}}
 {{< tab name="Tab 1" >}}
   Markdown
