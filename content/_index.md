@@ -70,9 +70,9 @@ culpa qui officia deserunt mollit anim id est laborum.
 ## file list
 
 {{< file-list >}}
-- [Page 1](#page1)
-- [Page 2](#page2)
-- [Page 3](#page3)
+- [Page 1](#page-1)
+- [Page 2](#page-2)
+- [Page 3](#page-3)
 {{< /file-list >}}
 
 ## icon

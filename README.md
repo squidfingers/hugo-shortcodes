@@ -6,6 +6,7 @@ This collection of Hugo shortcodes is not meant to be an exhaustive list of comp
 - [button](#button)
 - [collapse](#collapse)
 - [figure](#figure)
+- [file-list](#file-list)
 - [icon](#icon)
 - [ifparam](#ifparam)
 - [img](#img)
@@ -177,6 +178,32 @@ Parameters:
   <img src="/path/to/image.jpg" alt="Alt text">
   <figcaption>Image caption</figcaption>
 </figure>
+```
+
+## file-list
+
+If you want to display a list of links as a file list, you can use the `file-list` shortcode.
+
+```markdown
+{{< file-list >}}
+- [Page 1](page-1)
+- [Page 2](page-2)
+- [Page 3](page-3)
+{{< /file-list >}}
+```
+
+##### Notes
+
+The shortcode inner content must be an unordered list of anchor links.
+
+##### Output
+
+```html
+<ul class="file-list">
+  <li><a href="page-1"><svg class="icon">...</svg> Page 1</a></li>
+  <li><a href="page-2"><svg class="icon">...</svg> Page 2</a></li>
+  <li><a href="page-3"><svg class="icon">...</svg> Page 3</a></li>
+</ul>
 ```
 
 ## icon
