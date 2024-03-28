@@ -192,6 +192,15 @@ If you want to display a list of links as a file list, you can use the `file-lis
 {{< /file-list >}}
 ```
 
+You can use positional or named parameters to change the icon name and variant.
+
+Parameters:
+
+| Name         | Value | Description                           |
+| ------------ | ----- | ------------------------------------- |
+| 0: `icon`    | Text  | Icon name, defaults to "file"         |
+| 1: `variant` | Text  | Icon variant, defaults to "secondary" |
+
 ##### Notes
 
 The shortcode inner content must be an unordered list of anchor links.
