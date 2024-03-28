@@ -1,0 +1,5 @@
+{{- $list := .Inner | markdownify -}}
+{{- $icon := partial "icon.html" (dict "name" "file" "variant" "secondary") -}}
+{{- $list = replace $list "<ul>" `<ul class="file-list">` -}}
+{{- $list = replaceRE "(<a[^>]+>)" (printf "$1%s " $icon) $list -}}
+{{ $list | safeHTML }}

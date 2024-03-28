@@ -1,6 +1,14 @@
+:root {
+  --icon-vertical-align: middle;
+}
+@supports (height: 1cap) {
+  :root {
+    --icon-vertical-align: -0.4cap;
+  }
+}
 .icon {
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: var(--icon-vertical-align);
   width: 24px;
   height: 24px;
 

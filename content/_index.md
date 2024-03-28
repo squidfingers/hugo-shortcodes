@@ -67,6 +67,14 @@ culpa qui officia deserunt mollit anim id est laborum.
 
 {{< figure "/images/placeholder.svg" "Alt text" "Image caption" >}}
 
+## file list
+
+{{< file-list >}}
+- [Page 1](#page1)
+- [Page 2](#page2)
+- [Page 3](#page3)
+{{< /file-list >}}
+
 ## icon
 
 {{< icon "alert" "primary" "small" >}}
