@@ -21,7 +21,9 @@ To see the output of these shortcodes, run:
 hugo server
 ```
 
- Then visit http://localhost:1313 in your browser.
+Then visit http://localhost:1313 in your browser.
+
+Requires Hugo v0.121.2 or later.
 
 ## alert
 
