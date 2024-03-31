@@ -1,4 +1,1 @@
-{{ $uid := seq 0 9 }}
-{{ $uid = $uid | append "a" "b" "c" "d" "e" "f" "g" "h" }}
-{{ $uid = delimit (shuffle $uid) "" }}
-{{ return substr $uid 0 8 }}
+{{ return substr (string math.Rand) 4 8 }}
