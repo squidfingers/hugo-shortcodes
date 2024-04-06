@@ -1,0 +1,27 @@
+{{- $this := . -}}
+{{- $resource := .Get 0 -}}
+{{- with $.Page.Resources.Get $resource -}}
+  {{- if eq .ResourceType "application" -}}
+    {{- .Content | safeHTML -}}
+  {{- else if eq .ResourceType "audio" -}}
+    {{- printf "<audio controls><source src=%q type=%q></audio>" .RelPermalink .MediaType.Type | safeHTML -}}
+  {{- else if eq .ResourceType "image" -}}
+    {{- printf "<figure><img src=%q alt=%q></figure>" .RelPermalink .Name | safeHTML -}}
+  {{- else if eq .ResourceType "page" -}}
+    {{- .Content | safeHTML -}}
+  {{- else if eq .ResourceType "text" -}}
+    {{- if hasSuffix $resource ".js" -}} 
+      {{- printf "<script src=%q></script>" .RelPermalink | safeHTML -}}
+    {{- else if hasSuffix $resource ".css" -}}
+      {{- printf `<link rel="stylesheet" type="text/css" href=%q>` .RelPermalink | safeHTML -}}
+    {{- else -}}
+      {{- .Content | safeHTML -}}
+    {{- end -}}
+  {{- else if eq .ResourceType "video" -}}
+    {{- printf "<video controls><source src=%q type=%q></video>" .RelPermalink .MediaType.Type | safeHTML -}}
+  {{- else -}}
+    {{- errorf "Shortcode %q: resource type %q not supported at %s" $this.Name .ResourceType $this.Position -}}
+  {{- end -}}
+{{- else -}}
+  {{- errorf "Shortcode %q: resource %q not found at %s" .Name $resource .Position -}}
+{{- end -}}
