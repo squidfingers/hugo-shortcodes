@@ -339,7 +339,7 @@ You can also pass a second optional value that will only be returned if the para
 
 ## resource
 
-If you want to include a [page resource](https://gohugo.io/content-management/page-resources/) in your markdown, you can use the `resource` shortcode.
+If you want to include a [page resource](https://gohugo.io/content-management/page-resources/) in your Markdown, you can use the `resource` shortcode.
 
 ```markdown
 {{< resource "image.jpg" >}}
@@ -350,12 +350,12 @@ Supported resource types:
 | Type                       | Description                                                                                        |
 | -------------------------- | -------------------------------------------------------------------------------------------------- |
 | application (json, ...)    | Renders raw content of resource; to nest output in a codeblock, use `{{% %}}` shortcode delimiters |
-| audio (mp3, ogg, ...)      | Renders `audio` tag referencing resource url                                                       |
-| video (mp4, ogg, ...)      | Renders `video` tag referencing resource url                                                       |
-| image (jpg, png, svg, ...) | Renders `figure` tag referencing resource url                                                      |
-| page (markdown, html)      | Renders resource content as html                                                                   |
-| javascript (\*.js)         | Renders `script` tag referencing resource url                                                      |
-| stylesheet (\*.css)        | Renders `link` tag referencing resource url                                                        |
+| audio (mp3, ogg, ...)      | Renders `audio` tag referencing resource URL                                                       |
+| video (mp4, ogg, ...)      | Renders `video` tag referencing resource URL                                                       |
+| image (jpg, png, svg, ...) | Renders `figure` tag referencing resource URL                                                      |
+| page (Markdown, HTML)      | Renders resource content as HTML                                                                   |
+| javascript (\*.js)         | Renders `script` tag referencing resource URL                                                      |
+| stylesheet (\*.css)        | Renders `link` tag referencing resource URL                                                        |
 | text                       | Renders raw content of resource                                                                    |
 
 ## siteparam
