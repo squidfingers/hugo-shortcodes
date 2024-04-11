@@ -1,18 +1,25 @@
 {{- $this := . -}}
-{{- $resource := .Get 0 -}}
-{{- with $.Page.Resources.Get $resource -}}
+{{- $resourceName := .Get 0 -}}
+{{- with $.Page.Resources.Get $resourceName -}}
   {{- if eq .ResourceType "application" -}}
     {{- .Content | safeHTML -}}
   {{- else if eq .ResourceType "audio" -}}
     {{- printf "<audio controls><source src=%q type=%q></audio>" .RelPermalink .MediaType.Type | safeHTML -}}
   {{- else if eq .ResourceType "image" -}}
-    {{- printf "<figure><img src=%q alt=%q></figure>" .RelPermalink .Name | safeHTML -}}
+    {{- $resource := . }}
+    {{- if not (eq .MediaType.SubType "svg") }}
+      {{- $process := $this.Get 1 }}
+      {{- if $process }}
+        {{- $resource = .Process $process }}
+      {{- end }}
+    {{- end }}
+    {{- printf "<figure><img src=%q alt=%q></figure>" $resource.RelPermalink $resource.Name | safeHTML -}}
   {{- else if eq .ResourceType "page" -}}
     {{- .Content | safeHTML -}}
   {{- else if eq .ResourceType "text" -}}
-    {{- if hasSuffix $resource ".js" -}} 
+    {{- if hasSuffix $resourceName ".js" -}} 
       {{- printf "<script src=%q></script>" .RelPermalink | safeHTML -}}
-    {{- else if hasSuffix $resource ".css" -}}
+    {{- else if hasSuffix $resourceName ".css" -}}
       {{- printf `<link rel="stylesheet" type="text/css" href=%q>` .RelPermalink | safeHTML -}}
     {{- else -}}
       {{- .Content | safeHTML -}}
@@ -23,5 +30,5 @@
     {{- errorf "Shortcode %q: resource type %q not supported at %s" $this.Name .ResourceType $this.Position -}}
   {{- end -}}
 {{- else -}}
-  {{- errorf "Shortcode %q: resource %q not found at %s" .Name $resource .Position -}}
+  {{- errorf "Shortcode %q: resource %q not found at %s" .Name $resourceName .Position -}}
 {{- end -}}

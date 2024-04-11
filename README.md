@@ -342,7 +342,13 @@ You can also pass a second optional value that will only be returned if the para
 If you want to include a [page resource](https://gohugo.io/content-management/page-resources/) in your Markdown, you can use the `resource` shortcode.
 
 ```markdown
-{{< resource "image.jpg" >}}
+{{< resource "image.svg" >}}
+```
+
+If the resource is a raster image (webp, jpg, png, ...), then you can pass an optional [process specification](https://gohugo.io/methods/resource/process/#process-specification).
+
+```markdown
+{{< resource "image.webp" "fill 200x200 jpg q80 lanczos" >}}
 ```
 
 Supported resource types:
@@ -352,7 +358,7 @@ Supported resource types:
 | application (json, ...)    | Renders raw content of resource; to nest output in a codeblock, use `{{% %}}` shortcode delimiters |
 | audio (mp3, ogg, ...)      | Renders `audio` tag referencing resource URL                                                       |
 | video (mp4, ogg, ...)      | Renders `video` tag referencing resource URL                                                       |
-| image (jpg, png, svg, ...) | Renders `figure` tag referencing resource URL                                                      |
+| image (jpg, png, svg, ...) | Renders `figure` with `img` tag referencing resource URL                                                      |
 | page (Markdown, HTML)      | Renders resource content as HTML                                                                   |
 | javascript (\*.js)         | Renders `script` tag referencing resource URL                                                      |
 | stylesheet (\*.css)        | Renders `link` tag referencing resource URL                                                        |
