@@ -46,7 +46,7 @@ Or named parameters:
 {{< /alert >}}
 ```
 
-Parameters:
+#### Parameters
 
 | Name          | Value                                           | Description                  |
 | ------------- | ----------------------------------------------- | -----------------------------|
@@ -54,7 +54,7 @@ Parameters:
 | 1: `size`     | `small`                                         | Defaults to none             |
 | 2: `hideIcon` | `true`                                          | Hides icon; Default to false |
 
-##### Output
+#### Output
 
 ```html
 <div class="alert alert--info alert--small">
@@ -87,7 +87,7 @@ Or named parameters:
 {{< /button >}}
 ```
 
-Parameters:
+#### Parameters
 
 | Name                 | Value                                                         | Description      |
 | -------------------- | ------------------------------------------------------------- | ---------------- |
@@ -96,11 +96,11 @@ Parameters:
 | 2: `size`            | `small`, `large`                                              | Defaults to none |
 | 3: `disabled`        | `disabled` or `true`                                          |                  |
 
-##### Notes
+#### Notes
 
 If `href` begins with "http", then the link will open in a new window.
 
-##### Output
+#### Output
 
 ```html
 <a class="button button--primary button--small button--disabled">
@@ -128,13 +128,13 @@ Or named parameters:
 {{< /collapse >}}
 ```
 
-Parameters:
+#### Parameters
 
 | Name           | Value  | Description                                                          |
 | -------------- | ------ | ---------------------------------------------------------------------|
 | 0: `maxHeight` | Number | The max-height of the content when it's collapsed; Defaults to 200px |
 
-##### Output
+#### Output
 
 ```html
 <div class="collapse">
@@ -146,7 +146,7 @@ Parameters:
 </div>
 ```
 
-##### Caveats
+#### Caveats
 
 The `collapse` shortcode doesn't reliably work when nested in a `tabpane` shortcode. The expand button may still be visible when it's not needed. This is because the CSS `display` property of the inactive `tabpane` panel is set to `none`, so the height of the content cannot be determined on page load. 
 
@@ -166,7 +166,7 @@ Or named parameters:
 {{< figure src="/path/to/image.jpg" alt="Alt text" title="Image caption" >}}
 ```
 
-Parameters:
+#### Parameters
 
 | Name                | Value    | Description                        |
 | ------------------- | -------- | ---------------------------------- |
@@ -174,7 +174,7 @@ Parameters:
 | 1: `alt`            | Text     | Image alt                          |
 | 2: `title`          | Markdown | Caption to display under the image |
 
-##### Output
+#### Output
 
 ```html
 <figure>
@@ -197,18 +197,18 @@ If you want to display a list of links as a file list, you can use the `file-lis
 
 You can use positional or named parameters to change the icon name and variant.
 
-Parameters:
+#### Parameters
 
 | Name         | Value | Description                           |
 | ------------ | ----- | ------------------------------------- |
 | 0: `icon`    | Text  | Icon name, defaults to "file"         |
 | 1: `variant` | Text  | Icon variant, defaults to "secondary" |
 
-##### Notes
+#### Notes
 
 The shortcode inner content must be an unordered list of anchor links.
 
-##### Output
+#### Output
 
 ```html
 <ul class="file-list">
@@ -234,7 +234,7 @@ Or named parameters:
 {{< icon name="alert" variant="primary" size="small" >}}
 ```
 
-Parameters:
+#### Parameters
 
 | Name                 | Value                                                         | Description      |
 | -------------------- | ------------------------------------------------------------- | -----------------|
@@ -242,11 +242,11 @@ Parameters:
 | 1: `variant`         | `primary`, `secondary`, `info`, `success`, `warning`, `error` | Defaults to none |
 | 2: `size`            | `small`, `large`                                              | Defaults to none | 
 
-##### Notes
+#### Notes
 
 The icon file must be an svg, located in the `/assets/icons/` directory.
 
-##### Output
+#### Output
 
 ```html
 <svg class="icon icon--primary icon--small">...</svg>
@@ -280,7 +280,7 @@ If you want to add an image in your content, but need to set additional attribut
 {{< img src="/path/to/image.jpg" alt="Alt text" width="600" height="400" class="image" style="border: solid 1px red" >}}
 ```
 
-Parameters:
+#### Parameters
 
 | Name                | Value     | Description       |
 | ------------------- | --------- | ----------------- |
@@ -291,7 +291,7 @@ Parameters:
 | 4: `class`          | Classname | CSS class name    |
 | 5: `style`          | CSS rules | Inline CSS styles |
 
-##### Output
+#### Output
 
 ```html
 <img src="/path/to/image.jpg" alt="Alt text" width="600" height="400" class="image" style="border: solid 1px red">
@@ -305,7 +305,7 @@ If you have HTML or Markdown that you would like to externally include in your c
 {{< include "includes/file.md" >}}
 ```
 
-##### Notes
+#### Notes
 
 - You must use `{{< >}}` shortcode delimiters to render the included content correctly.
 - All included files under the `content` directory must have `draft:true` set in their `frontmatter`.
@@ -345,24 +345,40 @@ If you want to include a [page resource](https://gohugo.io/content-management/pa
 {{< resource "image.svg" >}}
 ```
 
+#### Raster images
+
 If the resource is a raster image (webp, jpg, png, ...), then you can pass an optional [process specification](https://gohugo.io/methods/resource/process/#process-specification).
 
 ```markdown
 {{< resource "image.webp" "fill 200x200 jpg q80 lanczos" >}}
 ```
 
-Supported resource types:
+#### JavaScript and stylesheets
 
-| Type                       | Description                                                                                        |
-| -------------------------- | -------------------------------------------------------------------------------------------------- |
-| application (json, ...)    | Renders raw content of resource; to nest output in a codeblock, use `{{% %}}` shortcode delimiters |
-| audio (mp3, ogg, ...)      | Renders `audio` tag referencing resource URL                                                       |
-| video (mp4, ogg, ...)      | Renders `video` tag referencing resource URL                                                       |
-| image (jpg, png, svg, ...) | Renders `figure` with `img` tag referencing resource URL                                                      |
-| page (Markdown, HTML)      | Renders resource content as HTML                                                                   |
-| javascript (\*.js)         | Renders `script` tag referencing resource URL                                                      |
-| stylesheet (\*.css)        | Renders `link` tag referencing resource URL                                                        |
-| text                       | Renders raw content of resource                                                                    |
+If the resource is a JavaScript or stylesheet file, the file contents will be printed on the page as text. If you would like to link to the file as an external resource, then you can pass an optional "external" param.
+
+```markdown
+{{< resource "script.js" "external" >}}
+```
+
+**Output**
+
+```html
+<script src="script.js"></script>
+```
+
+#### Supported resource types
+
+| Type                          | Description                                                                                        |
+| ----------------------------- | -------------------------------------------------------------------------------------------------- |
+| application (json, yaml, ...) | Renders raw content of resource; to nest output in a codeblock, use `{{% %}}` shortcode delimiters |
+| audio (mp3, ogg, ...)         | Renders `audio` tag referencing resource URL                                                       |
+| video (mp4, ogg, ...)         | Renders `video` tag referencing resource URL                                                       |
+| image (jpg, png, svg, ...)    | Renders `figure` with `img` tag referencing resource URL                                           |
+| page (Markdown, HTML)         | Renders resource content as HTML                                                                   |
+| javascript                    | Renders raw content or `script` tag referencing resource URL                                       |
+| stylesheet                    | Renders raw content or `link` tag referencing resource URL                                         |
+| text                          | Renders raw content of resource                                                                    |
 
 ## siteparam
 
@@ -402,11 +418,11 @@ If you want to add tabs to your content, you can use the `tabpane` shortcode.
 {{< /tabpane >}}
 ```
 
-##### Notes
+#### Notes
 
-- On page load, the first tab will be active. At this time, there is not a parameter to set which tab is active by default.
+On page load, the first tab will be active. At this time, there is not a parameter to set which tab is active by default.
 
-##### Output
+#### Output
 
 ```html
 <div class="tabpane">

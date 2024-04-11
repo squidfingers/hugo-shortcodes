@@ -1,3 +1,6 @@
 .highlight {
   margin-bottom: 24px;
 }
+.highlight pre {
+  padding: 4px 8px;
+}
