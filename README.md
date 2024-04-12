@@ -70,7 +70,7 @@ Or named parameters:
 
 ## blockquote
 
-If you want to add an blockquote to your content, you can use the `blockquote` shortcode.
+If you want to add a blockquote to your content, you can use the `blockquote` shortcode.
 
 You can use positional parameters:
 
