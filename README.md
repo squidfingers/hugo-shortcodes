@@ -3,6 +3,7 @@
 This collection of Hugo shortcodes is not meant to be an exhaustive list of components you might need in your Markdown content, rather it's a few examples that illustrate various techinques that will help you build out your own shortcodes. These techinques include: validating parameters ([button](#button)), using a partial within the shortcode so layout and content can use the component ([icon](#icon)), using conditional content ([ifparam](#ifparam)), and passing parameters from a child shortcode to the parent for rendering ([tabpane](#tabpane)).
 
 - [alert](#alert)
+- [blockquote](#blockquote)
 - [button](#button)
 - [collapse](#collapse)
 - [figure](#figure)
@@ -28,7 +29,7 @@ Requires Hugo v0.121.2 or later.
 
 ## alert
 
-If you want to add an alert banner to your content, you can you the `alert` shortcode.
+If you want to add an alert banner to your content, you can use the `alert` shortcode.
 
 You can use positional parameters:
 
@@ -67,9 +68,50 @@ Or named parameters:
 </div>
 ```
 
+## blockquote
+
+If you want to add an blockquote to your content, you can use the `blockquote` shortcode.
+
+You can use positional parameters:
+
+```markdown
+{{< blockquote "Author" >}}
+  Markdown
+{{< /blockquote >}}
+```
+
+Or named parameters:
+
+```markdown
+{{< blockquote author="Author" cite="Source" url="https://www.huxley.net/" >}}
+  Markdown
+{{< /blockquote >}}
+```
+
+#### Parameters
+
+| Name        | Value | Description |
+| ----------- | ----- | ----------- |
+| 0: `author` | Text  | Author name |
+| 1: `cite`   | Text  | Source name |
+| 2: `url`    | URL   | Source URL  |
+
+#### Output
+
+```html
+<blockquote cite="https://www.huxley.net/bnw/">
+  <p>
+    Markdown
+  </p>
+  <footer>
+    —Author, <cite><a href="https://www.huxley.net/bnw/">Source</a></cite>
+  </footer>
+</blockquote>
+```
+
 ## button
 
-If you want to add a button to your content, you can you the `button` shortcode.
+If you want to add a button to your content, you can use the `button` shortcode.
 
 You can use positional parameters:
 

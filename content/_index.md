@@ -17,6 +17,12 @@ has_title: true
   This alert doesn't have an icon
 {{< /alert >}}
 
+## blockquote
+
+{{< blockquote author="Aldous Huxley" cite="Brave New World" url="https://www.huxley.net/bnw/" >}}
+  Most human beings have an almost infinite capacity for taking things for granted.
+{{< /blockquote >}}
+
 ## button
 
 {{< button "https://github.com/" >}}

@@ -116,3 +116,38 @@ pre, code {
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   font-size: 0.85rem;
 }
+
+blockquote {
+  position: relative;
+  margin: 0 0 1rem;
+  padding: 1rem;
+  padding-left: 3rem;
+  background-color: #f9f9f9;
+  border-left: solid 5px #999;
+
+  p {
+    color: #555;
+    font-style: italic;
+  }
+  footer {
+    color: #222;
+
+    cite {
+      font-style: italic;
+    }
+  }
+  &::before {
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    color:#999;
+    font-size: 4rem;
+    content: "\201C";
+  }
+  &::after {
+    content: "";
+  }
+  & > :last-child {
+    margin-bottom: 0;
+  }
+}
