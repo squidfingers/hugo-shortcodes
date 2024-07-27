@@ -9,6 +9,7 @@
   vertical-align: middle;
   text-align: center;
   text-decoration: none;
+  font-size: 18px;
   font-weight: 500;
   cursor: pointer;
 
@@ -30,6 +31,18 @@
   &.button--error {
     padding: 0.5rem 1rem;
     color: #fff;
+
+    // Variant + Size
+
+    &.button--large {
+      padding: 0.75rem 1.5rem;
+    }
+    &.button--medium {
+      padding: 0.5rem 1rem;
+    }
+    &.button--small {
+      padding: 0.25rem 0.5rem;
+    }
   }
   &.button--primary {
     background-color: #0085fd;
@@ -53,11 +66,15 @@
   // Size
 
   &.button--large {
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem;
     font-size: 20px;
   }
+  &.button--medium {
+    padding: 0.5rem;
+    font-size: 18px;
+  }
   &.button--small {
-    padding: 0.25rem 0.5rem;
+    padding: 0.25rem;
     font-size: 16px;
   }
 

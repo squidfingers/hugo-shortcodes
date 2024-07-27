@@ -49,11 +49,11 @@ Or named parameters:
 
 #### Parameters
 
-| Name          | Value                                           | Description                  |
-| ------------- | ----------------------------------------------- | -----------------------------|
-| 0: `severity` | `info` (default), `success`, `warning`, `error` |                              |
-| 1: `size`     | `small`                                         | Defaults to none             |
-| 2: `hideIcon` | `true`                                          | Hides icon; Default to false |
+| Name          | Value                                           | Description                     |
+| ------------- | ----------------------------------------------- | ------------------------------- |
+| 0: `severity` | `info` (default), `success`, `warning`, `error` | Variant of alert                |
+| 1: `size`     | `small`                                         | Size of alert; Defaults to none |
+| 2: `hideIcon` | `true`                                          | Hides icon; Default to false    |
 
 #### Output
 
@@ -90,11 +90,11 @@ Or named parameters:
 
 #### Parameters
 
-| Name        | Value | Description |
-| ----------- | ----- | ----------- |
-| 0: `author` | Text  | Author name |
-| 1: `cite`   | Text  | Source name |
-| 2: `url`    | URL   | Source URL  |
+| Name        | Value  | Description |
+| ----------- | ------ | ----------- |
+| 0: `author` | String | Author name |
+| 1: `cite`   | String | Source name |
+| 2: `url`    | URL    | Source URL  |
 
 #### Output
 
@@ -131,12 +131,13 @@ Or named parameters:
 
 #### Parameters
 
-| Name                 | Value                                                         | Description      |
-| -------------------- | ------------------------------------------------------------- | ---------------- |
-| 0: `href` (Required) | URL                                                           | Page link        |
-| 1: `variant`         | `primary`, `secondary`, `info`, `success`, `warning`, `error` | Defaults to none |
-| 2: `size`            | `small`, `large`                                              | Defaults to none |
-| 3: `disabled`        | `disabled` or `true`                                          |                  |
+| Name                 | Value                                                         | Description                          |
+| -------------------- | ------------------------------------------------------------- | ------------------------------------ |
+| 0: `href` (Required) | URL                                                           | Page link                            |
+| 1: `variant`         | `primary`, `secondary`, `info`, `success`, `warning`, `error` | Variant of button; Defaults to none  |
+| 2: `size`            | `small`, `medium`, `large`                                    | Size of button; Defaults to `medium` |
+| 3: `disabled`        | `disabled` or `true`                                          | Disable button; Defaults to none     |
+| 4: `class`           | String                                                        | Additional class name                |
 
 #### Notes
 
@@ -173,7 +174,7 @@ Or named parameters:
 #### Parameters
 
 | Name           | Value  | Description                                                          |
-| -------------- | ------ | ---------------------------------------------------------------------|
+| -------------- | ------ | -------------------------------------------------------------------- |
 | 0: `maxHeight` | Number | The max-height of the content when it's collapsed; Defaults to 200px |
 
 #### Output
@@ -190,7 +191,7 @@ Or named parameters:
 
 #### Caveats
 
-The `collapse` shortcode doesn't reliably work when nested in a `tabpane` shortcode. The expand button may still be visible when it's not needed. This is because the CSS `display` property of the inactive `tabpane` panel is set to `none`, so the height of the content cannot be determined on page load. 
+The `collapse` shortcode doesn't reliably work when nested in a `tabpane` shortcode. The expand button may still be visible when it's not needed. This is because the CSS `display` property of the inactive `tabpane` panel is set to `none`, so the height of the content cannot be determined on page load.
 
 ## figure
 
@@ -213,7 +214,7 @@ Or named parameters:
 | Name                | Value    | Description                        |
 | ------------------- | -------- | ---------------------------------- |
 | 0: `src` (Required) | URL      | Image filepath                     |
-| 1: `alt`            | Text     | Image alt                          |
+| 1: `alt`            | String   | Image alt                          |
 | 2: `title`          | Markdown | Caption to display under the image |
 
 #### Output
@@ -241,10 +242,10 @@ You can use positional or named parameters to change the icon name and variant.
 
 #### Parameters
 
-| Name         | Value | Description                           |
-| ------------ | ----- | ------------------------------------- |
-| 0: `icon`    | Text  | Icon name, defaults to "file"         |
-| 1: `variant` | Text  | Icon variant, defaults to "secondary" |
+| Name         | Value  | Description                           |
+| ------------ | ------ | ------------------------------------- |
+| 0: `icon`    | String | Icon name, defaults to "file"         |
+| 1: `variant` | String | Icon variant, defaults to "secondary" |
 
 #### Notes
 
@@ -254,9 +255,15 @@ The shortcode inner content must be an unordered list of anchor links.
 
 ```html
 <ul class="file-list">
-  <li><a href="page-1"><svg class="icon">...</svg> Page 1</a></li>
-  <li><a href="page-2"><svg class="icon">...</svg> Page 2</a></li>
-  <li><a href="page-3"><svg class="icon">...</svg> Page 3</a></li>
+  <li>
+    <a href="page-1"><svg class="icon">...</svg> Page 1</a>
+  </li>
+  <li>
+    <a href="page-2"><svg class="icon">...</svg> Page 2</a>
+  </li>
+  <li>
+    <a href="page-3"><svg class="icon">...</svg> Page 3</a>
+  </li>
 </ul>
 ```
 
@@ -278,11 +285,12 @@ Or named parameters:
 
 #### Parameters
 
-| Name                 | Value                                                         | Description      |
-| -------------------- | ------------------------------------------------------------- | -----------------|
-| 0: `name` (Required) | Text                                                          | Icon name        |
-| 1: `variant`         | `primary`, `secondary`, `info`, `success`, `warning`, `error` | Defaults to none |
-| 2: `size`            | `small`, `large`                                              | Defaults to none | 
+| Name                 | Value                                                                    | Description                        |
+| -------------------- | ------------------------------------------------------------------------ | ---------------------------------- |
+| 0: `name` (Required) | String                                                                   | Icon name                          |
+| 1: `variant`         | `primary`, `secondary`, `info`, `success`, `warning`, `error`, `current` | Variant of icon; Defaults to none  |
+| 2: `size`            | `small`, `medium` `large`                                                | Size of icon; Defaults to `medium` |
+| 3: `class`           | String                                                                   | Additional class name              |
 
 #### Notes
 
@@ -327,10 +335,10 @@ If you want to add an image in your content, but need to set additional attribut
 | Name                | Value     | Description       |
 | ------------------- | --------- | ----------------- |
 | 0: `src` (Required) | URL       | Image path        |
-| 1: `alt`            | Text      | Image alt         |
+| 1: `alt`            | String    | Image alt         |
 | 2: `width`          | Number    | Image width       |
 | 3: `height`         | Number    | Image height      |
-| 4: `class`          | Classname | CSS class name    |
+| 4: `class`          | String    | CSS class name    |
 | 5: `style`          | CSS rules | Inline CSS styles |
 
 #### Output

@@ -44,12 +44,21 @@
       fill: #d32f2f;
     }
   }
+  &.icon--current {
+    path {
+      fill: currentColor;
+    }
+  }
 
   // Size
   
   &.icon--large {
     width: 32px;
     height: 32px;
+  }
+  &.icon--medium {
+    width: 24px;
+    height: 24px;
   }
   &.icon--small {
     width: 20px;

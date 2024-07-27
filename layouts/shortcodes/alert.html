@@ -1,4 +1,4 @@
-{{- $class := slice "alert" -}}
+{{- $classNames := slice "alert" -}}
 {{- /* Map severity to icon names */ -}}
 {{- $icons := dict
   "info" "information-box"
@@ -11,20 +11,20 @@
 {{- if not (or (eq $sev "success") (eq $sev "warning") (eq $sev "error")) -}}
   {{- $sev = "info" -}}
 {{- end -}}
-{{- $class = $class | append (printf "alert--%s" $sev) -}}
+{{- $classNames = $classNames | append (printf "alert--%s" $sev) -}}
 {{- /* Get size */ -}}
 {{- $size := cond .IsNamedParams (.Get "size") (.Get 1) -}}
 {{- if eq $size "small" -}}
-  {{-  $class = $class | append (printf "alert--%s" $size) -}}
+  {{-  $classNames = $classNames | append (printf "alert--%s" $size) -}}
 {{- else -}}
   {{- $size = "" -}}
 {{- end -}}
 {{- /* Build class names */ -}}
-{{- $class = delimit $class " " -}}
+{{- $classNames = delimit $classNames " " -}}
 {{- /* Get hideIcon */ -}}
 {{- $hideIcon := cond .IsNamedParams (.Get "hideIcon") (.Get 2) -}}
 {{- /* Output */ -}}
-<div class="{{ $class }}">
+<div class="{{ $classNames }}">
   {{ if not (eq $hideIcon "true") -}}
     <div class="alert__icon">
       {{ partial "icon.html" (dict "name" (index $icons $sev) "variant" $sev "size" $size) }}
