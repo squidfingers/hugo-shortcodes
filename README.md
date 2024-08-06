@@ -12,6 +12,7 @@ This collection of Hugo shortcodes is not meant to be an exhaustive list of comp
 - [ifparam](#ifparam)
 - [img](#img)
 - [include](#include)
+- [labeled-highlight](#labeled-highlight)
 - [param](#param)
 - [resource](#resource)
 - [siteparam](#siteparam)
