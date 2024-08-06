@@ -352,7 +352,7 @@ json {title="users.json",linenos=true}
 
 Then add styles to display the title attribute:
 
-```css
+```scss
 .highlight[title] {
   &::before {
     content: attr(title);
