@@ -323,25 +323,6 @@ If you need to label the code block, you can use the `labeled-highlight` shortco
 {{< /labeled-highlight >}}
 ```
 
-__This shortcode has been deprecated.__
-
-Rather than using a shortcode, a better way solution is to add a title with Markdown attribute syntax to the code fence:
-
-```
-json {title="users.json",linenos=true}
-```
-
-Then add styles to display the title attribute:
-
-```css
-.highlight[title] {
-  &::before {
-    content: attr(title);
-    ...
-  }
-}
-```
-
 #### Parameters
 
 | Name         | Value  | Description                                                 |
@@ -360,6 +341,27 @@ Then add styles to display the title attribute:
   ...
 </div>
 ```
+
+#### Alternate method
+
+Rather than using a shortcode, an alternate solution is to add a title with Markdown attribute syntax to the code fence:
+
+```
+json {title="users.json",linenos=true}
+```
+
+Then add styles to display the title attribute:
+
+```css
+.highlight[title] {
+  &::before {
+    content: attr(title);
+    ...
+  }
+}
+```
+
+While this method avoids needing to use a shortcode, the shortcode allows for more control of the markup used to display the label.
 
 ## param
 
