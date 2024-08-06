@@ -101,6 +101,15 @@ The `title` param {{< ifparam "has_title" "is" "is not" >}} set
 
 {{< include "includes/file.md" >}}
 
+## labeled-highlight
+
+{{< labeled-highlight lang="json" label="users.json" options="lineNos=true" >}}
+{
+  "name": "John",
+  "age": 30
+}
+{{< /labeled-highlight >}}
+
 ## param
 
 The page title is "{{< param "title" >}}"

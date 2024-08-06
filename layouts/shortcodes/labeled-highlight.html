@@ -1,0 +1,7 @@
+{{- $label := cond .IsNamedParams (.Get "label") (.Get 0) -}}
+{{- $lang := cond .IsNamedParams (.Get "lang") (.Get 1) -}}
+{{- $options := cond .IsNamedParams (.Get "options") (.Get 2) -}}
+{{- $code := trim .Inner "\n\r" -}}
+{{- /* Output */ -}}
+{{ with $label }}<div class="highlight__label"><code>{{ . }}</code></div>{{ end }}
+{{ highlight $code $lang $options }}

@@ -31,16 +31,6 @@ Requires Hugo v0.121.2 or later.
 
 If you want to add an alert banner to your content, you can use the `alert` shortcode.
 
-You can use positional parameters:
-
-```markdown
-{{< alert "warning" >}}
-  Markdown
-{{< /alert >}}
-```
-
-Or named parameters:
-
 ```markdown
 {{< alert severity="warning" size="small" >}}
   Markdown
@@ -72,16 +62,6 @@ Or named parameters:
 
 If you want to add a blockquote to your content, you can use the `blockquote` shortcode.
 
-You can use positional parameters:
-
-```markdown
-{{< blockquote "Author" >}}
-  Markdown
-{{< /blockquote >}}
-```
-
-Or named parameters:
-
 ```markdown
 {{< blockquote author="Author" cite="Source" url="https://www.huxley.net/" >}}
   Markdown
@@ -112,16 +92,6 @@ Or named parameters:
 ## button
 
 If you want to add a button to your content, you can use the `button` shortcode.
-
-You can use positional parameters:
-
-```markdown
-{{< button "https://github.com/" "primary" "small" "disabled" >}}
-  Markdown
-{{< /button >}}
-```
-
-Or named parameters:
 
 ```markdown
 {{< button href="https://github.com/" variant="primary" size="small" disabled="true" >}}
@@ -155,16 +125,6 @@ If `href` begins with "http", then the link will open in a new window.
 
 If you want to collapse a block of content and show an expand button to reveal the full content, you can use the `collapse` shortcode.
 
-You can use positional parameters:
-
-```markdown
-{{< collapse "100" >}}
-  Markdown
-{{< /collapse >}}
-```
-
-Or named parameters:
-
 ```markdown
 {{< collapse maxHeight="100" >}}
   Markdown
@@ -196,14 +156,6 @@ The `collapse` shortcode doesn't reliably work when nested in a `tabpane` shortc
 ## figure
 
 If you want to add an image with a caption to your content, you can use the `figure` shortcode.
-
-You can use positional parameters:
-
-```markdown
-{{< figure "/path/to/image.jpg" "Alt text" "Image caption" >}}
-```
-
-Or named parameters:
 
 ```markdown
 {{< figure src="/path/to/image.jpg" alt="Alt text" title="Image caption" >}}
@@ -238,8 +190,6 @@ If you want to display a list of links as a file list, you can use the `file-lis
 {{< /file-list >}}
 ```
 
-You can use positional or named parameters to change the icon name and variant.
-
 #### Parameters
 
 | Name         | Value  | Description                           |
@@ -270,14 +220,6 @@ The shortcode inner content must be an unordered list of anchor links.
 ## icon
 
 If you want to add an icon to your content, you can use the `icon` shortcode.
-
-You can use positional parameters:
-
-```markdown
-{{< icon "alert" "primary" "small" >}}
-```
-
-Or named parameters:
 
 ```markdown
 {{< icon name="alert" variant="primary" size="small" >}}
@@ -362,6 +304,42 @@ If you have HTML or Markdown that you would like to externally include in your c
 - Only relative paths **under** the page including the file are supported. Relative paths traversing up the directory are **not** supported. For files outside the current working directory you can use an absolute path starting with `/`.
 - When editing an **included** file in local development, the page **including** the file is not automatically updated. Restarting the server is required to see any changes.
 - The headings of included files will **not** be displayed in Hugo's `TableOfContents`.
+
+## labeled-highlight
+
+Hugo automatically highlights content in code fences, and also provides a built-in [`highlight` shortcode](https://gohugo.io/content-management/syntax-highlighting/#highlight-shortcode).
+
+However, Hugo does not provide an [option](https://gohugo.io/functions/transform/highlight/#options) to display a title or filename.
+
+If you need to label the code block, you can use the `labeled-highlight` shortcode.
+
+```
+{{< labeled-highlight label="users.json" lang="json" options="lineNos=true" >}}
+{
+  "name": "John",
+  "age": 30
+}
+{{< /labeled-highlight >}}
+```
+
+#### Parameters
+
+| Name         | Value  | Description                                                 |
+| ------------ | ------ | ----------------------------------------------------------- |
+| 0: `label`   | String | Teh text to display above the code block                    |
+| 1: `lang`    | String | The language of the code to highlight                       |
+| 2: `options` | String | Additional options, formatted as "lineNos=table, style=api" |
+
+#### Output
+
+```html
+<div class="highlight__label">
+  <code>Label</code>
+</div>
+<div class="highlight">
+  ...
+</div>
+```
 
 ## param
 
