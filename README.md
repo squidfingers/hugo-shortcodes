@@ -323,6 +323,28 @@ If you need to label the code block, you can use the `labeled-highlight` shortco
 {{< /labeled-highlight >}}
 ```
 
+🚨 This shortcode has been deprecated.
+
+A better way to add a label above a highlighted code block is to add a title with Markdown attribute syntax:
+
+```json {title="users.json",linenos=true}
+{
+  "name": "John",
+  "age": 30
+}
+```
+
+Then add styles to display the title attribute:
+
+```css
+.highlight[title] {
+  &::before {
+    content: attr(title);
+    ...
+  }
+}
+```
+
 #### Parameters
 
 | Name         | Value  | Description                                                 |
