@@ -7,7 +7,7 @@
     {{- $tabId :=  printf "%v-%v" $tabpaneId $k }}
     <input type="radio" name="{{ $tabpaneId }}" id="{{ $tabId }}" class="tabpane__input" tabindex="1"{{ if eq $k "00" }} checked="checked"{{ end }}>
     <label class="tabpane__label" for="{{ $tabId }}">
-      {{ index . "name" }}
+      {{ index . "label" }}
     </label>
     <div class="tabpane__panel" tabindex="1">
       {{ index . "content" | markdownify }}

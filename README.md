@@ -456,17 +456,23 @@ If you want to add tabs to your content, you can use the `tabpane` shortcode.
 
 ```markdown
 {{< tabpane >}}
-{{< tab name="Tab 1" >}}
+{{< tab label="Tab 1" >}}
   Markdown
 {{< /tab >}}
-{{< tab name="Tab 2" >}}
+{{< tab label="Tab 2" >}}
   Markdown
 {{< /tab >}}
-{{< tab name="Tab 3" >}}
+{{< tab label="Tab 3" >}}
   Markdown
 {{< /tab >}}
 {{< /tabpane >}}
 ```
+
+#### `tab` Parameters
+
+| Name       | Value  | Description                          |
+| ---------- | ------ | ------------------------------------ |
+| 0: `label` | String | The text displayed in the tab button |
 
 #### Notes
 
