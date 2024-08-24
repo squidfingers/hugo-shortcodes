@@ -1,11 +1,10 @@
-{{- /* Populate Scratch with tab content by rendering .Inner; print to a variable so whitespace isn't rendered */ -}}
+{{- /* Populated Scratch with tab content by rendering .Inner; print to a variable so whitespace isn't rendered */ -}}
 {{- $inner := .Inner -}}
+{{- $tabpaneId := printf "tabpane-%02v" .Ordinal -}}
 {{- /* Render tabpane */ -}}
-{{- $tabPaneOrdinal := .Ordinal -}}
 <div class="tabpane">
   {{- range $k, $v := $.Scratch.Get "tabs" }}
-    {{- $tabpaneId := printf "tabpane-%02v" $tabPaneOrdinal | anchorize }}
-    {{- $tabId := printf "tabpane-%02v-%v" $tabPaneOrdinal $k | anchorize }}
+    {{- $tabId :=  printf "%v-%v" $tabpaneId $k }}
     <input type="radio" name="{{ $tabpaneId }}" id="{{ $tabId }}" class="tabpane__input" tabindex="1"{{ if eq $k "00" }} checked="checked"{{ end }}>
     <label class="tabpane__label" for="{{ $tabId }}">
       {{ index . "name" }}
