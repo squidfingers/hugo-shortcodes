@@ -123,13 +123,13 @@ The page description is {{< param "description" "not set" >}}
 ## tabpane
 
 {{< tabpane >}}
-{{< tab label="Tab 1" >}}
+{{< tab "Tab 1" >}}
   This is content for **tab 1**
 {{< /tab >}}
-{{< tab label="Tab 2" >}}
+{{< tab "Tab 2" "selected" >}}
   This is content for **tab 2**
 {{< /tab >}}
-{{< tab label="Tab 3" >}}
+{{< tab "Tab 3" >}}
   This is content for **tab 3**
 {{< /tab >}}
 {{< /tabpane >}}

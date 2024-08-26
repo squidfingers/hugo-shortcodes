@@ -459,7 +459,7 @@ If you want to add tabs to your content, you can use the `tabpane` shortcode.
 {{< tab label="Tab 1" >}}
   Markdown
 {{< /tab >}}
-{{< tab label="Tab 2" >}}
+{{< tab label="Tab 2" selected="true" >}}
   Markdown
 {{< /tab >}}
 {{< tab label="Tab 3" >}}
@@ -470,13 +470,10 @@ If you want to add tabs to your content, you can use the `tabpane` shortcode.
 
 #### `tab` Parameters
 
-| Name       | Value  | Description                          |
-| ---------- | ------ | ------------------------------------ |
-| 0: `label` | String | The text displayed in the tab button |
-
-#### Notes
-
-On page load, the first tab will be active. At this time, there is not a parameter to set which tab is active by default.
+| Name          | Value   | Description                          |
+| ------------- | ------- | ------------------------------------ |
+| 0: `label`    | String  | The text displayed in the tab button |
+| 1: `selected` | Boolean | Defaults to `false`                  |
 
 #### Output
 

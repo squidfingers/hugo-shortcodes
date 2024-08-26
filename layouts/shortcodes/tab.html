@@ -6,9 +6,15 @@
 {{ else }}
   {{ errorf "shortcode %q must be enclosed inside a %q block, but no parent block was found. Error position: %s" .Name "tabpane" .Position }}
 {{ end }}
-{{/* Get tab label */}}
+{{/* Get label */}}
 {{ $label := cond .IsNamedParams (.Get "label") (.Get 0) | default (printf "Tab %v" .Ordinal) }}
-{{/* Pass label and content to tabpane */}}
+{{/* Get selected */}}
+{{ $selected := cond .IsNamedParams (.Get "selected") (.Get 1) }}
+{{ $selected = or (eq $selected "true") (eq $selected "selected") }}
+{{/* Pass params to tabpane */}}
 {{ $tab := dict "label" $label }}
+{{ if $selected }}
+  {{ $tab = merge $tab (dict "selected" true) }}
+{{ end }}
 {{ $tab = merge $tab (dict "content" .Inner) }}
 {{ .Parent.Scratch.SetInMap "tabs" (printf "%02v" .Ordinal) $tab }}

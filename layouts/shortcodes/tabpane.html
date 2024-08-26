@@ -1,16 +1,29 @@
 {{- /* Populated Scratch with tab content by rendering .Inner; print to a variable so whitespace isn't rendered */ -}}
 {{- $inner := .Inner -}}
 {{- $tabpaneId := printf "tabpane-%02v" .Ordinal -}}
+{{- /* Determine default tab */ -}}
+{{- $checked := "" -}}
+{{- $isFirst := true -}}
+{{- range $k, $v := $.Scratch.Get "tabs" }}
+  {{- if $isFirst -}}
+    {{- $checked = $k -}}
+    {{- $isFirst = false -}}
+  {{- end -}}
+  {{- if eq (index $v "selected") true -}}
+    {{- $checked = $k -}}
+    {{- break -}}
+  {{- end -}}
+{{- end }}
 {{- /* Render tabpane */ -}}
 <div class="tabpane">
   {{- range $k, $v := $.Scratch.Get "tabs" }}
     {{- $tabId :=  printf "%v-%v" $tabpaneId $k }}
-    <input type="radio" name="{{ $tabpaneId }}" id="{{ $tabId }}" class="tabpane__input" tabindex="1"{{ if eq $k "00" }} checked="checked"{{ end }}>
+    <input type="radio" name="{{ $tabpaneId }}" id="{{ $tabId }}" class="tabpane__input" tabindex="1"{{ if eq $k $checked }} checked="checked"{{ end }}>
     <label class="tabpane__label" for="{{ $tabId }}">
-      {{ index . "label" }}
+      {{ index $v "label" }}
     </label>
     <div class="tabpane__panel" tabindex="1">
-      {{ index . "content" | markdownify }}
+      {{ index $v "content" | markdownify }}
     </div>
   {{- end }}
 </div>
