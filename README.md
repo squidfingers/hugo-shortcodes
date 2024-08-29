@@ -308,7 +308,7 @@ If you have HTML or Markdown that you would like to externally include in your c
 
 ## labeled-highlight
 
-Hugo automatically highlights content in code fences, and also provides a built-in [`highlight` shortcode](https://gohugo.io/content-management/syntax-highlighting/#highlight-shortcode).
+Hugo automatically highlights content in code fences, and also provides a built-in [`highlight`](https://gohugo.io/content-management/syntax-highlighting/#highlight-shortcode) shortcode.
 
 However, Hugo does not provide an [option](https://gohugo.io/functions/transform/highlight/#options) to display a title or filename.
 
@@ -323,22 +323,32 @@ If you need to label the code block, you can use the `labeled-highlight` shortco
 {{< /labeled-highlight >}}
 ```
 
+You can also use a code fence as the content of the shortcode. The language and options of the code fence will be honored, and the `lang` and `options` parameters will be ignored.
+
+```
+{{< labeled-highlight "users.json" >}}
+[code fence]
+{{< /labeled-highlight >}}
+```
+
 #### Parameters
 
 | Name         | Value  | Description                                                 |
 | ------------ | ------ | ----------------------------------------------------------- |
-| 0: `label`   | String | Teh text to display above the code block                    |
+| 0: `label`   | String | The text to display above the code block                    |
 | 1: `lang`    | String | The language of the code to highlight                       |
 | 2: `options` | String | Additional options, formatted as "lineNos=table, style=api" |
 
 #### Output
 
 ```html
-<div class="highlight__label">
-  <code>Label</code>
-</div>
-<div class="highlight">
-  ...
+<div class="labeled-highlight">
+  <div class="labeled-highlight__label">
+    <code>Label</code>
+  </div>
+  <div class="highlight">
+    ...
+  </div>
 </div>
 ```
 

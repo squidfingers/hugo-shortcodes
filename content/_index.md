@@ -103,11 +103,20 @@ The `title` param {{< ifparam "has_title" "is" "is not" >}} set
 
 ## labeled-highlight
 
-{{< labeled-highlight lang="json" label="users.json" options="lineNos=true" >}}
-{
-  "name": "John",
-  "age": 30
-}
+{{< labeled-highlight label="users.json" lang="json" options="lineNos=true" >}}
+[
+  {
+    "name": "John",
+    "age": 30
+  }
+]
+{{< /labeled-highlight >}}
+
+{{< labeled-highlight "users.yaml" >}}
+```yaml {lineNos=true}
+- name: John
+  age: 30
+```
 {{< /labeled-highlight >}}
 
 ## param

@@ -1,7 +1,21 @@
 {{- $label := cond .IsNamedParams (.Get "label") (.Get 0) -}}
-{{- $lang := cond .IsNamedParams (.Get "lang") (.Get 1) -}}
+{{- $lang := cond .IsNamedParams (.Get "lang") (.Get 1) | default "plaintext" -}}
 {{- $options := cond .IsNamedParams (.Get "options") (.Get 2) -}}
-{{- $code := trim .Inner "\n\r" -}}
+{{- $inner := trim .Inner "\n\r" -}}
+{{- $highlight := "" -}}
+{{- if hasPrefix $inner "```" -}}
+  {{- /* Inner is a code fence, so render with markdownify */ -}}
+  {{- $highlight = $inner | markdownify -}}
+{{- else -}}
+  {{- /* Inner is not a code fence, so render with highlight */ -}}
+  {{- $highlight = highlight $inner $lang $options -}}
+{{- end -}}
 {{- /* Output */ -}}
-{{ with $label }}<div class="highlight__label"><code>{{ . }}</code></div>{{ end }}
-{{ highlight $code $lang $options }}
+<div class="labeled-highlight">
+  {{- with $label }}
+    <div class="labeled-highlight__label">
+      <code>{{ . }}</code>
+    </div>
+  {{- end }}
+  {{ $highlight }}
+</div>

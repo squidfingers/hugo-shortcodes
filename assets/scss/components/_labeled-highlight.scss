@@ -1,0 +1,18 @@
+.labeled-highlight {
+  .labeled-highlight__label {
+    padding: 0.25rem 0.5rem;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+
+    // Match monokai styles (https://xyproto.github.io/splash/docs/monokai.html)
+    color: #f8f8f2;
+    background-color: #272822;
+    border-bottom: solid 1px rgba(#f8f8f2, 0.25);
+  }
+  .highlight {
+    & > * {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+}
