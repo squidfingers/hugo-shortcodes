@@ -1,0 +1,25 @@
+{{/*
+@example {{ partial "utils/css" (dict "src" "scss/main.scss" "dst" "css/main.css") }}
+*/}}
+
+{{ $src := .src }}
+{{ $dst := .dst }}
+{{ $css := "" }}
+{{ $result := "" }}
+
+{{ with resources.Get $src }}
+  {{ if $dst }}
+    {{ $css = . | toCSS (dict "transpiler" "libsass" "targetPath" $dst) }}
+    {{ if hugo.IsProduction }}
+      {{ $css = $css | minify | fingerprint }}
+    {{ end }}
+    {{ $result = printf `<link rel="stylesheet" href=%q>` $css.RelPermalink }}
+  {{ end }}
+{{ end }}
+
+{{/* Return result */}}
+{{ if ne $result "" }}
+  {{ return ($result | safeHTML) }}
+{{ else }}
+  {{ errorf "Unable to include stylesheet %q" $src }}
+{{ end }}

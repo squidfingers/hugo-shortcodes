@@ -3,10 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>{{ site.Title }}</title>
-    {{ $cssOpts := dict "transpiler" "libsass" "targetPath" "css/main.css" }}
-    {{ with resources.Get "scss/main.scss" | toCSS $cssOpts | resources.Minify | resources.Fingerprint }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}">
-    {{ end }}
+    {{ partial "utils/css" (dict "src" "scss/main.scss" "dst" "css/main.css") }}
   </head>
   <body>
     {{ block "main" . }}

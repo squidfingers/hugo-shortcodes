@@ -27,7 +27,7 @@
 <div class="{{ $classNames }}">
   {{ if not (eq $hideIcon "true") -}}
     <div class="alert__icon">
-      {{ partial "icon.html" (dict "name" (index $icons $sev) "variant" $sev "size" $size) }}
+      {{ partial "utils/icon" (dict "name" (index $icons $sev) "variant" $sev "size" $size) }}
     </div>
   {{ end -}}
   <div class="alert__body">
