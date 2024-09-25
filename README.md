@@ -314,7 +314,7 @@ However, Hugo does not provide an [option](https://gohugo.io/functions/transform
 
 If you need to label the code block, you can use the `labeled-highlight` shortcode.
 
-```
+```markdown
 {{< labeled-highlight label="users.json" lang="json" options="lineNos=true" >}}
 {
   "name": "John",
@@ -325,11 +325,14 @@ If you need to label the code block, you can use the `labeled-highlight` shortco
 
 You can also use a code fence as the content of the shortcode. The language and options of the code fence will be honored, and the `lang` and `options` parameters will be ignored.
 
-```
+````markdown
 {{< labeled-highlight "users.json" >}}
-[code fence]
-{{< /labeled-highlight >}}
+```yaml
+name: "John"
+age: 30
 ```
+{{< /labeled-highlight >}}
+````
 
 #### Parameters
 
