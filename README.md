@@ -326,7 +326,7 @@ If you need to label the code block, you can use the `labeled-highlight` shortco
 You can also use a code fence as the content of the shortcode. The language and options of the code fence will be honored, and the `lang` and `options` parameters will be ignored.
 
 ````markdown
-{{< labeled-highlight "users.json" >}}
+{{< labeled-highlight "users.yaml" >}}
 ```yaml
 name: "John"
 age: 30
