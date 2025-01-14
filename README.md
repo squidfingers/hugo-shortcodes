@@ -632,3 +632,9 @@ If you want to add tabs to your content, you can use the `tabpane` shortcode.
   </div>
 </div>
 ```
+
+---
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
