@@ -1,6 +1,6 @@
 # Hugo shortcodes and render hooks
 
-This collection of Hugo [shortcodes](https://gohugo.io/templates/shortcode/) and [render hooks](https://gohugo.io/render-hooks/) is not meant to be an exhaustive list of components you might need in your Markdown content, rather it's a few examples that illustrate various techinques that will help you build out your own system. These techinques include: validating parameters ([button](#button)), using a partial within the shortcode so layout and content can use the component ([icon](#icon)), using conditional content ([ifparam](#ifparam)), and passing parameters from a child shortcode to the parent for rendering ([tabpane](#tabpane)).
+This collection of Hugo [shortcodes](https://gohugo.io/templates/shortcode/) and [render hooks](https://gohugo.io/render-hooks/) is not meant to be an exhaustive list of components you might need in your Markdown content, rather it's a few examples that illustrate various techinques that will help you build out your own system. These techinques include: validating parameters ([button](#button)), handling arbitrary parameters ([img](#img)), using a partial within the shortcode so layout and content can use the component ([icon](#icon)), using conditional content ([ifparam](#ifparam)), and passing parameters from a child shortcode to the parent for rendering ([tabpane](#tabpane)).
 
 To see the output of these shortcodes and render hooks, run:
 
