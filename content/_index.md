@@ -157,6 +157,8 @@ The `title` param {{< ifparam "has_title" "is" "is not" >}} set
 
 ## img
 
+{{< img "Alt text" "/images/placeholder.svg" >}}
+
 {{< img src="/images/placeholder.svg" alt="Alt text" width="300" height="200" class="image" style="border: solid 1px red" >}}
 
 ## include

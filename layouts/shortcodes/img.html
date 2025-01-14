@@ -1,12 +1,16 @@
-{{- $src := cond .IsNamedParams (.Get "src") (.Get 0) -}}
-{{- $alt := cond .IsNamedParams (.Get "alt") (.Get 1) -}}
-{{- $width := cond .IsNamedParams (.Get "width") (.Get 2) -}}
-{{- $height := cond .IsNamedParams (.Get "height") (.Get 3) -}}
-{{- $class := cond .IsNamedParams (.Get "class") (.Get 4) -}}
-{{- $style := cond .IsNamedParams (.Get "style") (.Get 5) -}}
+{{/* Get params */}}
+{{ $params := dict }}
+{{ if .IsNamedParams }}
+  {{ $params = .Params }}
+{{ else }}
+  {{ $params = dict "alt" (.Get 0) "src" (.Get 1) }}
+{{ end }}
+{{/* Process attributes */}}
+{{ $attributes := "" }}
+  {{ range $k, $v := $params }}
+    {{ if $v }}
+      {{ $attributes = printf "%s %s=%q" $attributes $k $v -}}
+    {{ end }}
+  {{ end }}
 {{- /* Output */ -}}
-<img src="{{ $src }}" alt="{{ with $alt }}{{ . }}{{ end }}"
-  {{- with $width }} width="{{ . }}"{{ end -}}
-  {{ with $height }} height="{{ . }}"{{ end -}}
-  {{ with $class }} class="{{ . }}"{{ end -}}
-  {{ with $style }} style="{{ . }}"{{ end }}>{{ "" -}}
+<img{{ $attributes | safeHTMLAttr }}>{{ "" -}}

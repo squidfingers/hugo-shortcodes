@@ -384,7 +384,15 @@ You can also leave the false value empty, and the shortcode will only print the 
 
 ### img
 
-If you want to add an image in your content, but need to set additional attributes not supported by Markdown image syntax, you can use the `img` shortcode.
+If you want to add an image in your content, but need to set additional attributes not supported by Markdown image syntax, you can use the `img` shortcode. When using positional parameters, only the required `alt` and `src` attributes are supported. To set additional attributes, set each attribute as a named parameter. 
+
+#### Positional parameters
+
+```markdown
+{{< img "Alt text" "/path/to/image.jpg" >}}
+```
+
+#### Named parameters
 
 ```markdown
 {{< img src="/path/to/image.jpg" alt="Alt text" width="600" height="400" class="image" style="border: solid 1px red" >}}
@@ -394,12 +402,8 @@ If you want to add an image in your content, but need to set additional attribut
 
 | Name                | Value     | Description       |
 | ------------------- | --------- | ----------------- |
-| 0: `src` (Required) | URL       | Image path        |
-| 1: `alt`            | String    | Image alt         |
-| 2: `width`          | Number    | Image width       |
-| 3: `height`         | Number    | Image height      |
-| 4: `class`          | String    | CSS class name    |
-| 5: `style`          | CSS rules | Inline CSS styles |
+| 0: `alt` (Required) | String    | Image alt         |
+| 1: `src` (Required) | URL       | Image path        |
 
 #### Output
 
