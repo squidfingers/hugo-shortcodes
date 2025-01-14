@@ -61,7 +61,7 @@ To add an alert to your Markdown content, you can add an alert designator consis
 > Urgent info that needs immediate user attention to avoid problems.
 ```
 
-Learn more about the [blockquote render hook](https://gohugo.io/render-hooks/blockquotes/)
+Learn more about the [blockquote render hook](https://gohugo.io/render-hooks/blockquotes/).
 
 ### Code blocks
 
@@ -77,7 +77,7 @@ exit
 ```
 ````
 
-Learn more about the [codeblock render hook](https://gohugo.io/render-hooks/code-blocks/)
+Learn more about the [codeblock render hook](https://gohugo.io/render-hooks/code-blocks/).
 
 ### Headings
 
@@ -99,7 +99,7 @@ In the render hook example, headings `h1` through `h4` will automatically have a
 ###### Heading 6
 ```
 
-Learn more about the [heading render hook](https://gohugo.io/render-hooks/headings/)
+Learn more about the [heading render hook](https://gohugo.io/render-hooks/headings/).
 
 ### Images
 
@@ -117,7 +117,7 @@ In the render hook example, standalone images will be rendered within a `figure`
 ![Alt text](/images/placeholder.svg "Image caption")
 ```
 
-Learn more about the [image render hook](https://gohugo.io/render-hooks/images/)
+Learn more about the [image render hook](https://gohugo.io/render-hooks/images/).
 
 ### Links
 
@@ -131,7 +131,7 @@ This is a [link](/).
 This is an [external link](https://github.com/).
 ```
 
-Learn more about the [link render hook](https://gohugo.io/render-hooks/links/)
+Learn more about the [link render hook](https://gohugo.io/render-hooks/links/).
 
 ### Tables
 
@@ -147,7 +147,7 @@ In the render hook example, tables will automatically be striped.
 | March    | $1000  |
 ```
 
-Learn more about the [table render hook](https://gohugo.io/render-hooks/tables/)
+Learn more about the [table render hook](https://gohugo.io/render-hooks/tables/).
 
 ---
 
