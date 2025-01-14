@@ -39,11 +39,11 @@ exit
 
 ### Inline
 
-This is an inline ![Alt text](/images/placeholder.svg "Image title") image.
+This is an inline ![Alt text](image.png "Image title") image.
 
 ### Block
 
-![Alt text](/images/placeholder.svg "Image caption")
+![Alt text](image.png "Image caption")
 
 ## Links
 
@@ -157,9 +157,9 @@ The `title` param {{< ifparam "has_title" "is" "is not" >}} set
 
 ## img
 
-{{< img "Alt text" "/images/placeholder.svg" >}}
+{{< img "Alt text" "image.png" "resize 300x200 jpg q80 lanczos" >}}
 
-{{< img src="/images/placeholder.svg" alt="Alt text" width="300" height="200" class="image" style="border: solid 1px red" >}}
+{{< img src="image.png" alt="Alt text" width="300" height="200" class="image" style="border: solid 1px red" process="resize 300x200 jpg q80 lanczos" >}}
 
 ## include
 
@@ -188,6 +188,14 @@ The `title` param {{< ifparam "has_title" "is" "is not" >}} set
 The page title is "{{< param "title" >}}"
 
 The page description is {{< param "description" "not set" >}}
+
+## resource
+
+{{< resource "image.png" "resize 300x200 jpg q80 lanczos" >}}
+
+```javascript
+{{< resource "script.js" >}}
+```
 
 ## siteparam
 

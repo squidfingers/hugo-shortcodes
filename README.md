@@ -384,31 +384,36 @@ You can also leave the false value empty, and the shortcode will only print the 
 
 ### img
 
-If you want to add an image in your content, but need to set additional attributes not supported by Markdown image syntax, you can use the `img` shortcode. When using positional parameters, only the required `alt` and `src` attributes are supported. To set additional attributes, set each attribute as a named parameter. 
+If you want to add an image in your content, but need to set additional attributes not supported by Markdown image syntax, or you want to apply a [Hugo .Process](https://gohugo.io/methods/resource/process/#process-specification) to the image, you can use the `img` shortcode. When using positional parameters, only `alt`, `src`, and `process` parameters are supported. To set additional attributes, set each attribute as a named parameter. 
 
 #### Positional parameters
 
 ```markdown
-{{< img "Alt text" "/path/to/image.jpg" >}}
+{{< img "Alt text" "image.png" "resize 600x" >}}
 ```
 
 #### Named parameters
 
 ```markdown
-{{< img src="/path/to/image.jpg" alt="Alt text" width="600" height="400" class="image" style="border: solid 1px red" >}}
+{{< img src="image.png" alt="Alt text" width="300" height="200" class="image" style="border: solid 1px red" process="fit 600x400" >}}
 ```
 
 #### Parameters
 
-| Name                | Value     | Description       |
-| ------------------- | --------- | ----------------- |
-| 0: `alt` (Required) | String    | Image alt         |
-| 1: `src` (Required) | URL       | Image path        |
+| Name                | Value     | Description           |
+| ------------------- | --------- | --------------------- |
+| 0: `alt` (Required) | String    | Image alt             |
+| 1: `src` (Required) | URL       | Image path            |
+| 2: `process`        | String    | Process specification |
+
+#### Notes
+
+To use image processing, the image must be a page resource, not a global resource or a static image.
 
 #### Output
 
 ```html
-<img src="/path/to/image.jpg" alt="Alt text" width="600" height="400" class="image" style="border: solid 1px red">
+<img src="/image_xxx.png" alt="Alt text" width="300" height="200" class="image" style="border: solid 1px red">
 ```
 
 ### include

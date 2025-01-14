@@ -1,16 +1,31 @@
 {{- /* Get params */ -}}
 {{- $params := dict -}}
+{{- $process := cond .IsNamedParams (.Get "process") (.Get 2) -}}
 {{- if .IsNamedParams -}}
-  {{- $params = .Params -}}
+  {{- range $k, $v := .Params -}}
+    {{- if not (eq $k "process") -}}
+      {{- $params = merge $params (dict $k $v) -}}
+    {{- end -}}
+  {{- end -}}
 {{- else -}}
   {{- $params = dict "alt" (.Get 0) "src" (.Get 1) -}}
 {{- end -}}
-{{- /* Process attributes */ -}}
-{{- $attributes := "" -}}
-  {{- range $k, $v := $params -}}
-    {{- if $v -}}
-      {{- $attributes = printf "%s %s=%q" $attributes $k $v -}}
-    {{- end -}}
+{{- /* Process image */ -}}
+{{- if $process -}}
+  {{- $res := false -}}
+  {{- with $.Page.Resources.GetMatch (index $params "src") -}}
+    {{- $res = .Process $process -}}
   {{- end -}}
+  {{- if $res -}}
+    {{- $params = merge $params (dict "src" $res.RelPermalink) -}}
+  {{- end -}}
+{{- end -}}
+{{- /* Create attributes */ -}}
+{{- $attributes := "" -}}
+{{- range $k, $v := $params -}}
+  {{- if $v -}}
+    {{- $attributes = printf "%s %s=%q" $attributes $k $v -}}
+  {{- end -}}
+{{- end -}}
 {{- /* Output */ -}}
 <img{{ $attributes | safeHTMLAttr }}>{{ "" -}}
