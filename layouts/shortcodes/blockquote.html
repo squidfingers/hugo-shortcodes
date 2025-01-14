@@ -1,23 +1,6 @@
+{{- $text := .Inner | $.Page.RenderString (dict "display" "block") -}}
 {{- $author := cond .IsNamedParams (.Get "author") (.Get 0) -}}
 {{- $cite := cond .IsNamedParams (.Get "cite") (.Get 1) -}}
-{{- $url := cond .IsNamedParams (.Get "url") (.Get 2) -}}
-<blockquote{{ if $url }} cite="{{ $url }}"{{ end }}>{{ "" -}}
-  {{- .Inner | $.Page.RenderString (dict "display" "block") -}}
-  {{- if or $author $cite -}}
-    <footer>—
-      {{- if $author -}}
-        {{- $author -}}
-        {{- if $cite }}, {{ end -}}
-      {{- end -}}
-      {{- if $cite -}}
-        <cite>
-          {{- if $url -}}
-            <a href="{{ $url }}"{{ if hasPrefix $url "http" }} target="_blank" rel="noopener"{{ end }}>{{ $cite }}</a>
-          {{- else -}}
-            {{ $cite }}
-          {{- end -}}
-        </cite>
-      {{- end -}}
-    </footer>
-  {{- end -}}
-</blockquote>
+{{- $caption := cond .IsNamedParams (.Get "caption") (.Get 2) -}}
+{{- /* Output */ -}}
+{{- partial "components/blockquote" (dict "text" $text "author" $author "cite" $cite "caption" $caption) -}}

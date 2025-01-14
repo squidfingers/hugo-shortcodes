@@ -3,7 +3,7 @@
 {{- $size := cond .IsNamedParams (.Get "size") (.Get 2) -}}
 {{- $class := cond .IsNamedParams (.Get "class") (.Get 3) -}}
 {{- /* Output */ -}}
-{{- $icon := partial "utils/icon" (dict "name" $name "variant" $variant "size" $size "class" $class) -}}
+{{- $icon := partial "components/icon" (dict "name" $name "variant" $variant "size" $size "class" $class) -}}
 {{- if not $icon -}}
   {{- errorf "Shortcode %q could not find %q. Error position: %s" .Name $name .Position -}}
 {{- end -}}

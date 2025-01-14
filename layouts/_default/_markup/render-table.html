@@ -1,0 +1,33 @@
+{{- /* Process attributes */ -}}
+{{- $a := merge .Attributes (dict "class" "striped") -}}
+{{- $attributes := "" -}}
+{{- range $k, $v := $a -}}
+  {{- if $v -}}
+    {{- $attributes = printf "%s %s=%q" $attributes $k $v -}}
+  {{- end -}}
+{{- end -}}
+{{- /* Output table */ -}}
+<table{{ $attributes | safeHTMLAttr }}>
+  <thead>
+    {{- range .THead }}
+      <tr>
+        {{- range . }}
+          <th {{ printf "align=%q" .Alignment | safeHTMLAttr }}>
+            {{- .Text -}}
+          </th>
+        {{- end }}
+      </tr>
+    {{- end }}
+  </thead>
+  <tbody>
+    {{- range .TBody }}
+      <tr>
+        {{- range . }}
+          <td {{ printf "align=%q" .Alignment | safeHTMLAttr }}>
+            {{- .Text -}}
+          </td>
+        {{- end }}
+      </tr>
+    {{- end }}
+  </tbody>
+</table>

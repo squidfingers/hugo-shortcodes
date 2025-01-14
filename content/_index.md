@@ -1,25 +1,83 @@
 ---
-title: Hugo shortcodes
+title: Hugo shortcodes and render hooks
 has_title: true
 ---
+
+# Render hooks
+
+## Blockquotes
+
+> Quote
+
+> Most human beings have an almost infinite capacity for taking things for granted.
+{cite="https://www.huxley.net/bnw/" caption="Brave New World"}
+
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
+
+> [!TIP]
+> Helpful advice for doing things better or more easily.
+
+> [!IMPORTANT]
+> Key information users need to know to achieve their goal.
+
+> [!CAUTION]
+> Advises about risks or negative outcomes of certain actions.
+
+> [!WARNING]
+> Urgent info that needs immediate user attention to avoid problems.
+
+## Code blocks
+
+```bash
+declare a=1
+echo "$a"
+exit
+```
+
+## Images
+
+### Inline
+
+This is an inline ![Alt text](/images/placeholder.svg "Image title") image.
+
+### Block
+
+![Alt text](/images/placeholder.svg "Image caption")
+
+## Links
+
+This is a [link](/).
+
+This is an [external link](https://github.com/).
+
+## Tables
+
+| Month    | Amount |
+| :------- | -----: |
+| January  | $10    |
+| February | $100   |
+| March    | $1000  |
+
+# Shortcodes
 
 ## alert
 
 {{< alert "success" >}}
-  **Success:** This is a success alert
+  **Success:** This is a success alert.
 {{< /alert >}}
 
 {{< alert severity="warning" size="small" >}}
-  **Warning:** This is a small warning alert
+  **Warning:** This is a small warning alert.
 {{< /alert >}}
 
 {{< alert hideIcon="true" >}}
-  This alert doesn't have an icon
+  This alert doesn't have an icon.
 {{< /alert >}}
 
 ## blockquote
 
-{{< blockquote author="Aldous Huxley" cite="Brave New World" url="https://www.huxley.net/bnw/" >}}
+{{< blockquote author="Aldous Huxley" cite="https://www.huxley.net/bnw/" caption="Brave New World" >}}
   Most human beings have an almost infinite capacity for taking things for granted.
 {{< /blockquote >}}
 
@@ -30,14 +88,22 @@ has_title: true
 {{< /button >}}
 
 {{< button "https://github.com/" "primary" "small" >}}
+  Primary Small
+{{< /button >}}
+
+{{< button "https://github.com/" "primary" >}}
   Primary
+{{< /button >}}
+
+{{< button "https://github.com/" "primary" "large" >}}
+  Primary Large
 {{< /button >}}
 
 {{< button href="https://github.com/" variant="secondary" >}}
   Secondary
 {{< /button >}}
 
-{{< button href="https://github.com/" variant="error" size="large" disabled="true" >}}
+{{< button href="https://github.com/" variant="error" disabled="true" >}}
   Disabled
 {{< /button >}}
 
@@ -68,10 +134,6 @@ fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
 culpa qui officia deserunt mollit anim id est laborum.
 
 {{< /collapse >}}
-
-## figure
-
-{{< figure "/images/placeholder.svg" "Alt text" "Image caption" >}}
 
 ## file list
 

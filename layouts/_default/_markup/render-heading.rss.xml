@@ -1,0 +1,4 @@
+{{- /* Do not add anchors when content is being rendered as RSS */ -}}
+<h{{ .Level }}>
+  {{ .Text | safeHTML }}
+</h{{ .Level }}>

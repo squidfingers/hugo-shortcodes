@@ -1,12 +1,162 @@
-# Hugo shortcodes
+# Hugo shortcodes and render hooks
 
-This collection of Hugo shortcodes is not meant to be an exhaustive list of components you might need in your Markdown content, rather it's a few examples that illustrate various techinques that will help you build out your own shortcodes. These techinques include: validating parameters ([button](#button)), using a partial within the shortcode so layout and content can use the component ([icon](#icon)), using conditional content ([ifparam](#ifparam)), and passing parameters from a child shortcode to the parent for rendering ([tabpane](#tabpane)).
+This collection of Hugo [shortcodes](https://gohugo.io/templates/shortcode/) and [render hooks](https://gohugo.io/render-hooks/) is not meant to be an exhaustive list of components you might need in your Markdown content, rather it's a few examples that illustrate various techinques that will help you build out your own system. These techinques include: validating parameters ([button](#button)), using a partial within the shortcode so layout and content can use the component ([icon](#icon)), using conditional content ([ifparam](#ifparam)), and passing parameters from a child shortcode to the parent for rendering ([tabpane](#tabpane)).
+
+To see the output of these shortcodes and render hooks, run:
+
+```bash
+hugo server
+```
+
+Then visit http://localhost:1313 in your browser.
+
+Requires Hugo v0.134.0 or later.
+
+---
+
+## Render hooks
+
+- [Blockquotes](#blockquotes)
+- [Code blocks](#code-blocks)
+- [Headings](#headings)
+- [Images](#images)
+- [Links](#links)
+- [Tables](#tables)
+
+### Blockquotes
+
+This render hook overrides the rendering of Markdown blockquotes to HTML.
+
+```markdown
+> Quote
+```
+
+#### Blockquote with citation and caption
+
+In the render hook example, you can add a citation or caption to your blockquote by passing them as Markdown attributes.
+
+```markdown
+> Most human beings have an almost infinite capacity for taking things for granted.
+{cite="https://www.huxley.net/bnw/" caption="Brave New World"}
+```
+
+#### Blockquote rendered as an alert
+
+To add an alert to your Markdown content, you can add an alert designator consisting of an exclamation point followed by the alert type, wrapped within brackets.
+
+```markdown
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
+
+> [!TIP]
+> Helpful advice for doing things better or more easily.
+
+> [!IMPORTANT]
+> Key information users need to know to achieve their goal.
+
+> [!CAUTION]
+> Advises about risks or negative outcomes of certain actions.
+
+> [!WARNING]
+> Urgent info that needs immediate user attention to avoid problems.
+```
+
+Learn more about the [blockquote render hook](https://gohugo.io/render-hooks/blockquotes/)
+
+### Code blocks
+
+This render hook overrides the rendering of Markdown code blocks to HTML.
+
+In the render hook example, all code blocks will have line numbers by default.
+
+````markdown
+```bash
+declare a=1
+echo "$a"
+exit
+```
+````
+
+Learn more about the [codeblock render hook](https://gohugo.io/render-hooks/code-blocks/)
+
+### Headings
+
+This render hook overrides the rendering of Markdown headings to HTML.
+
+In the render hook example, headings `h1` through `h4` will automatically have an anchor link injected.
+
+```markdown
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+#### Heading 4
+
+##### Heading 5
+
+###### Heading 6
+```
+
+Learn more about the [heading render hook](https://gohugo.io/render-hooks/headings/)
+
+### Images
+
+This render hook overrides the rendering of Markdown images to HTML.
+
+```markdown
+This is an inline ![Alt text](/images/icon.svg "Image title") image.
+```
+
+#### Standalone images
+
+In the render hook example, standalone images will be rendered within a `figure` element. 
+
+```markdown
+![Alt text](/images/placeholder.svg "Image caption")
+```
+
+Learn more about the [image render hook](https://gohugo.io/render-hooks/images/)
+
+### Links
+
+This render hook overrides the rendering of Markdown links to HTML.
+
+In the render hook example, links with external destinations will automatically open in a new window.
+
+```markdown
+This is a [link](/).
+
+This is an [external link](https://github.com/).
+```
+
+Learn more about the [link render hook](https://gohugo.io/render-hooks/links/)
+
+### Tables
+
+This render hook overrides the rendering of Markdown tables to HTML.
+
+In the render hook example, tables will automatically be striped.
+
+```markdown
+| Month    | Amount |
+| :------- | -----: |
+| January  | $10    |
+| February | $100   |
+| March    | $1000  |
+```
+
+Learn more about the [table render hook](https://gohugo.io/render-hooks/tables/)
+
+---
+
+## Shortcodes
 
 - [alert](#alert)
 - [blockquote](#blockquote)
 - [button](#button)
 - [collapse](#collapse)
-- [figure](#figure)
 - [file-list](#file-list)
 - [icon](#icon)
 - [ifparam](#ifparam)
@@ -18,23 +168,13 @@ This collection of Hugo shortcodes is not meant to be an exhaustive list of comp
 - [siteparam](#siteparam)
 - [tabpane](#tabpane)
 
-To see the output of these shortcodes, run:
-
-```bash
-hugo server
-```
-
-Then visit http://localhost:1313 in your browser.
-
-Requires Hugo v0.121.2 or later.
-
-## alert
+### alert
 
 If you want to add an alert banner to your content, you can use the `alert` shortcode.
 
 ```markdown
 {{< alert severity="warning" size="small" >}}
-  Markdown
+  **Warning:** This is a small warning alert.
 {{< /alert >}}
 ```
 
@@ -44,59 +184,61 @@ If you want to add an alert banner to your content, you can use the `alert` shor
 | ------------- | ----------------------------------------------- | ------------------------------- |
 | 0: `severity` | `info` (default), `success`, `warning`, `error` | Variant of alert                |
 | 1: `size`     | `small`                                         | Size of alert; Defaults to none |
-| 2: `hideIcon` | `true`                                          | Hides icon; Default to false    |
+| 2: `hideIcon` | `true`                                          | Hides icon; Defaults to false   |
 
 #### Output
 
 ```html
-<div class="alert alert--info alert--small">
+<div class="alert alert--warning alert--small">
   <div class="alert__icon">
-    <svg class="icon icon--info icon--small">...</svg>
+    <svg class="icon icon--alert icon--small">...</svg>
   </div>
   <div class="alert__body">
-    Markdown
+    <strong>Warning:</strong> This is a small warning alert.
   </div>
 </div>
 ```
 
-## blockquote
+### blockquote
 
 If you want to add a blockquote to your content, you can use the `blockquote` shortcode.
 
 ```markdown
-{{< blockquote author="Author" cite="Source" url="https://www.huxley.net/" >}}
-  Markdown
+{{< blockquote author="Aldous Huxley" cite="https://www.huxley.net/bnw/" caption="Brave New World" >}}
+  Most human beings have an almost infinite capacity for taking things for granted.
 {{< /blockquote >}}
 ```
 
 #### Parameters
 
-| Name        | Value  | Description |
-| ----------- | ------ | ----------- |
-| 0: `author` | String | Author name |
-| 1: `cite`   | String | Source name |
-| 2: `url`    | URL    | Source URL  |
+| Name         | Value  | Description |
+| ------------ | ------ | ----------- |
+| 0: `author`  | String | Author name |
+| 1: `cite`    | URL    | Source URL  |
+| 2: `caption` | String | Source name |
 
 #### Output
 
 ```html
-<blockquote cite="https://www.huxley.net/bnw/">
-  <p>
-    Markdown
-  </p>
-  <footer>
-    —Author, <cite><a href="https://www.huxley.net/bnw/">Source</a></cite>
-  </footer>
-</blockquote>
+<figure>
+  <blockquote cite="https://www.huxley.net/bnw/">
+    <p>
+      Most human beings have an almost infinite capacity for taking things for granted.
+    </p>
+    <figcaption>
+      Aldous Huxley, <cite><a href="https://www.huxley.net/bnw/">Brave New World</a></cite>
+    </figcaption>
+  </blockquote>
+</figure>
 ```
 
-## button
+### button
 
 If you want to add a button to your content, you can use the `button` shortcode.
 
 ```markdown
-{{< button href="https://github.com/" variant="primary" size="small" disabled="true" >}}
-  Markdown
+{{< button href="https://github.com/" variant="primary" size="large" >}}
+  Learn more
 {{< /button >}}
 ```
 
@@ -118,11 +260,11 @@ If `href` begins with "http", then the link will open in a new window.
 
 ```html
 <a class="button button--primary button--small button--disabled">
-  Markdown
+  Learn more
 </a>
 ```
 
-## collapse
+### collapse
 
 If you want to collapse a block of content and show an expand button to reveal the full content, you can use the `collapse` shortcode.
 
@@ -154,32 +296,7 @@ If you want to collapse a block of content and show an expand button to reveal t
 
 The `collapse` shortcode doesn't reliably work when nested in a `tabpane` shortcode. The expand button may still be visible when it's not needed. This is because the CSS `display` property of the inactive `tabpane` panel is set to `none`, so the height of the content cannot be determined on page load.
 
-## figure
-
-If you want to add an image with a caption to your content, you can use the `figure` shortcode.
-
-```markdown
-{{< figure src="/path/to/image.jpg" alt="Alt text" title="Image caption" >}}
-```
-
-#### Parameters
-
-| Name                | Value    | Description                        |
-| ------------------- | -------- | ---------------------------------- |
-| 0: `src` (Required) | URL      | Image filepath                     |
-| 1: `alt`            | String   | Image alt                          |
-| 2: `title`          | Markdown | Caption to display under the image |
-
-#### Output
-
-```html
-<figure>
-  <img src="/path/to/image.jpg" alt="Alt text">
-  <figcaption>Image caption</figcaption>
-</figure>
-```
-
-## file-list
+### file-list
 
 If you want to display a list of links as a file list, you can use the `file-list` shortcode.
 
@@ -218,7 +335,7 @@ The shortcode inner content must be an unordered list of anchor links.
 </ul>
 ```
 
-## icon
+### icon
 
 If you want to add an icon to your content, you can use the `icon` shortcode.
 
@@ -265,7 +382,7 @@ In your Markdown, you can conditionally print some text based on this parameter.
 
 You can also leave the false value empty, and the shortcode will only print the text if the parameter is true.
 
-## img
+### img
 
 If you want to add an image in your content, but need to set additional attributes not supported by Markdown image syntax, you can use the `img` shortcode.
 
@@ -290,7 +407,7 @@ If you want to add an image in your content, but need to set additional attribut
 <img src="/path/to/image.jpg" alt="Alt text" width="600" height="400" class="image" style="border: solid 1px red">
 ```
 
-## include
+### include
 
 If you have HTML or Markdown that you would like to externally include in your content files, you can place the file under the current working directory. Then, you can use the `include` shortcode to pull in this file into your content.
 
@@ -306,7 +423,7 @@ If you have HTML or Markdown that you would like to externally include in your c
 - When editing an **included** file in local development, the page **including** the file is not automatically updated. Restarting the server is required to see any changes.
 - The headings of included files will **not** be displayed in Hugo's `TableOfContents`.
 
-## labeled-highlight
+### labeled-highlight
 
 Hugo automatically highlights content in code fences, and also provides a built-in [`highlight`](https://gohugo.io/content-management/syntax-highlighting/#highlight-shortcode) shortcode.
 
@@ -376,7 +493,7 @@ Then add styles to display the title attribute:
 
 While this method avoids needing to use a shortcode, the shortcode allows for more control of the markup used to display the label.
 
-## param
+### param
 
 If you need to print a `frontmatter` parameter in your Markdown, you can use the `param` shortcode.
 
@@ -384,7 +501,7 @@ Let's say you have this param set in your `frontmatter`:
 
 ```yaml
 ---
-title: Hugo shortcodes
+title: Hugo shortcodes and render hooks
 ---
 ```
 
@@ -400,7 +517,7 @@ You can also pass a second optional value that will only be returned if the para
 {{< param "param_name" "default value" >}}
 ```
 
-## resource
+### resource
 
 If you want to include a [page resource](https://gohugo.io/content-management/page-resources/) in your Markdown, you can use the `resource` shortcode.
 
@@ -437,13 +554,13 @@ If the resource is a JavaScript or stylesheet file, the file contents will be pr
 | application (json, yaml, ...) | Renders raw content of resource; to nest output in a codeblock, use `{{% %}}` shortcode delimiters |
 | audio (mp3, ogg, ...)         | Renders `audio` tag referencing resource URL                                                       |
 | video (mp4, ogg, ...)         | Renders `video` tag referencing resource URL                                                       |
-| image (jpg, png, svg, ...)    | Renders `figure` with `img` tag referencing resource URL                                           |
+| image (jpg, png, svg, ...)    | Renders `img` tag referencing resource URL                                                         |
 | page (Markdown, HTML)         | Renders resource content as HTML                                                                   |
 | javascript                    | Renders raw content or `script` tag referencing resource URL                                       |
 | stylesheet                    | Renders raw content or `link` tag referencing resource URL                                         |
 | text                          | Renders raw content of resource                                                                    |
 
-## siteparam
+### siteparam
 
 If you need to print a site parameter in your Markdown, you can use the `siteparam` shortcode.
 
@@ -463,7 +580,7 @@ You can also access the site parameter by chaining the identifiers
 {{< siteparam "a.b.c" >}}
 ```
 
-## tabpane
+### tabpane
 
 If you want to add tabs to your content, you can use the `tabpane` shortcode.
 

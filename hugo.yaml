@@ -1,4 +1,0 @@
-title: "Hugo Shortcodes"
-disableKinds: ["RSS","taxonomy","term"]
-params:
-  some_param: "I ♥ Hugo"

@@ -1,0 +1,3 @@
+{{- $opts := merge .Options (dict "linenos" true) -}}
+{{- $result := transform.HighlightCodeBlock . $opts -}}
+{{ $result.Wrapped }}

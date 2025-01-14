@@ -13,7 +13,7 @@
       {{- end -}}
     {{- end -}}
     {{- with $resource -}}
-      {{- printf "<figure><img src=%q alt=%q></figure>" .RelPermalink .Name | safeHTML -}}
+      {{- printf "<img src=%q alt=%q>" .RelPermalink .Name | safeHTML -}}
     {{- end -}}
   {{- else if eq .ResourceType "page" -}}
     {{- .Content | safeHTML -}}

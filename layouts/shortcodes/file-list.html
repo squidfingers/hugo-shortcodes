@@ -6,7 +6,7 @@
 {{- if not $variant }}{{ $variant = "secondary" }}{{ end -}}
 {{- /* Output */ -}}
 {{- $list := .Inner | markdownify -}}
-{{- $icon := partial "utils/icon" (dict "name" $icon "variant" $variant) -}}
+{{- $icon := partial "components/icon" (dict "name" $icon "variant" $variant) -}}
 {{- $list = replace $list "<ul>" `<ul class="file-list">` -}}
 {{- $list = replaceRE "(<a[^>]+>)" (printf "$1%s " $icon) $list -}}
 {{ $list | safeHTML }}

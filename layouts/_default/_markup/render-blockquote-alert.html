@@ -1,0 +1,9 @@
+{{- /* Map .AlertType to icon severity */ -}}
+{{- $typeToSev := dict
+  "note"      "info"
+  "tip"       "info"
+  "important" "info"
+  "caution"   "warning"
+  "warning"   "error"
+-}}
+{{ partial "components/alert" (dict "text" .Text "severity" (index $typeToSev .AlertType)) }}

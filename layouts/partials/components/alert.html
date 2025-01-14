@@ -1,0 +1,37 @@
+{{- /*
+@example {{ partial "components/alert" (dict "text" $text "severity" $severity "size" $size "hideIcon" $hideIcon) }}
+*/ -}}
+{{- $classNames := slice "alert" -}}
+{{- /* Map severity to icon names */ -}}
+{{- $icons := dict
+  "info"    "information-box"
+  "success" "check-circle"
+  "warning" "alert"
+  "error"   "alert-circle"
+}}
+{{- /* Get severity */ -}}
+{{- $severity := .severity -}}
+{{- if not (or (eq $severity "success") (eq $severity "warning") (eq $severity "error")) -}}
+  {{- $severity = "info" -}}
+{{- end -}}
+{{- $classNames = $classNames | append (printf "alert--%s" $severity) -}}
+{{- /* Get size */ -}}
+{{- $size := .size -}}
+{{- if eq $size "small" -}}
+  {{- $classNames = $classNames | append (printf "alert--%s" $size) -}}
+{{- else -}}
+  {{- $size = "" -}}
+{{- end -}}
+{{- /* Build class names */ -}}
+{{- $classNames = delimit $classNames " " -}}
+{{- /* Output */ -}}
+<div class="{{ $classNames }}">
+  {{ if not .hideIcon -}}
+    <div class="alert__icon">
+      {{ partial "components/icon" (dict "name" (index $icons $severity) "variant" $severity "size" $size) }}
+    </div>
+  {{ end -}}
+  <div class="alert__body">
+    {{ .text }}
+  </div>
+</div>

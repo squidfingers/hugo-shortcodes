@@ -129,12 +129,9 @@ blockquote {
     color: #555;
     font-style: italic;
   }
-  footer {
+  figcaption {
     color: #222;
-
-    cite {
-      font-style: italic;
-    }
+    font-style: italic;
   }
   &::before {
     position: absolute;
@@ -149,5 +146,32 @@ blockquote {
   }
   & > :last-child {
     margin-bottom: 0;
+  }
+}
+
+figure > blockquote {
+  margin-bottom: 0;
+}
+
+table {
+  margin: 0;
+  margin-bottom: 1rem;
+  border-collapse: collapse;
+  border-top: solid 1px #ccc;
+}
+
+th, td {
+  padding: 0.5rem 1rem;
+  border-bottom: solid 1px #ccc;
+}
+
+th {
+  font-weight: 600;
+}
+
+table.striped {
+  thead tr,
+  tr:nth-child(even) {
+    background-color: #eee;
   }
 }

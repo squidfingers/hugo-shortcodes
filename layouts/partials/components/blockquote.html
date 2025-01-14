@@ -1,0 +1,23 @@
+{{- /*
+@example {{ partial "components/blockquote" (dict "text" $text "author" $author "cite" $cite "caption" $caption) }}
+*/ -}}
+<figure>
+  <blockquote{{ with .cite }} cite="{{ . }}"{{ end }}>
+    {{ .text }}
+    {{- if or .author .caption }}
+      <figcaption>—
+        {{- with .author }}{{ . }}{{ end }}
+        {{- if and .author .caption }}, {{ end }}
+        {{- if .caption }}
+          <cite>
+            {{- if .cite }}
+              <a href="{{ .cite }}"{{ if hasPrefix .cite "http" }} target="_blank" rel="noopener"{{ end }}>{{ .caption }}</a>
+            {{- else }}
+              {{ .caption }}
+            {{- end }}
+          </cite>
+        {{- end }}
+      </figcaption>
+    {{- end }}
+  </blockquote>
+</figure>

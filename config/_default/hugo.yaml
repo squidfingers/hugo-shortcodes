@@ -1,0 +1,2 @@
+title: "Hugo shortcodes and render hooks"
+disableKinds: ["RSS","taxonomy","term"]
