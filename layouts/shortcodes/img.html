@@ -1,16 +1,16 @@
-{{/* Get params */}}
-{{ $params := dict }}
-{{ if .IsNamedParams }}
-  {{ $params = .Params }}
-{{ else }}
-  {{ $params = dict "alt" (.Get 0) "src" (.Get 1) }}
-{{ end }}
-{{/* Process attributes */}}
-{{ $attributes := "" }}
-  {{ range $k, $v := $params }}
-    {{ if $v }}
-      {{ $attributes = printf "%s %s=%q" $attributes $k $v -}}
-    {{ end }}
-  {{ end }}
+{{- /* Get params */ -}}
+{{- $params := dict -}}
+{{- if .IsNamedParams -}}
+  {{- $params = .Params -}}
+{{- else -}}
+  {{- $params = dict "alt" (.Get 0) "src" (.Get 1) -}}
+{{- end -}}
+{{- /* Process attributes */ -}}
+{{- $attributes := "" -}}
+  {{- range $k, $v := $params -}}
+    {{- if $v -}}
+      {{- $attributes = printf "%s %s=%q" $attributes $k $v -}}
+    {{- end -}}
+  {{- end -}}
 {{- /* Output */ -}}
 <img{{ $attributes | safeHTMLAttr }}>{{ "" -}}
