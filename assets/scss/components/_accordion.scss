@@ -1,0 +1,34 @@
+.accordion {
+  border-top: solid 1px #ccc;
+  
+  details {
+    padding: 1rem;
+    background-color: #eee;
+    border-bottom: solid 1px #ccc;
+
+    summary {
+      padding-right: 36px;
+      list-style-type: none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" fill="%230085fd" /></svg>');
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: 24px 24px;
+      cursor: pointer;
+
+      &:hover {
+        color: #0085fd;
+      }
+    }
+    &[open] {
+      background-color: #f9f9f9;
+
+      summary {
+        margin-bottom: 1rem;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" fill="%230085fd" /></svg>');  
+      }
+    }
+    & > :last-child {
+      margin-bottom: 0;
+    }
+  }
+}

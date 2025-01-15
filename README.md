@@ -153,10 +153,12 @@ Learn more about the [table render hook](https://gohugo.io/render-hooks/tables/)
 
 ## Shortcodes
 
+- [accordion](#accordion)
 - [alert](#alert)
 - [blockquote](#blockquote)
 - [button](#button)
 - [collapse](#collapse)
+- [details](#details)
 - [file-list](#file-list)
 - [icon](#icon)
 - [ifparam](#ifparam)
@@ -167,6 +169,46 @@ Learn more about the [table render hook](https://gohugo.io/render-hooks/tables/)
 - [resource](#resource)
 - [siteparam](#siteparam)
 - [tabpane](#tabpane)
+
+### accordion
+
+If you want to add an accordion to your content, you can use the `accordion` shortcode.
+
+```markdown
+{{< accordion name="my-accordion" >}}
+  {{< details summary="Accordion 1" open="true" >}}
+    Lorem ipsum dolor sit amet.
+  {{< /details >}}
+  {{< details summary="Accordion 2" >}}
+    Lorem ipsum dolor sit amet.
+  {{< /details >}}
+{{< /accordion >}}
+```
+
+#### Parameters
+
+| Name      | Value  | Description    |
+| --------- | ------ | -------------- |
+| 0: `name` | String | Accordion name |
+
+#### Notes
+
+To only have one details element open at a time, the `name` parameter needs to be set.
+
+#### Output
+
+```html
+<div class="accordion">
+  <details name="my-accordion" open>
+    <summary>Accordion 1</summary>
+    <p>Lorem ipsum dolor sit amet.</p>
+  </details>
+  <details name="my-accordion">
+    <summary>Accordion 2</summary>
+    <p>Lorem ipsum dolor sit amet.</p>
+  </details>
+</div>
+```
 
 ### alert
 
@@ -295,6 +337,35 @@ If you want to collapse a block of content and show an expand button to reveal t
 #### Caveats
 
 The `collapse` shortcode doesn't reliably work when nested in a `tabpane` shortcode. The expand button may still be visible when it's not needed. This is because the CSS `display` property of the inactive `tabpane` panel is set to `none`, so the height of the content cannot be determined on page load.
+
+### details
+
+This shortcode overrides Hugo’s embedded [`details` shortcode](https://gohugo.io/content-management/shortcodes/#details) (added in Hugo v0.140.0), so it can be nested in the `accordion` shortcode.
+
+```markdown
+{{< details "Summary" >}}
+  Lorem ipsum dolor sit amet.
+{{< /details >}}
+```
+
+#### Parameters
+
+| Name         | Value   | Description                                             |
+| ------------ | ------- | ------------------------------------------------------- |
+| 0: `summary` | String  | Summary content                                         |
+| 1: `open`    | Boolean | Whether to initially display details; Defaults to false |
+| 2: `class`   | String  | Class attribute                                         |
+| 3: `name`    | String  | Name attribute                                          |
+| 4: `title`   | String  | Title attribute                                         |
+
+#### Output
+
+```html
+<details>
+  <summary>Summary</summary>
+  <p>Lorem ipsum dolor sit amet.</p>
+</details>
+```
 
 ### file-list
 

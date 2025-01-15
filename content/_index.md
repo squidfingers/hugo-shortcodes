@@ -61,6 +61,17 @@ This is an [external link](https://github.com/).
 
 # Shortcodes
 
+## accordion
+
+{{< accordion name="my-accordion" >}}
+  {{< details summary="**Accordion 1**" open="true" >}}
+    Lorem ipsum dolor sit amet.
+  {{< /details >}}
+  {{< details summary="**Accordion 2**" >}}
+    Lorem ipsum dolor sit amet.
+  {{< /details >}}
+{{< /accordion >}}
+
 ## alert
 
 {{< alert "success" >}}
@@ -135,7 +146,13 @@ culpa qui officia deserunt mollit anim id est laborum.
 
 {{< /collapse >}}
 
-## file list
+## details
+
+{{< details summary="Summary" name="my-details" title="My Details" >}}
+  Lorem ipsum dolor sit amet.
+{{< /details >}}
+
+## file-list
 
 {{< file-list >}}
 - [Page 1](#page-1)
@@ -204,13 +221,13 @@ The page description is {{< param "description" "not set" >}}
 ## tabpane
 
 {{< tabpane >}}
-{{< tab "Tab 1" >}}
-  This is content for **tab 1**
-{{< /tab >}}
-{{< tab "Tab 2" "selected" >}}
-  This is content for **tab 2**
-{{< /tab >}}
-{{< tab "Tab 3" >}}
-  This is content for **tab 3**
-{{< /tab >}}
+  {{< tab "Tab 1" >}}
+    This is content for **tab 1**
+  {{< /tab >}}
+  {{< tab "Tab 2" "selected" >}}
+    This is content for **tab 2**
+  {{< /tab >}}
+  {{< tab "Tab 3" >}}
+    This is content for **tab 3**
+  {{< /tab >}}
 {{< /tabpane >}}

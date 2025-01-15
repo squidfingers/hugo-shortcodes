@@ -16,5 +16,5 @@
 {{ if $selected }}
   {{ $tab = merge $tab (dict "selected" true) }}
 {{ end }}
-{{ $tab = merge $tab (dict "content" .Inner) }}
+{{ $tab = merge $tab (dict "content" .InnerDeindent) }}
 {{ .Parent.Scratch.SetInMap "tabs" (printf "%02v" .Ordinal) $tab }}

@@ -1,0 +1,36 @@
+{{- /*
+  Override Hugo’s embedded details shortcode so it will use the name param from the from parent.
+  https://gohugo.io/content-management/shortcodes/#details
+*/ -}}
+{{- /* Get summary */ -}}
+{{- $summary := cond .IsNamedParams (.Get "summary") (.Get 0) -}}
+{{- $summary = $summary | $.Page.RenderString -}}
+{{- /* Get open */ -}}
+{{- $open := cond .IsNamedParams (.Get "open") (.Get 1) -}}
+{{- $open = or (eq $open "true") (eq $open "selected") -}}
+{{- /* Get class */ -}}
+{{- $class := cond .IsNamedParams (.Get "class") (.Get 2) -}}
+{{- /* Get name */ -}}
+{{- /* If called within accordion shortcode, get name from parent, otherwise get name passed to this shortcode */ -}}
+{{- $name := "" -}}
+{{- if and .Parent (eq .Parent.Name "accordion") -}}
+  {{- with .Parent -}}
+    {{- $name = cond .IsNamedParams (.Get "name") (.Get 0) -}}
+  {{- end -}}
+{{- else -}}
+  {{- $name = cond .IsNamedParams (.Get "name") (.Get 3) -}}
+{{- end -}}
+{{- /* Get title */ -}}
+{{- $title := cond .IsNamedParams (.Get "title") (.Get 4) -}}
+{{- /* Get content */ -}}
+{{- $content := .InnerDeindent | $.Page.RenderString (dict "display" "block") -}}
+{{- /* Output */ -}}
+<details
+  {{- with $open }} open {{- end }}
+  {{- with $class }} class="{{ . }}" {{- end }}
+  {{- with $name }} name="{{ . }}" {{- end }}
+  {{- with $title }} title="{{ . }}" {{- end -}}
+>
+  <summary>{{ $summary }}</summary>
+  {{ $content -}}
+</details>
