@@ -1,5 +1,14 @@
+{{- /* Get .RelPermalink of page resources */ -}}
+{{- $src := .Destination -}}
+{{- if not (or (hasPrefix $src "/") (hasPrefix $src "http")) -}}
+  {{- with $.Page.Resources.Get (strings.TrimPrefix "./" $src) -}}
+    {{- if eq .ResourceType "image" -}}
+      {{- $src = .RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 {{- /* Process attributes */ -}}
-{{- $a := merge .Attributes (dict "alt" .Text "src" .Destination) -}}
+{{- $a := merge .Attributes (dict "alt" .Text "src" $src) -}}
 {{- $attributes := "" -}}
 {{- range $k, $v := $a -}}
   {{- if $v -}}
