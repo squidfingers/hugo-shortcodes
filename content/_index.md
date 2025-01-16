@@ -10,7 +10,7 @@ has_title: true
 > Quote
 
 > Most human beings have an almost infinite capacity for taking things for granted.
-{cite="https://www.huxley.net/bnw/" caption="Brave New World"}
+{author="Aldous Huxley" cite="https://www.huxley.net/bnw/" caption="Brave New World"}
 
 > [!NOTE]
 > Useful information that users should know, even when skimming content.

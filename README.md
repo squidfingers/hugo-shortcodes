@@ -31,13 +31,13 @@ This render hook overrides the rendering of Markdown blockquotes to HTML.
 > Quote
 ```
 
-#### Blockquote with citation and caption
+#### Blockquote with author, citation, and caption
 
-In the render hook example, you can add a citation or caption to your blockquote by passing them as Markdown attributes.
+In the render hook example, you can add an author, citation, or caption to your blockquote by passing them as Markdown attributes.
 
 ```markdown
 > Most human beings have an almost infinite capacity for taking things for granted.
-{cite="https://www.huxley.net/bnw/" caption="Brave New World"}
+{author="Aldous Huxley" cite="https://www.huxley.net/bnw/" caption="Brave New World"}
 ```
 
 #### Blockquote rendered as an alert
