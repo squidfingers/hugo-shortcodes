@@ -1,43 +1,46 @@
-{{- $resourceName := .Get 0 -}}
-{{- with $.Page.Resources.Get $resourceName -}}
-  {{- if eq .ResourceType "application" -}}
-    {{- .Content | safeHTML -}}
-  {{- else if eq .ResourceType "audio" -}}
-    {{- printf "<audio controls><source src=%q type=%q></audio>" .RelPermalink .MediaType.Type | safeHTML -}}
-  {{- else if eq .ResourceType "image" -}}
-    {{- $resource := . -}}
-    {{- if not (eq .MediaType.SubType "svg") -}}
-      {{- $process := $.Get 1 -}}
-      {{- if $process -}}
-        {{- $resource = .Process $process -}}
-      {{- end -}}
-    {{- end -}}
-    {{- with $resource -}}
-      {{- printf "<img src=%q alt=%q>" .RelPermalink .Name | safeHTML -}}
-    {{- end -}}
-  {{- else if eq .ResourceType "page" -}}
-    {{- .Content | safeHTML -}}
-  {{- else if eq .ResourceType "text" -}}
-    {{- if eq .MediaType.SubType "javascript" -}}
-      {{- if eq ($.Get 1) "external" -}}
-        {{- printf "<script src=%q></script>" .RelPermalink | safeHTML -}}
-      {{- else -}}
-        {{- .Content | safeHTML -}}
-      {{- end -}}
-    {{- else if eq .MediaType.SubType "css" -}}
-      {{- if eq ($.Get 1) "external" -}}
-        {{- printf `<link rel="stylesheet" type="text/css" href=%q>` .RelPermalink | safeHTML -}}
-      {{- else -}}
-        {{- .Content | safeHTML -}}
-      {{- end -}}
-    {{- else -}}
+{{- with .Get 0 -}}
+  {{- with or ($.Page.Resources.GetMatch .) (resources.GetMatch .) -}}
+    {{- if eq .ResourceType "application" -}}
       {{- .Content | safeHTML -}}
+    {{- else if eq .ResourceType "audio" -}}
+      {{- printf "<audio controls><source src=%q type=%q></audio>" .RelPermalink .MediaType.Type | safeHTML -}}
+    {{- else if eq .ResourceType "image" -}}
+      {{- $resource := . -}}
+      {{- if not (eq .MediaType.SubType "svg") -}}
+        {{- $process := $.Get 1 -}}
+        {{- if $process -}}
+          {{- $resource = .Process $process -}}
+        {{- end -}}
+      {{- end -}}
+      {{- with $resource -}}
+        {{- printf "<img src=%q alt=%q>" .RelPermalink .Name | safeHTML -}}
+      {{- end -}}
+    {{- else if eq .ResourceType "page" -}}
+      {{- .Content | safeHTML -}}
+    {{- else if eq .ResourceType "text" -}}
+      {{- if eq .MediaType.SubType "javascript" -}}
+        {{- if eq ($.Get 1) "external" -}}
+          {{- printf "<script src=%q></script>" .RelPermalink | safeHTML -}}
+        {{- else -}}
+          {{- .Content | safeHTML -}}
+        {{- end -}}
+      {{- else if eq .MediaType.SubType "css" -}}
+        {{- if eq ($.Get 1) "external" -}}
+          {{- printf `<link rel="stylesheet" type="text/css" href=%q>` .RelPermalink | safeHTML -}}
+        {{- else -}}
+          {{- .Content | safeHTML -}}
+        {{- end -}}
+      {{- else -}}
+        {{- .Content | safeHTML -}}
+      {{- end -}}
+    {{- else if eq .ResourceType "video" -}}
+      {{- printf "<video controls><source src=%q type=%q></video>" .RelPermalink .MediaType.Type | safeHTML -}}
+    {{- else -}}
+      {{ errorf "Shortcode %q: Resource type %q not supported. See %s" $.Name .ResourceType $.Position -}}
     {{- end -}}
-  {{- else if eq .ResourceType "video" -}}
-    {{- printf "<video controls><source src=%q type=%q></video>" .RelPermalink .MediaType.Type | safeHTML -}}
   {{- else -}}
-    {{ errorf "Shortcode %q: resource type %q not supported at %s" $.Name .ResourceType $.Position }}
+    {{ errorf "Shortcode %q: Resource %q not found. See %s" $.Name . $.Position -}}
   {{- end -}}
 {{- else -}}
-  {{ errorf "Shortcode %q: resource %q not found at %s" .Name $resourceName .Position }}
+  {{- errorf "Shortcode %q: A positional parameter indicating the path of the resource is required. See %s" $.Name $.Position -}}
 {{- end -}}

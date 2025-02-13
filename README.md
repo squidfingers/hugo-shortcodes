@@ -599,11 +599,13 @@ You can also pass a second optional value that will only be returned if the para
 
 ### resource
 
-If you want to include a [page resource](https://gohugo.io/content-management/page-resources/) in your Markdown, you can use the `resource` shortcode.
+If you want to include a page resource or a global resource in your Markdown, you can use the `resource` shortcode.
 
 ```markdown
-{{< resource "image.svg" >}}
+{{< resource "image.*" >}}
 ```
+
+This shortcode will first look for a [page resource](https://gohugo.io/methods/page/resources/) matching the file path, and if it was not found, it will then look for a [global resource](https://gohugo.io/methods/resource/name/#global-resource).
 
 #### Raster images
 
