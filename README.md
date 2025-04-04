@@ -165,6 +165,7 @@ Learn more about the [table render hook](https://gohugo.io/render-hooks/tables/)
 - [img](#img)
 - [include](#include)
 - [labeled-highlight](#labeled-highlight)
+- [md](#md)
 - [param](#param)
 - [resource](#resource)
 - [siteparam](#siteparam)
@@ -572,6 +573,60 @@ Then add styles to display the title attribute:
 ```
 
 While this method avoids needing to use a shortcode, the shortcode allows for more control of the markup used to display the label.
+
+### md
+
+If you have some html content pages, and can't use Markdown for some reason, but you want to make use of render hooks, you can use the `md` shortcode.
+
+For example, let's say you had this html:
+
+```html
+<article>
+  <h3>Heading</h3>
+  <img src="image.jpg" alt="image">
+  <p>This is an <a href="https://gohugo.io/">external link</a></p>
+</article>
+```
+
+You can utilize the Markdown render hooks by using the `md` shortcode:
+
+```html
+<article>
+  {{< md "### Heading" />}}
+  {{< md "![image](image.jpg)" />}}
+  {{< md >}}
+  This is an [external link](https://gohugo.io/)
+  {{< /md >}}
+</article>
+```
+
+Which could potentially output this markup, based on your render hook implementation:
+
+```html
+<article>
+  <h3 id="heading">Heading <a href="#heading">#</a></h3>
+  <figure>
+    <img src="/path/to/image.jpg" alt="image">
+  </figure>
+  <p>This is an <a href="https://gohugo.io/" target="_blank" rel="noopener">external link</a></p>
+</article>
+```
+
+You can either pass the Markdown content as an attribute:
+
+```html
+{{< md "Markdown" />}}
+```
+
+Or as content between the opening and closing tags:
+
+```html
+{{< md >}}
+- One
+- Two
+- Three
+{{< /md >}}
+```
 
 ### param
 
