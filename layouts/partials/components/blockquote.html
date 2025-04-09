@@ -11,7 +11,8 @@
         {{- if .caption }}
           <cite>
             {{- if .cite }}
-              <a href="{{ .cite }}"{{ if hasPrefix .cite "http" }} target="_blank" rel="noopener"{{ end }}>{{ .caption }}</a>
+              {{/* Use Markdown so the link will be passed through the render hook */}}
+              {{ printf "[%s](%s)" .caption .cite | markdownify }}
             {{- else }}
               {{ .caption }}
             {{- end }}
