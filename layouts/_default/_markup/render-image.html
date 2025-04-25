@@ -1,26 +1,33 @@
-{{- /* Get .RelPermalink of a page resource or global resource */ -}}
-{{- $u := urls.Parse .Destination }}
-{{- $src := $u.String }}
-{{- if not $u.IsAbs }}
-  {{- with or ($.Page.Resources.Get $u.Path) (resources.Get $u.Path) }}
+{{- /* Get .RelPermalink of resources */}}
+{{- $url := urls.Parse .Destination }}
+{{- $src := $url.String }}
+{{- if not $url.IsAbs }}
+  {{- $path := strings.TrimPrefix "./" $url.Path }}
+  {{- with or (.PageInner.Resources.Get $path) (resources.Get $path) }}
     {{- $src = .RelPermalink }}
+    {{- with $url.RawQuery }}
+      {{- $src = printf "%s?%s" $src . }}
+    {{- end }}
+    {{- with $url.Fragment }}
+      {{- $src = printf "%s#%s" $src . }}
+    {{- end }}
   {{- end }}
 {{- end }}
-{{- /* Process attributes */ -}}
-{{- $a := merge .Attributes (dict "alt" .Text "src" $src) -}}
-{{- $attributes := "" -}}
-{{- range $k, $v := $a -}}
-  {{- if $v -}}
-    {{- $attributes = printf "%s %s=%q" $attributes $k $v -}}
-  {{- end -}}
-{{- end -}}
-{{- /* Output standalone image */ -}}
-{{- if .IsBlock -}}
+{{- /* Process attributes */}}
+{{- $a := merge .Attributes (dict "alt" .PlainText "src" $src) }}
+{{- $attributes := "" }}
+{{- range $k, $v := $a }}
+  {{- if $v }}
+    {{- $attributes = printf "%s %s=%q" $attributes $k ($v | transform.HTMLEscape) }}
+  {{- end }}
+{{- end }}
+{{- /* Output standalone image */}}
+{{- if .IsBlock }}
   <figure>
     <img{{ $attributes | safeHTMLAttr }}>
     {{ with .Title }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
   </figure>
-{{- /* Output inline image */ -}}
-{{- else -}}
+{{- /* Output inline image */}}
+{{- else }}
   <img{{ $attributes | safeHTMLAttr }}{{ with .Title }} title="{{ . }}"{{ end }}>
 {{- end -}}

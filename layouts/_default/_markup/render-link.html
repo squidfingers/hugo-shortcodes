@@ -1,2 +1,52 @@
-<a href="{{ .Destination | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if hasPrefix .Destination "http" }} target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>
+{{- $url := urls.Parse .Destination }}
+{{- $href := $url.String }}
+{{- $err := printf "The link render hook was unable to find %q in %q" $url.String .Page.String }}
+{{- /* Get href */}}
+{{- if not $url.IsAbs }}
+  {{- with $url.Path }}
+    {{- with or ($.PageInner.GetPage .) ($.PageInner.GetPage (strings.TrimRight "/" .)) }}
+      {{- /* Page */}}
+      {{- $href = .RelPermalink }}
+      {{- with $url.RawQuery }}
+        {{- $href = printf "%s?%s" $href . }}
+      {{- end }}
+      {{- with $url.Fragment }}
+        {{- $href = printf "%s#%s" $href . }}
+      {{- end }}
+    {{- else with $.PageInner.Resources.Get . }}
+      {{- /* Page resource */}}
+      {{- $href = .RelPermalink }}
+    {{- else with (and ($.Page.CurrentSection.Resources.Get .) (ne $.Page.BundleType "leaf")) }}
+      {{- /* Section resource */}}
+      {{- $href = .RelPermalink }}
+    {{- else with resources.Get . }}
+      {{- /* Global resource */}}
+      {{- $href = .RelPermalink }}
+    {{- else }}
+      {{- warnf $err }}
+    {{- end }}
+  {{- else }}
+    {{- with $url.Fragment }}
+      {{- $href = (printf "%s#%s" $.Page.RelPermalink .) }}
+    {{- else }}
+      {{- warnf $err }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- /* Process attributes */}}
+{{- $a := dict "href" $href }}
+{{- if $url.IsAbs }}
+  {{- $a = merge $a (dict "target" "_blank" "rel" "noopener") }}
+{{- end }}
+{{- with .Title }}
+  {{- $a = merge $a (dict "title" .) }}
+{{- end }}
+{{- $attributes := "" }}
+{{- range $k, $v := $a }}
+  {{- if $v }}
+    {{- $attributes = printf "%s %s=%q" $attributes $k ($v | transform.HTMLEscape) }}
+  {{- end }}
+{{- end }}
+{{- /* Output */ -}}
+<a{{ $attributes | safeHTMLAttr }}>{{ .Text }}</a>
 {{- /**/ -}}
