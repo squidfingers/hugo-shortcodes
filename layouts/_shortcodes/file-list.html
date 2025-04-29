@@ -5,7 +5,7 @@
 {{- $variant := cond .IsNamedParams (.Get "variant") (.Get 1) -}}
 {{- if not $variant }}{{ $variant = "secondary" }}{{ end -}}
 {{- /* Output */ -}}
-{{- $list := .Inner | markdownify -}}
+{{- $list := .Inner | $.Page.RenderString -}}
 {{- $icon := partial "components/icon" (dict "name" $icon "variant" $variant) -}}
 {{- $list = replace $list "<ul>" `<ul class="file-list">` -}}
 {{- $list = replaceRE "(<a[^>]+>)" (printf "$1%s " $icon) $list -}}

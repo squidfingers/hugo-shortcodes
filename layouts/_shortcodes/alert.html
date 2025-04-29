@@ -1,4 +1,4 @@
-{{- $text := .Inner | markdownify -}}
+{{- $text := .Inner | $.Page.RenderString -}}
 {{- $severity := cond .IsNamedParams (.Get "severity") (.Get 0) -}}
 {{- $size := cond .IsNamedParams (.Get "size") (.Get 1) -}}
 {{- $hideIcon := cond .IsNamedParams (.Get "hideIcon") (.Get 2) -}}

@@ -11,7 +11,10 @@
         {{- if .caption }}
           <cite>
             {{- if .cite }}
-              {{/* Use Markdown so the link will be passed through the render hook */}}
+              {{/*
+                Use Markdown so the link will be passed through the render hook.
+                Note: Since we do not have a page context in this partial, we have to use markdownify instead of $.Page.RenderString, which will result in relative urls not being resolved.
+              */}}
               {{ printf "[%s](%s)" .caption .cite | markdownify }}
             {{- else }}
               {{ .caption }}

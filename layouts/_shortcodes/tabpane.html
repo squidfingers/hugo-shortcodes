@@ -23,7 +23,7 @@
       {{ index $v "label" }}
     </label>
     <div class="tabpane__panel" tabindex="1">
-      {{ index $v "content" | markdownify }}
+      {{ index $v "content" | $.Page.RenderString }}
     </div>
   {{- end }}
 </div>

@@ -4,7 +4,7 @@
   <input class="collapse__input" type="checkbox" id="{{ $collapseId }}">
   <label class="collapse__label" for="{{ $collapseId }}"></label>
   <div class="collapse__content"{{ with $maxHeight }} style="max-height:{{ . }}px"{{ end }}>
-    {{ .Inner | markdownify }}
+    {{ .Inner | $.Page.RenderString }}
   </div>
 </div>
 <script>

@@ -4,8 +4,8 @@
 {{- $inner := trim .Inner "\n\r" -}}
 {{- $highlight := "" -}}
 {{- if hasPrefix $inner "```" -}}
-  {{- /* Inner is a code fence, so render with markdownify */ -}}
-  {{- $highlight = $inner | markdownify -}}
+  {{- /* Inner is a code fence, so render Markdown */ -}}
+  {{- $highlight = $inner | $.Page.RenderString -}}
 {{- else -}}
   {{- /* Inner is not a code fence, so render with highlight */ -}}
   {{- $highlight = highlight $inner $lang $options -}}

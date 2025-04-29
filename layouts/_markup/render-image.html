@@ -25,7 +25,7 @@
 {{- if .IsBlock }}
   <figure>
     <img{{ $attributes | safeHTMLAttr }}>
-    {{ with .Title }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+    {{ with .Title }}<figcaption>{{ . | $.Page.RenderString }}</figcaption>{{ end }}
   </figure>
 {{- /* Output inline image */}}
 {{- else }}

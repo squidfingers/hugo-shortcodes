@@ -1,6 +1,5 @@
 {{- $url := urls.Parse .Destination }}
 {{- $href := $url.String }}
-{{- $err := printf "The link render hook was unable to find %q in %q" $url.String .Page.String }}
 {{- /* Get href */}}
 {{- if not $url.IsAbs }}
   {{- with $url.Path }}
@@ -23,13 +22,15 @@
       {{- /* Global resource */}}
       {{- $href = .RelPermalink }}
     {{- else }}
-      {{- warnf $err }}
+      {{ if hugo.IsDevelopment }}
+        {{- warnf "The link render hook was unable to resolve %q in %q" $url.String .Page.String }}
+      {{ end }}
     {{- end }}
   {{- else }}
     {{- with $url.Fragment }}
       {{- $href = (printf "%s#%s" $.Page.RelPermalink .) }}
     {{- else }}
-      {{- warnf $err }}
+      {{- $href = $.Page.RelPermalink }}
     {{- end }}
   {{- end }}
 {{- end }}
