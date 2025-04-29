@@ -23,7 +23,7 @@
       {{- $href = .RelPermalink }}
     {{- else }}
       {{ if hugo.IsDevelopment }}
-        {{- warnf "The link render hook was unable to resolve %q in %q" $url.String .Page.String }}
+        {{- warnf "The link render hook was unable to resolve %q in %q" $url.String $.Page.String }}
       {{ end }}
     {{- end }}
   {{- else }}
