@@ -10,7 +10,7 @@ hugo server
 
 Then visit http://localhost:1313 in your browser.
 
-Requires Hugo v0.134.0 or later.
+Requires Hugo v0.147.0 or later.
 
 ---
 
