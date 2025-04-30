@@ -1,42 +1,31 @@
-{{- $url := urls.Parse .Destination }}
-{{- $href := $url.String }}
 {{- /* Get href */}}
-{{- if not $url.IsAbs }}
-  {{- with $url.Path }}
-    {{- with or ($.PageInner.GetPage .) ($.PageInner.GetPage (strings.TrimRight "/" .)) }}
-      {{- /* Page */}}
-      {{- $href = .RelPermalink }}
-      {{- with $url.RawQuery }}
-        {{- $href = printf "%s?%s" $href . }}
-      {{- end }}
-      {{- with $url.Fragment }}
-        {{- $href = printf "%s#%s" $href . }}
-      {{- end }}
-    {{- else with $.PageInner.Resources.Get . }}
-      {{- /* Page resource */}}
-      {{- $href = .RelPermalink }}
-    {{- else with (and ($.Page.CurrentSection.Resources.Get .) (ne $.Page.BundleType "leaf")) }}
-      {{- /* Section resource */}}
-      {{- $href = .RelPermalink }}
-    {{- else with resources.Get . }}
-      {{- /* Global resource */}}
-      {{- $href = .RelPermalink }}
-    {{- else }}
-      {{ if hugo.IsDevelopment }}
-        {{- warnf "The link render hook was unable to resolve %q in %q" $url.String $.Page.String }}
-      {{ end }}
+{{- $u := urls.Parse .Destination }}
+{{- $href := or $u.String .Destination }}
+{{- if strings.HasPrefix $href "#" }}
+  {{- $href = printf "%s#%s" .PageInner.RelPermalink $u.Fragment }}
+{{- else if and $href (not $u.IsAbs) }}
+  {{- $path := strings.TrimPrefix "./" $u.Path }}
+  {{- with or
+    ($.PageInner.GetPage $path)
+    ($.PageInner.Resources.Get $path)
+    (resources.Get $path)
+  }}
+    {{- $href = .RelPermalink }}
+    {{- with $u.RawQuery }}
+      {{- $href = printf "%s?%s" $href . }}
+    {{- end }}
+    {{- with $u.Fragment }}
+      {{- $href = printf "%s#%s" $href . }}
     {{- end }}
   {{- else }}
-    {{- with $url.Fragment }}
-      {{- $href = (printf "%s#%s" $.Page.RelPermalink .) }}
-    {{- else }}
-      {{- $href = $.Page.RelPermalink }}
+    {{- if hugo.IsDevelopment }}
+      {{- warnf "The link render hook was unable to resolve %q in %q" $u.String .Page.String }}
     {{- end }}
   {{- end }}
 {{- end }}
 {{- /* Process attributes */}}
 {{- $a := dict "href" $href }}
-{{- if $url.IsAbs }}
+{{- if $u.IsAbs }}
   {{- $a = merge $a (dict "target" "_blank" "rel" "noopener") }}
 {{- end }}
 {{- with .Title }}
