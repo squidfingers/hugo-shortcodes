@@ -6,8 +6,7 @@
 {{- $summary := cond .IsNamedParams (.Get "summary") (.Get 0) -}}
 {{- $summary = $summary | $.Page.RenderString -}}
 {{- /* Get open */ -}}
-{{- $open := cond .IsNamedParams (.Get "open") (.Get 1) -}}
-{{- $open = or (eq $open "true") (eq $open "selected") -}}
+{{- $open := cond .IsNamedParams (.Get "open") (.Get 1) | in (slice "selected" "true") -}}
 {{- /* Get class */ -}}
 {{- $class := cond .IsNamedParams (.Get "class") (.Get 2) -}}
 {{- /* Get name */ -}}

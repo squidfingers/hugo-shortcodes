@@ -2,8 +2,7 @@
 {{- $icon := cond .IsNamedParams (.Get "icon") (.Get 0) -}}
 {{- if not $icon }}{{ $icon = "file" }}{{ end -}}
 {{- /* Get icon variant */ -}}
-{{- $variant := cond .IsNamedParams (.Get "variant") (.Get 1) -}}
-{{- if not $variant }}{{ $variant = "secondary" }}{{ end -}}
+{{- $variant := cond .IsNamedParams (.Get "variant") (.Get 1) | default "secondary" -}}
 {{- /* Output */ -}}
 {{- $list := .Inner | $.Page.RenderString -}}
 {{- $icon := partial "components/icon" (dict "name" $icon "variant" $variant) -}}

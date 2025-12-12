@@ -9,8 +9,7 @@
 {{/* Get label */}}
 {{ $label := cond .IsNamedParams (.Get "label") (.Get 0) | default (printf "Tab %v" .Ordinal) }}
 {{/* Get selected */}}
-{{ $selected := cond .IsNamedParams (.Get "selected") (.Get 1) }}
-{{ $selected = or (eq $selected "true") (eq $selected "selected") }}
+{{ $selected := cond .IsNamedParams (.Get "selected") (.Get 1) | in (slice "selected" "true") }}
 {{/* Pass params to tabpane */}}
 {{ $tab := dict "label" $label }}
 {{ if $selected }}

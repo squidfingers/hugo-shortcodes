@@ -11,13 +11,15 @@
 }}
 {{- /* Get severity */ -}}
 {{- $severity := .severity -}}
-{{- if not (or (eq $severity "success") (eq $severity "warning") (eq $severity "error")) -}}
-  {{- $severity = "info" -}}
+{{- $severities := slice "info" "success" "warning" "error" -}}
+{{- if not (in $severities $severity) -}}
+  {{- $severity = index $severities 0 -}}
 {{- end -}}
 {{- $classNames = $classNames | append (printf "alert--%s" $severity) -}}
 {{- /* Get size */ -}}
 {{- $size := .size -}}
-{{- if eq $size "small" -}}
+{{- $sizes := slice "small" -}}
+{{- if in $sizes $size -}}
   {{- $classNames = $classNames | append (printf "alert--%s" $size) -}}
 {{- else -}}
   {{- $size = "" -}}

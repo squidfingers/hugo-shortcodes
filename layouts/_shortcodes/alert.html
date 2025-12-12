@@ -1,7 +1,6 @@
 {{- $text := .Inner | $.Page.RenderString -}}
 {{- $severity := cond .IsNamedParams (.Get "severity") (.Get 0) -}}
 {{- $size := cond .IsNamedParams (.Get "size") (.Get 1) -}}
-{{- $hideIcon := cond .IsNamedParams (.Get "hideIcon") (.Get 2) -}}
-{{- $hideIcon = or (eq $hideIcon "hideIcon") (eq $hideIcon "true") -}}
+{{- $hideIcon := cond .IsNamedParams (.Get "hideIcon") (.Get 2) | in (slice "hideIcon" "true") -}}
 {{- /* Output */ -}}
 {{- partial "components/alert" (dict "text" $text "severity" $severity "size" $size "hideIcon" $hideIcon) -}}

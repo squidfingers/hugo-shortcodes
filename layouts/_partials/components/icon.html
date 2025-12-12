@@ -7,11 +7,13 @@
   {{ $svg := readFile $src | htmlUnescape }}
   {{ $classNames := slice "icon" }}
   {{/* Get variant */}}
-  {{ if or (eq .variant "primary") (eq .variant "secondary") (eq .variant "info") (eq .variant "success") (eq .variant "warning") (eq .variant "error") (eq .variant "current") }}
+  {{ $variants := slice "primary" "secondary" "info" "success" "warning" "error" "current" }}
+  {{ if in $variants .variant }}
     {{ $classNames = $classNames | append (printf "icon--%s" .variant) }}
   {{ end }}
   {{/* Get size */}}
-  {{ if or (eq .size "small") (eq .size "medium") (eq .size "large") }}
+  {{ $sizes := slice "small" "medium" "large" }}
+  {{ if in $sizes .size }}
     {{ $classNames = $classNames | append (printf "icon--%s" .size) }}
   {{ end }}
   {{/* Get additional class name */}}

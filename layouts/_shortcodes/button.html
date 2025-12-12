@@ -2,17 +2,17 @@
 {{- $classNames := slice "button" -}}
 {{- /* Get variant */ -}}
 {{- $variant := cond .IsNamedParams (.Get "variant") (.Get 1) -}}
-{{- if or (eq $variant "primary") (eq $variant "secondary") (eq $variant "info") (eq $variant "success") (eq $variant "warning") (eq $variant "error") -}}
+{{- if in (slice "primary" "secondary" "info" "success" "warning" "error") $variant -}}
   {{- $classNames = $classNames | append (printf "button--%s" $variant) -}}
 {{- end -}}
 {{- /* Get size */ -}}
 {{- $size := cond .IsNamedParams (.Get "size") (.Get 2) -}}
-{{- if or (eq $size "small") (eq $size "medium") (eq $size "large") -}}
+{{- if in (slice "small" "medium" "large") $size -}}
   {{- $classNames = $classNames | append (printf "button--%s" $size) -}}
 {{- end -}}
 {{- /* Get disabled */ -}}
 {{- $disabled := cond .IsNamedParams (.Get "disabled") (.Get 3) -}}
-{{- if or (eq $disabled "true") (eq $disabled "disabled") -}}
+{{- if in (slice "true" "disabled") $disabled -}}
   {{- $classNames = $classNames | append "button--disabled" -}}
 {{- end -}}
 {{- /* Get additional class name */ -}}

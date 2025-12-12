@@ -210,8 +210,8 @@ The page description is {{< param "description" "not set" >}}
 
 {{< resource "image.png" "resize 300x200 jpg q80 lanczos" >}}
 
-```javascript
-{{< resource "script.js" >}}
+```javascript {lineNos=false}
+{{% resource "script.js" %}}
 ```
 
 ## siteparam
