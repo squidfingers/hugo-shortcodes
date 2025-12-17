@@ -9,7 +9,7 @@
 
 {{ with resources.Get $src }}
   {{ if $dst }}
-    {{ $css = . | toCSS (dict "transpiler" "libsass" "targetPath" $dst) }}
+    {{ $css = . | toCSS (dict "transpiler" "dartsass" "targetPath" $dst) }}
     {{ if hugo.IsProduction }}
       {{ $css = $css | minify | fingerprint }}
     {{ end }}
