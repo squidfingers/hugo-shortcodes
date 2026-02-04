@@ -180,7 +180,7 @@ The `title` param {{< ifparam "has_title" "is" "is not" >}} set
 
 ## include
 
-{{< include "includes/file.md" >}}
+{{< include "_includes/file.md" >}}
 
 ## labeled-highlight
 

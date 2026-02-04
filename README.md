@@ -493,13 +493,13 @@ To use image processing, the image must be a page resource, not a global resourc
 If you have HTML or Markdown that you would like to externally include in your content files, you can place the file under the current working directory. Then, you can use the `include` shortcode to pull in this file into your content.
 
 ```markdown
-{{< include "includes/file.md" >}}
+{{< include "_includes/file.md" >}}
 ```
 
 #### Notes
 
 - You must use `{{< >}}` shortcode delimiters to render the included content correctly.
-- All included files under the `content` directory must have `draft:true` set in their `frontmatter`.
+- All included files under the `content` directory must have `draft:true` or `build: { list: never, publishResources: false, render: never }` set as `frontmatter` params.
 - Only relative paths **under** the page including the file are supported. Relative paths traversing up the directory are **not** supported. For files outside the current working directory you can use an absolute path starting with `/`.
 - When editing an **included** file in local development, the page **including** the file is not automatically updated. Restarting the server is required to see any changes.
 - The headings of included files will **not** be displayed in Hugo's `TableOfContents`.
