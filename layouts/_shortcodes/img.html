@@ -13,7 +13,7 @@
 {{- /* Process image */ -}}
 {{- if $process -}}
   {{- $res := false -}}
-  {{- with $.Page.Resources.GetMatch (index $params "src") -}}
+  {{- with or ($.Page.Resources.GetMatch (index $params "src")) (resources.GetMatch (index $params "src")) -}}
     {{- $res = .Process $process -}}
   {{- end -}}
   {{- if $res -}}
