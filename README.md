@@ -366,7 +366,7 @@ Parameters:
 | Name       | Value  | Description                                                                    |
 | ---------- | ------ | ------------------------------------------------------------------------------ |
 | 0: `label` | String | The text to display above the output code block; Defaults to "Example output:" |
-| 1: `prompt`| String | The terminal prompt that precedes the command; Defaults to "$"                 |
+| 1: `prompt`| String | The prompt that precedes the command; Defaults to "%"                          |
 
 ### details
 
