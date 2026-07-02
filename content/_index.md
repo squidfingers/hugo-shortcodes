@@ -146,6 +146,21 @@ culpa qui officia deserunt mollit anim id est laborum.
 
 {{< /collapse >}}
 
+## command-prompt
+
+{{< command-output label="You should see something like:" >}}
+
+```bash
+% ls -Flh
+total 4
+drwxr-xr-x  6 username  staff  256B Jan 02 15:04 assets/
+drwxr-xr-x  4 username  staff  256B Jan 02 15:04 config/
+drwxr-xr-x  8 username  staff  256B Jan 02 15:04 content/
+drwxr-xr-x  8 username  staff  256B Jan 02 15:04 layouts/
+```
+
+{{< /command-output >}}
+
 ## details
 
 {{< details summary="Summary" name="my-details" title="My Details" >}}

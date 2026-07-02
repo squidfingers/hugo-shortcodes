@@ -1,0 +1,37 @@
+{{- $label := cond .IsNamedParams (.Get "label") (.Get 0) | default "Example output:" -}}
+{{- $prompt := cond .IsNamedParams (.Get "prompt") (.Get 1) | default "%" -}}
+{{- $prompt = printf "%s " $prompt -}}
+{{- /* Get content and remove all whitespace outside of the code fence */ -}}
+{{- $inner := trim .Inner "\n\r\t " -}}
+{{- /* Split code fence into an array of lines */ -}}
+{{- $lines := split $inner "\n" -}}
+{{- /* Get the language from the first line */ -}}
+{{- $lang := strings.TrimPrefix "```" (index $lines 0) -}}
+{{- /* Get all lines between the code fence */ -}}
+{{- $body := first (sub (len $lines) 2) (after 1 $lines) -}}
+{{- /* Seperate command and output into their own arrays */ -}}
+{{- $command := slice -}}
+{{- $output := slice -}}
+{{- $outputFound := false -}}
+{{- range $body -}}
+  {{- if and (not $outputFound) (hasPrefix . $prompt) -}}
+    {{- $command = $command | append (strings.TrimPrefix $prompt .) -}}
+  {{- else -}}
+    {{- $outputFound = true -}}
+    {{- $output = $output | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- /* Only set the language of the output to plaintext if a command was found */ -}}
+{{- $outputLang := cond (gt (len $command) 0) "plaintext" $lang }}
+{{- /* Output */ -}}
+<div class="command-output">
+  {{- with $command }}
+  {{ printf "```%s\n%s\n```" $lang (delimit . "\n") | $.Page.RenderString }}
+  {{- end }}
+  {{- if and $command $output }}
+  {{ printf `<div class="command-output__label">%s</div>` $label | safeHTML }}
+  {{- end }}
+  {{- with $output }}
+  {{ printf "```%s\n%s\n```" $outputLang (delimit . "\n") | $.Page.RenderString }}
+  {{- end }}
+</div>

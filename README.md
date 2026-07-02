@@ -158,6 +158,7 @@ Learn more about the [table render hook](https://gohugo.io/render-hooks/tables/)
 - [blockquote](#blockquote)
 - [button](#button)
 - [collapse](#collapse)
+- [command-output](#command-output)
 - [details](#details)
 - [file-list](#file-list)
 - [icon](#icon)
@@ -338,6 +339,34 @@ If you want to collapse a block of content and show an expand button to reveal t
 #### Caveats
 
 The `collapse` shortcode doesn't reliably work when nested in a `tabpane` shortcode. The expand button may still be visible when it's not needed. This is because the CSS `display` property of the inactive `tabpane` panel is set to `none`, so the height of the content cannot be determined on page load.
+
+### command-output
+
+If you want to display a command with output in a highlighted code block, you can use the `command-output` shortcode.
+
+````markdown
+{{< command-output >}}
+
+```bash
+% ls -Flh
+total 4
+drwxr-xr-x  6 username  staff  256B Jan 02 15:04 assets/
+drwxr-xr-x  4 username  staff  256B Jan 02 15:04 config/
+drwxr-xr-x  8 username  staff  256B Jan 02 15:04 content/
+drwxr-xr-x  8 username  staff  256B Apr 02 15:04 layouts/
+```
+
+{{< /command-output >}}
+````
+
+All of the lines in the code block that begin with the command prompt will be displayed in a highlighted code block using the language specified in the code fence. All other lines after the command are considered output, and will be rendered in a plaintext code block. If you would like to modify the header above the output, you can set the `label` parameter.
+
+Parameters:
+
+| Name       | Value  | Description                                                                    |
+| ---------- | ------ | ------------------------------------------------------------------------------ |
+| 0: `label` | String | The text to display above the output code block; Defaults to "Example output:" |
+| 1: `prompt`| String | The prompt that precedes the command; Defaults to "%"                          |
 
 ### details
 
