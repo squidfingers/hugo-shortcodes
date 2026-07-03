@@ -1,6 +1,8 @@
 {{- $label := cond .IsNamedParams (.Get "label") (.Get 0) | default "Example output:" -}}
-{{- $prompt := cond .IsNamedParams (.Get "prompt") (.Get 1) | default "%" -}}
-{{- $prompt = printf "%s " $prompt -}}
+{{- $defaultPrompt := "%" -}}
+{{- $prompt := cond .IsNamedParams (.Get "prompt") (.Get 1) | default $defaultPrompt -}}
+{{- $promptPrefix := printf "%s " $prompt -}}
+{{- $hasDefaultPrompt := eq $defaultPrompt $prompt -}}
 {{- /* Get content and remove all whitespace outside of the code fence */ -}}
 {{- $inner := trim .Inner "\n\r\t " -}}
 {{- /* Split code fence into an array of lines */ -}}
@@ -14,8 +16,8 @@
 {{- $output := slice -}}
 {{- $outputFound := false -}}
 {{- range $body -}}
-  {{- if and (not $outputFound) (hasPrefix . $prompt) -}}
-    {{- $command = $command | append (strings.TrimPrefix $prompt .) -}}
+  {{- if and (not $outputFound) (hasPrefix . $promptPrefix) -}}
+    {{- $command = $command | append (strings.TrimPrefix $promptPrefix .) -}}
   {{- else -}}
     {{- $outputFound = true -}}
     {{- $output = $output | append . -}}
@@ -23,15 +25,27 @@
 {{- end -}}
 {{- /* Only set the language of the output to plaintext if a command was found */ -}}
 {{- $outputLang := cond (gt (len $command) 0) "plaintext" $lang }}
+{{- /* Output style for custom prompt */ -}}
+{{- $id := "" -}}
+{{- if not $hasDefaultPrompt -}}
+  {{- $id = printf "command-output-%02v" .Ordinal -}}
+  <style>
+    #{{ $id }} .command-output__command pre code > span::before {content:'{{ $promptPrefix }}'}
+  </style>
+{{- end -}}
 {{- /* Output */ -}}
-<div class="command-output">
+<div class="command-output"{{ with $id }} id="{{ . }}"{{ end }}>
   {{- with $command }}
-  {{ printf "```%s\n%s\n```" $lang (delimit . "\n") | $.Page.RenderString }}
+    <div class="command-output__command">
+      {{ printf "```%s\n%s\n```" $lang (delimit . "\n") | $.Page.RenderString }}
+    </div>
   {{- end }}
   {{- if and $command $output }}
-  {{ printf `<div class="command-output__label">%s</div>` $label | safeHTML }}
+    {{ printf `<div class="command-output__label">%s</div>` $label | safeHTML }}
   {{- end }}
   {{- with $output }}
-  {{ printf "```%s\n%s\n```" $outputLang (delimit . "\n") | $.Page.RenderString }}
+    <div class="command-output__output">
+      {{ printf "```%s\n%s\n```" $outputLang (delimit . "\n") | $.Page.RenderString }}
+    </div>
   {{- end }}
 </div>
