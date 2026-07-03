@@ -344,11 +344,14 @@ The `collapse` shortcode doesn't reliably work when nested in a `tabpane` shortc
 
 If you want to display a command with output in a highlighted code block, you can use the `command-output` shortcode.
 
+Starting with the first line in the clode block, every line is considered part of the command until there's a line starting with the marker. The default marker is `#`. Any text on the same line as the marker will be used as a label above the output, which defaults to "Example output:". All other lines after the marker are considered output, and will be rendered in a plaintext code block.
+
 ````markdown
 {{< command-output >}}
 
 ```bash
 % ls -Flh
+# You should see something like:
 total 4
 drwxr-xr-x  6 username  staff  256B Jan 02 15:04 assets/
 drwxr-xr-x  4 username  staff  256B Jan 02 15:04 config/
@@ -359,14 +362,16 @@ drwxr-xr-x  8 username  staff  256B Apr 02 15:04 layouts/
 {{< /command-output >}}
 ````
 
-All of the lines in the code block that begin with the command prompt will be displayed in a highlighted code block using the language specified in the code fence. All other lines after the command are considered output, and will be rendered in a plaintext code block. If you would like to modify the header above the output, you can set the `label` parameter.
-
 Parameters:
 
-| Name        | Value  | Description                                                                    |
-| ----------- | ------ | ------------------------------------------------------------------------------ |
-| 0: `label`  | String | The text to display above the output code block; Defaults to "Example output:" |
-| 1: `prompt` | String | The prompt that precedes the command; Defaults to "%"                          |
+| Name         | Value  | Description                                                             |
+| ------------ | ------ | ----------------------------------------------------------------------- |
+| 0: `prompt`  | String | The prompt that precedes the command; Defaults to "%"                   |
+| 1: `marker`  | String | The marker that designates the beginning of the output; Defaults to "#" |
+
+#### Notes
+
+Code fence options are preserved on the command code block, but are not passed to the output code block.
 
 ### details
 

@@ -7,9 +7,12 @@
     margin-bottom: 0;
   }
   .command-output__command pre code > span::before {
+    content: '  ';
+    user-select: none;
+  }
+  .command-output__command pre code > span:first-child::before {
     content: '% ';
     color: rgba(#f8f8f2, 0.5);
-    user-select: none;
   }
   .command-output__label {
     padding: 0.5rem;

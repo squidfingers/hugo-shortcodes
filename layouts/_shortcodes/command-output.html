@@ -1,10 +1,10 @@
-{{- $label := cond .IsNamedParams (.Get "label") (.Get 0) | default "Example output:" -}}
 {{- $defaultPrompt := "%" -}}
-{{- $prompt := cond .IsNamedParams (.Get "prompt") (.Get 1) | default $defaultPrompt -}}
+{{- $prompt := cond .IsNamedParams (.Get "prompt") (.Get 0) | default $defaultPrompt -}}
 {{- $promptPrefix := printf "%s " $prompt -}}
 {{- $hasDefaultPrompt := eq $defaultPrompt $prompt -}}
+{{- $labelPrefix := cond .IsNamedParams (.Get "marker") (.Get 1) | default "#" -}}
 {{- /* Get content and remove all whitespace outside of the code fence */ -}}
-{{- $inner := trim .Inner "\n\r\t " -}}
+{{- $inner := strings.TrimSpace .Inner -}}
 {{- /* Split code fence into an array of lines */ -}}
 {{- $lines := split $inner "\n" -}}
 {{- /* Get the language from the first line */ -}}
@@ -14,38 +14,41 @@
 {{- /* Seperate command and output into their own arrays */ -}}
 {{- $command := slice -}}
 {{- $output := slice -}}
+{{- $label := "" -}}
 {{- $outputFound := false -}}
 {{- range $body -}}
-  {{- if and (not $outputFound) (hasPrefix . $promptPrefix) -}}
-    {{- $command = $command | append (strings.TrimPrefix $promptPrefix .) -}}
+  {{- if not $outputFound -}}
+    {{- if hasPrefix . $labelPrefix -}}
+      {{- $outputFound = true -}}
+      {{- $label = strings.TrimPrefix $labelPrefix . | strings.TrimSpace | default "Example output:" -}}
+    {{- else -}}
+      {{- $command = $command | append (strings.TrimPrefix $promptPrefix .) -}}
+    {{- end -}}
   {{- else -}}
-    {{- $outputFound = true -}}
     {{- $output = $output | append . -}}
   {{- end -}}
 {{- end -}}
-{{- /* Only set the language of the output to plaintext if a command was found */ -}}
-{{- $outputLang := cond (gt (len $command) 0) "plaintext" $lang }}
 {{- /* Output style for custom prompt */ -}}
 {{- $id := "" -}}
 {{- if not $hasDefaultPrompt -}}
   {{- $id = printf "command-output-%02v" .Ordinal -}}
   <style>
-    #{{ $id }} .command-output__command pre code > span::before {content:'{{ $promptPrefix }}'}
+    #{{ $id }} .command-output__command pre code > span:first-child::before {content:'{{ $promptPrefix }}'}
   </style>
 {{- end -}}
 {{- /* Output */ -}}
 <div class="command-output"{{ with $id }} id="{{ . }}"{{ end }}>
   {{- with $command }}
-    <div class="command-output__command">
-      {{ printf "```%s\n%s\n```" $lang (delimit . "\n") | $.Page.RenderString }}
-    </div>
+  <div class="command-output__command">
+  {{ printf "```%s\n%s\n```" $lang (delimit . "\n") | $.Page.RenderString }}
+  </div>
   {{- end }}
   {{- if and $command $output }}
-    {{ printf `<div class="command-output__label">%s</div>` $label | safeHTML }}
+  {{ printf `<div class="command-output__label">%s</div>` $label | safeHTML }}
   {{- end }}
   {{- with $output }}
-    <div class="command-output__output">
-      {{ printf "```%s\n%s\n```" $outputLang (delimit . "\n") | $.Page.RenderString }}
-    </div>
+  <div class="command-output__output">
+  {{ printf "```plaintext {class=disable-copy}\n%s\n```" (delimit . "\n") | $.Page.RenderString }}
+  </div>
   {{- end }}
 </div>
