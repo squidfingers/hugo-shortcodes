@@ -363,10 +363,10 @@ All of the lines in the code block that begin with the command prompt will be di
 
 Parameters:
 
-| Name       | Value  | Description                                                                    |
-| ---------- | ------ | ------------------------------------------------------------------------------ |
-| 0: `label` | String | The text to display above the output code block; Defaults to "Example output:" |
-| 1: `prompt`| String | The prompt that precedes the command; Defaults to "%"                          |
+| Name        | Value  | Description                                                                    |
+| ----------- | ------ | ------------------------------------------------------------------------------ |
+| 0: `label`  | String | The text to display above the output code block; Defaults to "Example output:" |
+| 1: `prompt` | String | The prompt that precedes the command; Defaults to "%"                          |
 
 ### details
 
