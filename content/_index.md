@@ -148,11 +148,10 @@ culpa qui officia deserunt mollit anim id est laborum.
 
 ## command-prompt
 
-{{< command-output >}}
+{{< command-output "You should see something like:" >}}
 
 ```bash
 % ls -Flh
-# You should see something like:
 total 4
 drwxr-xr-x  6 username  staff  256B Jan 02 15:04 assets/
 drwxr-xr-x  4 username  staff  256B Jan 02 15:04 config/
@@ -162,25 +161,16 @@ drwxr-xr-x  8 username  staff  256B Jan 02 15:04 layouts/
 
 {{< /command-output >}}
 
-{{< command-output "$" >}}
+{{< command-output prompt="$" marker="#" >}}
 
 ```bash
-$ curl -sX POST localhost:9898/echo \
-  | grep -o 'PODINFO_UI_MESSAGE=. backend'
-# Example output:
-# Some other comment
-PODINFO_UI_MESSAGE=A backend
-```
-
-{{< /command-output >}}
-
-{{< command-output marker="# Output -" >}}
-
-```bash
-% command
-# Some comment I want displayed with the command
-# Output - You should see something like:
-output
+$ hugo \
+  --gc \
+  --cleanDestinationDir \
+  --minify
+# You should see something like:
+Start building sites … 
+hugo v0.160.0-xxx darwin/amd64 BuildDate=2026-01-01T00:00:00Z VendorInfo=gohugoio
 ```
 
 {{< /command-output >}}

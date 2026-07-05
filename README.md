@@ -344,14 +344,17 @@ The `collapse` shortcode doesn't reliably work when nested in a `tabpane` shortc
 
 If you want to display a command with output in a highlighted code block, you can use the `command-output` shortcode.
 
-Starting with the first line in the clode block, every line is considered part of the command until there's a line starting with the marker. The default marker is `#`. Any text on the same line as the marker will be used as a label above the output, which defaults to "Example output:". All other lines after the marker are considered output, and will be rendered in a plaintext code block.
+The command prompt and the output are separated from the command so it can be copied and ran without alteration.
+
+#### If `marker` parameter is not set
+
+Starting with the first line in the code block, every line that begins with the `prompt` is considered to be part of the command. On the first line without the `prompt`, all remaining lines are considered output and will be rendered in a plaintext code block (even if they also begin with the `prompt`). A `label` is placed above the output, which defaults to "Example output:".
 
 ````markdown
-{{< command-output >}}
+{{< command-output "You should see something like:" >}}
 
 ```bash
 % ls -Flh
-# You should see something like:
 total 4
 drwxr-xr-x  6 username  staff  256B Jan 02 15:04 assets/
 drwxr-xr-x  4 username  staff  256B Jan 02 15:04 config/
@@ -362,12 +365,31 @@ drwxr-xr-x  8 username  staff  256B Apr 02 15:04 layouts/
 {{< /command-output >}}
 ````
 
+#### If `marker` parameter is set
+
+Starting with the first line in the code block, consider every line to be part of the command until there's a line starting with the `marker`. Any text on the same line as the `marker` will be used as the text above the output if the `label` parameter is not set. If `marker` does not contain any text and `label` is not set, then the text will default to "Example output:". All other lines after the `marker` are considered output, and will be rendered in a plaintext code block.
+
+{{< command-output marker="#" >}}
+
+```bash
+% hugo \
+  --gc \
+  --cleanDestinationDir \
+  --minify
+# You should see something like:
+Start building sites … 
+hugo v0.160.0-xxx darwin/amd64 BuildDate=2026-01-01T00:00:00Z VendorInfo=gohugoio
+```
+
+{{< /command-output >}}
+
 Parameters:
 
-| Name         | Value  | Description                                                             |
-| ------------ | ------ | ----------------------------------------------------------------------- |
-| 0: `prompt`  | String | The prompt that precedes the command; Defaults to "%"                   |
-| 1: `marker`  | String | The marker that designates the beginning of the output; Defaults to "#" |
+| Name        | Value  | Description                                                                    |
+| ----------- | ------ | ------------------------------------------------------------------------------ |
+| 0: `label`  | String | The text to display above the output code block; Defaults to "Example output:" |
+| 1: `prompt` | String | The prompt that precedes the command; Defaults to "%"                          |
+| 2: `marker` | String | The marker that designates the beginning of the output                         |
 
 #### Notes
 
