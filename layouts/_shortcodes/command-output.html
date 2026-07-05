@@ -1,43 +1,82 @@
-{{- $label := cond .IsNamedParams (.Get "label") (.Get 0) | default "Example output:" -}}
+{{- /* Get label param */ -}}
+{{- $defaultLabel := "Example output:" -}}
+{{- $label := cond .IsNamedParams (.Get "label") (.Get 0) | default "" -}}
+{{- $hasLabel := ne $label "" -}}
+
+{{- /* Get prompt param */ -}}
 {{- $defaultPrompt := "%" -}}
 {{- $prompt := cond .IsNamedParams (.Get "prompt") (.Get 1) | default $defaultPrompt -}}
 {{- $promptPrefix := printf "%s " $prompt -}}
-{{- $hasDefaultPrompt := eq $defaultPrompt $prompt -}}
+
+{{- /* Get marker param */ -}}
+{{- $marker := cond .IsNamedParams (.Get "marker") (.Get 2) | default "" -}}
+{{- $hasMarker := ne $marker "" -}}
+
 {{- /* Get content and remove all whitespace outside of the code fence */ -}}
-{{- $inner := trim .Inner "\n\r\t " -}}
+{{- $inner := strings.TrimSpace .Inner -}}
+
 {{- /* Split code fence into an array of lines */ -}}
 {{- $lines := split $inner "\n" -}}
+
 {{- /* Get the language from the first line */ -}}
 {{- $lang := strings.TrimPrefix "```" (index $lines 0) -}}
+
 {{- /* Get all lines between the code fence */ -}}
 {{- $body := first (sub (len $lines) 2) (after 1 $lines) -}}
+
 {{- /* Seperate command and output into their own arrays */ -}}
 {{- $command := slice -}}
 {{- $output := slice -}}
-{{- $outputFound := false -}}
-{{- range $body -}}
-  {{- if and (not $outputFound) (hasPrefix . $promptPrefix) -}}
-    {{- $command = $command | append (strings.TrimPrefix $promptPrefix .) -}}
-  {{- else -}}
-    {{- $outputFound = true -}}
-    {{- $output = $output | append . -}}
+
+{{- /* Look for marker */ -}}
+{{- if $hasMarker -}}
+  {{- $markerFound := false -}}
+  {{- range $body -}}
+    {{- if $markerFound -}}
+      {{- $output = $output | append . -}}
+    {{- else -}}
+      {{- if hasPrefix . $marker -}}
+        {{- $markerFound = true -}}
+        {{- if not $hasLabel -}}
+          {{- $label = strings.TrimPrefix $marker . | strings.TrimSpace | default "" -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $command = $command | append . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+{{- /* Look for output */ -}}
+{{- else -}}
+  {{- $outputFound := false -}}
+  {{- range $body -}}
+    {{- if and (not $outputFound) (hasPrefix . $promptPrefix) -}}
+      {{- $command = $command | append . -}}
+    {{- else -}}
+      {{- $outputFound = true -}}
+      {{- $output = $output | append . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if eq (len $command) 0 -}}
+    {{- /* The prompt was not found, so treat everything as the command */ -}}
+    {{- $command = $output -}}
+    {{- $output = slice -}}
   {{- end -}}
 {{- end -}}
-{{- /* Only set the language of the output to plaintext if a command was found */ -}}
-{{- $outputLang := cond (gt (len $command) 0) "plaintext" $lang }}
-{{- /* Output style for custom prompt */ -}}
-{{- $id := "" -}}
-{{- if not $hasDefaultPrompt -}}
-  {{- $id = printf "command-output-%02v" .Ordinal -}}
-  <style>
-    #{{ $id }} .command-output__command pre code > span::before {content:'{{ $promptPrefix }}'}
-  </style>
+
+{{- /* Set default label */ -}}
+{{- if eq $label "" -}}
+  {{- $label := $defaultLabel -}}
 {{- end -}}
+
 {{- /* Output */ -}}
-<div class="command-output"{{ with $id }} id="{{ . }}"{{ end }}>
+<div class="command-output">
   {{- with $command }}
     <div class="command-output__command">
-      {{ printf "```%s\n%s\n```" $lang (delimit . "\n") | $.Page.RenderString }}
+      {{- $find := printf `<span>\%s` $promptPrefix }}
+      {{- $replace := printf `<span class="prompt" data-prompt="%s">` $prompt }}
+      {{- $html := printf "```%s\n%s\n```" $lang (delimit . "\n") | $.Page.RenderString }}
+      {{ replaceRE $find $replace $html | safeHTML }}
     </div>
   {{- end }}
   {{- if and $command $output }}
@@ -45,7 +84,7 @@
   {{- end }}
   {{- with $output }}
     <div class="command-output__output">
-      {{ printf "```%s\n%s\n```" $outputLang (delimit . "\n") | $.Page.RenderString }}
+      {{ printf "```plaintext\n%s\n```" (delimit . "\n") | $.Page.RenderString }}
     </div>
   {{- end }}
 </div>

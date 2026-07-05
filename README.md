@@ -344,8 +344,14 @@ The `collapse` shortcode doesn't reliably work when nested in a `tabpane` shortc
 
 If you want to display a command with output in a highlighted code block, you can use the `command-output` shortcode.
 
+The command prompt and the output are separated from the command so it can be copied and ran without alteration.
+
+#### If `marker` parameter is not set
+
+Starting with the first line in the code block, every line that begins with the `prompt` is considered to be part of the command. On the first line without the `prompt`, all remaining lines are considered output and will be rendered in a plaintext code block (even if they also begin with the `prompt`). A `label` is placed above the output, which defaults to "Example output:".
+
 ````markdown
-{{< command-output >}}
+{{< command-output "You should see something like:" >}}
 
 ```bash
 % ls -Flh
@@ -359,7 +365,23 @@ drwxr-xr-x  8 username  staff  256B Apr 02 15:04 layouts/
 {{< /command-output >}}
 ````
 
-All of the lines in the code block that begin with the command prompt will be displayed in a highlighted code block using the language specified in the code fence. All other lines after the command are considered output, and will be rendered in a plaintext code block. If you would like to modify the header above the output, you can set the `label` parameter.
+#### If `marker` parameter is set
+
+Starting with the first line in the code block, consider every line to be part of the command until there's a line starting with the `marker`. Any text on the same line as the `marker` will be used as the text above the output if the `label` parameter is not set. If `marker` does not contain any text and `label` is not set, then the text will default to "Example output:". All other lines after the `marker` are considered output, and will be rendered in a plaintext code block.
+
+{{< command-output marker="#" >}}
+
+```bash
+% hugo \
+  --gc \
+  --cleanDestinationDir \
+  --minify
+# You should see something like:
+Start building sites … 
+hugo v0.160.0-xxx darwin/amd64 BuildDate=2026-01-01T00:00:00Z VendorInfo=gohugoio
+```
+
+{{< /command-output >}}
 
 Parameters:
 
@@ -367,6 +389,11 @@ Parameters:
 | ----------- | ------ | ------------------------------------------------------------------------------ |
 | 0: `label`  | String | The text to display above the output code block; Defaults to "Example output:" |
 | 1: `prompt` | String | The prompt that precedes the command; Defaults to "%"                          |
+| 2: `marker` | String | The marker that designates the beginning of the output                         |
+
+#### Notes
+
+Code fence options are preserved on the command code block, but are not passed to the output code block.
 
 ### details
 

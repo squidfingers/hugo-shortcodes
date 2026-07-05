@@ -148,24 +148,29 @@ culpa qui officia deserunt mollit anim id est laborum.
 
 ## command-prompt
 
-{{< command-output >}}
+{{< command-output "You should see something like:" >}}
 
 ```bash
-% hugo version
-hugo v0.160.0-...+extended darwin/amd64 BuildDate=2026-01-01T00:00:00Z VendorInfo=gohugoio
-```
-
-{{< /command-output >}}
-
-{{< command-output "You should see something like:" "$" >}}
-
-```bash
-$ ls -Flh
+% ls -Flh
 total 4
 drwxr-xr-x  6 username  staff  256B Jan 02 15:04 assets/
 drwxr-xr-x  4 username  staff  256B Jan 02 15:04 config/
 drwxr-xr-x  8 username  staff  256B Jan 02 15:04 content/
 drwxr-xr-x  8 username  staff  256B Jan 02 15:04 layouts/
+```
+
+{{< /command-output >}}
+
+{{< command-output prompt="$" marker="#" >}}
+
+```bash
+$ hugo \
+  --gc \
+  --cleanDestinationDir \
+  --minify
+# You should see something like:
+Start building sites … 
+hugo v0.160.0-xxx darwin/amd64 BuildDate=2026-01-01T00:00:00Z VendorInfo=gohugoio
 ```
 
 {{< /command-output >}}
