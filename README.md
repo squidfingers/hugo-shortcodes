@@ -369,6 +369,7 @@ drwxr-xr-x  8 username  staff  256B Apr 02 15:04 layouts/
 
 Starting with the first line in the code block, consider every line to be part of the command until there's a line starting with the `marker`. Any text on the same line as the `marker` will be used as the text above the output if the `label` parameter is not set. If `marker` does not contain any text and `label` is not set, then the text will default to "Example output:". All other lines after the `marker` are considered output, and will be rendered in a plaintext code block.
 
+````markdown
 {{< command-output marker="#" >}}
 
 ```bash
@@ -382,6 +383,7 @@ hugo v0.160.0-xxx darwin/amd64 BuildDate=2026-01-01T00:00:00Z VendorInfo=gohugoi
 ```
 
 {{< /command-output >}}
+````
 
 Parameters:
 
@@ -440,8 +442,8 @@ If you want to display a list of links as a file list, you can use the `file-lis
 
 | Name         | Value  | Description                           |
 | ------------ | ------ | ------------------------------------- |
-| 0: `icon`    | String | Icon name, defaults to "file"         |
-| 1: `variant` | String | Icon variant, defaults to "secondary" |
+| 0: `icon`    | String | Icon name; Defaults to "file"         |
+| 1: `variant` | String | Icon variant; Defaults to "secondary" |
 
 #### Notes
 
