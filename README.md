@@ -351,7 +351,7 @@ The command prompt and the output are separated from the command so it can be co
 Starting with the first line in the code block, every line that begins with the `prompt` is considered to be part of the command. On the first line without the `prompt`, all remaining lines are considered output and will be rendered in a plaintext code block (even if they also begin with the `prompt`). A `label` is placed above the output, which defaults to "Example output:".
 
 ````markdown
-{{< command-output "You should see something like:" >}}
+{{< command-output >}}
 
 ```bash
 % ls -Flh
@@ -367,7 +367,7 @@ drwxr-xr-x  8 username  staff  256B Apr 02 15:04 layouts/
 
 #### If `marker` parameter is set
 
-Starting with the first line in the code block, consider every line to be part of the command until there's a line starting with the `marker`. Any text on the same line as the `marker` will be used as the text above the output if the `label` parameter is not set. If `marker` does not contain any text and `label` is not set, then the text will default to "Example output:". All other lines after the `marker` are considered output, and will be rendered in a plaintext code block.
+If you have a multi-line command, and not every line of the command has a prompt, you can set the `marker` parameter. Starting with the first line in the code block, consider every line to be part of the command until there's a line starting with the `marker`. Any text on the same line as the `marker` will be used as the text above the output if the `label` parameter is not set. If `marker` does not contain any text and `label` is not set, then the text will default to "Example output:". All other lines after the `marker` are considered output, and will be rendered in a plaintext code block.
 
 ````markdown
 {{< command-output marker="#" >}}
