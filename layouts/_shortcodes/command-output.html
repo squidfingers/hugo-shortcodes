@@ -37,7 +37,9 @@
     {{- else -}}
       {{- if hasPrefix . $marker -}}
         {{- $markerFound = true -}}
-        {{- if not $hasLabel -}}
+        {{- if $hasLabel -}}
+          {{- $output = $output | append . -}}
+        {{- else -}}
           {{- $label = strings.TrimPrefix $marker . | strings.TrimSpace | default "" -}}
         {{- end -}}
       {{- else -}}

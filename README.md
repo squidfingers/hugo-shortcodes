@@ -367,7 +367,7 @@ drwxr-xr-x  8 username  staff  256B Apr 02 15:04 layouts/
 
 #### If `marker` parameter is set
 
-If you have a multi-line command, and not every line of the command has a prompt, you can set the `marker` parameter to separate the command and output. Starting with the first line in the code block, every line is considered to be part of the command until there's a line starting with the `marker`. Any text on the same line as the `marker` will be used as the text above the output if the `label` parameter is not set. If `marker` does not contain any text, and `label` is not set, then the text will default to "Example output:". All other lines after the `marker` are considered output, and will be rendered in a plaintext code block.
+If you have a multi-line command, and not every line of the command has a prompt, you can set the `marker` parameter to separate the command and output. Starting with the first line in the code block, every line is considered to be part of the command until there's a line starting with the `marker`. If `label` is not set, then the text on the same line after the `marker` will be used as the text above the output. If there is not any text after the `marker`, and `label` is not set, then the text will default to "Example output:". All other lines after the `marker` are considered output, and will be rendered in a plaintext code block.
 
 ````markdown
 {{< command-output marker="#" >}}
