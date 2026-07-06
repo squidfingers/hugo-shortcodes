@@ -389,7 +389,35 @@ hugo v0.160.0-xxx darwin/amd64 BuildDate=2026-01-01T00:00:00Z VendorInfo=gohugoi
 {{< /command-output >}}
 ````
 
-Parameters:
+**More examples**
+
+If you just want to use the default `label`, include the whole line as the `marker`:
+
+````markdown
+{{< command-output marker="###" >}}
+```bash
+% command \
+  --flag
+###
+output
+```
+{{< /command-output >}}
+````
+
+If you want a comment to designate the beginning of the output and you also want the it to appear in the output code block, just set the `label` parameter.
+
+````markdown
+{{< command-output label="You should see:" marker="#" >}}
+```bash
+% command \
+  --flag
+# Some comment you want displayed with the output
+output
+```
+{{< /command-output >}}
+````
+
+#### Parameters:
 
 | Name        | Value  | Description                                                                    |
 | ----------- | ------ | ------------------------------------------------------------------------------ |
