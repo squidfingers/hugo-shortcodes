@@ -346,9 +346,11 @@ If you want to display a command with output in a highlighted code block, you ca
 
 The command prompt and the output are separated from the command so it can be copied and ran without alteration.
 
-#### If `marker` parameter is not set
+#### If `marker` parameter is _not_ set
 
-Starting with the first line in the code block, every line that begins with the `prompt` is considered to be part of the command. On the first line without the `prompt`, all remaining lines are considered output and will be rendered in a plaintext code block (even if they also begin with the `prompt`). A `label` is placed above the output, which defaults to "Example output:".
+Starting with the first line in the code block, every line that begins with the `prompt` is considered to be part of the command. On the first line without the `prompt`, all remaining lines are considered output and will be rendered in a plaintext code block (even if they also begin with the `prompt`).
+
+The `label` is displayed above the output, which defaults to "Example output:".
 
 ````markdown
 {{< command-output >}}
@@ -367,7 +369,9 @@ drwxr-xr-x  8 username  staff  256B Apr 02 15:04 layouts/
 
 #### If `marker` parameter is set
 
-If you have a multi-line command, and not every line of the command has a prompt, you can set the `marker` parameter to separate the command and output. Starting with the first line in the code block, every line is considered to be part of the command until there's a line starting with the `marker`. If `label` is not set, then the text on the same line after the `marker` will be used as the text above the output. If there is not any text after the `marker`, and `label` is not set, then the text will default to "Example output:". All other lines after the `marker` are considered output, and will be rendered in a plaintext code block.
+If you have a multi-line command, and not every line of the command has a prompt, you can set the `marker` parameter to separate the command and output. Starting with the first line in the code block, every line is considered to be part of the command until there's a line starting with the `marker`. All other lines after the `marker` are considered output, and will be rendered in a plaintext code block.
+
+If `label` is not set, then the text on the same line after the `marker` will be used as the text above the output. If there is not any text after the `marker`, then the text will default to "Example output:". If `label` is set, then the `marker` will be considered output.
 
 ````markdown
 {{< command-output marker="#" >}}
